@@ -73,6 +73,7 @@ class CourseCatalogController extends Controller
                 'enrollment_id' => $enrollmentId,
                 'course_id' => (int) $course['id'],
             ]);
+            $this->gamification->enrollmentCreated((int) $user['id'], $enrollmentId, (int) $course['id']);
 
             flash('success', 'Matrícula realizada. Bom estudo!');
             $this->redirect('/meus-cursos/' . $enrollmentId);
@@ -121,6 +122,7 @@ class CourseCatalogController extends Controller
                 'lesson_id' => (int) $lessonId,
                 'progress_percent' => $progress['progress_percent'],
             ]);
+            $this->gamification->lessonCompleted((int) $user['id'], (int) $lessonId, (int) $enrollmentId);
 
             if ($progress['course_completed_now']) {
                 $this->logs->record((int) $user['id'], 'course.completed', [
