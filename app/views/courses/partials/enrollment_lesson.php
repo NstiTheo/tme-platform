@@ -43,7 +43,7 @@ $isCompleted = $lessonProgress && $lessonProgress['status'] === 'concluida';
                 <small><?= e(date('d/m/Y H:i', strtotime($lessonProgress['completed_at']))) ?></small>
             <?php endif; ?>
         <?php elseif ($enrollment['status'] !== 'cancelada'): ?>
-            <form action="<?= e(url('/aluno/meus-cursos/' . $enrollment['id'] . '/aulas/' . $lesson['id'] . '/concluir')) ?>" method="post">
+            <form action="<?= e(url('/meus-cursos/' . $enrollment['id'] . '/aulas/' . $lesson['id'] . '/concluir')) ?>" method="post">
                 <?= csrf_field() ?>
                 <button class="button small" type="submit">Marcar concluída</button>
             </form>
