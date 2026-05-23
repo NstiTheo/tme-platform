@@ -73,9 +73,13 @@ function Test-ExcludedRelativePath {
     $fileName = Split-Path $normalized -Leaf
 
     return (
+        $normalized -eq '.git' -or
         $normalized -like '.git\*' -or
+        $normalized -eq 'vendor' -or
         $normalized -like 'vendor\*' -or
+        $normalized -eq 'node_modules' -or
         $normalized -like 'node_modules\*' -or
+        $normalized -eq '.automation' -or
         $normalized -like '.automation\*' -or
         $normalized -like 'storage\logs\*' -or
         $normalized -like 'storage\cache\*' -or
@@ -360,9 +364,13 @@ $eventAction = {
     $fileName = Split-Path $normalized -Leaf
 
     if (
+        $normalized -eq '.git' -or
         $normalized -like '.git\*' -or
+        $normalized -eq 'vendor' -or
         $normalized -like 'vendor\*' -or
+        $normalized -eq 'node_modules' -or
         $normalized -like 'node_modules\*' -or
+        $normalized -eq '.automation' -or
         $normalized -like '.automation\*' -or
         $normalized -like 'storage\logs\*' -or
         $normalized -like 'storage\cache\*' -or
