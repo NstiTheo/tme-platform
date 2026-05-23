@@ -29,7 +29,7 @@ class Activity extends Model
             $params['type'] = $filters['type'];
         }
 
-        $sql = $this->baseSelect() . '
+        $sql = $this->baseSelect('COUNT(DISTINCT submissions.id) AS submissions_count') . '
                 LEFT JOIN submissions ON submissions.activity_id = activities.id';
 
         if ($where) {
@@ -48,7 +48,14 @@ class Activity extends Model
     public function forStudent(int $studentId): array
     {
         $statement = $this->db->prepare(
-            $this->baseSelect() . '
+            $this->baseSelect('
+                    submissions.id AS submission_id,
+                    submissions.status AS submission_status,
+                    submissions.submitted_at AS submitted_at,
+                    grades.score AS grade_score,
+                    grades.feedback AS grade_feedback,
+                    grades.graded_at AS graded_at
+                ') . '
              INNER JOIN enrollments ON enrollments.course_id = activities.course_id
                 AND enrollments.user_id = :student_id
                 AND enrollments.status IN ("ativa", "concluida")
@@ -89,7 +96,7 @@ class Activity extends Model
     public function find(int $id): ?array
     {
         $statement = $this->db->prepare(
-            $this->baseSelect() . '
+            $this->baseSelect('0 AS submissions_count') . '
              WHERE activities.id = :id
              GROUP BY activities.id, courses.title, course_modules.title, lessons.title, teacher.full_name
              LIMIT 1'
@@ -103,7 +110,16 @@ class Activity extends Model
     public function findForStudent(int $id, int $studentId): ?array
     {
         $statement = $this->db->prepare(
-            $this->baseSelect() . '
+            $this->baseSelect('
+                    submissions.id AS submission_id,
+                    submissions.status AS submission_status,
+                    submissions.content AS submission_content,
+                    submissions.file_path AS submission_file_path,
+                    submissions.submitted_at AS submitted_at,
+                    grades.score AS grade_score,
+                    grades.feedback AS grade_feedback,
+                    grades.graded_at AS graded_at
+                ') . '
              INNER JOIN enrollments ON enrollments.course_id = activities.course_id
                 AND enrollments.user_id = :student_id
                 AND enrollments.status IN ("ativa", "concluida")
@@ -215,22 +231,14 @@ class Activity extends Model
         )->fetchAll();
     }
 
-    private function baseSelect(): string
+    private function baseSelect(string $extraSelect): string
     {
         return 'SELECT activities.*,
                        courses.title AS course_title,
                        course_modules.title AS module_title,
                        lessons.title AS lesson_title,
                        teacher.full_name AS teacher_name,
-                       COUNT(DISTINCT submissions.id) AS submissions_count,
-                       submissions.id AS submission_id,
-                       submissions.status AS submission_status,
-                       submissions.content AS submission_content,
-                       submissions.file_path AS submission_file_path,
-                       submissions.submitted_at AS submitted_at,
-                       grades.score AS grade_score,
-                       grades.feedback AS grade_feedback,
-                       grades.graded_at AS graded_at
+                       ' . $extraSelect . '
                 FROM activities
                 LEFT JOIN courses ON courses.id = activities.course_id
                 LEFT JOIN course_modules ON course_modules.id = activities.module_id
