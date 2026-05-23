@@ -221,8 +221,10 @@ class LibraryItem extends Model
         }
 
         if (! empty($filters['q'])) {
-            $where[] = '(library_items.title LIKE :q OR library_items.description LIKE :q OR library_items.author LIKE :q)';
-            $params['q'] = '%' . $filters['q'] . '%';
+            $where[] = '(library_items.title LIKE :q_title OR library_items.description LIKE :q_description OR library_items.author LIKE :q_author)';
+            $params['q_title'] = '%' . $filters['q'] . '%';
+            $params['q_description'] = '%' . $filters['q'] . '%';
+            $params['q_author'] = '%' . $filters['q'] . '%';
         }
 
         if (! empty($filters['category'])) {

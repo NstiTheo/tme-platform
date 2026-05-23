@@ -149,7 +149,9 @@ class Gamification extends Model
                 ' . $join . '
                 LEFT JOIN user_badges ON user_badges.user_id = users.id
                 WHERE ' . implode(' AND ', $where) . '
-                GROUP BY users.id, users.full_name, roles.slug, gamification_profiles.id
+                GROUP BY users.id, users.full_name, roles.slug, gamification_profiles.id,
+                         gamification_profiles.xp_total, gamification_profiles.level,
+                         gamification_profiles.internal_coins, gamification_profiles.streak_days
                 ORDER BY gamification_profiles.xp_total DESC, gamification_profiles.level DESC, users.full_name ASC
                 LIMIT 100';
 

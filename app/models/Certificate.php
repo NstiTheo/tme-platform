@@ -64,8 +64,10 @@ class Certificate extends Model
         }
 
         if (! empty($filters['q'])) {
-            $where[] = '(certificates.code LIKE :q OR certificates.title LIKE :q OR users.full_name LIKE :q)';
-            $params['q'] = '%' . $filters['q'] . '%';
+            $where[] = '(certificates.code LIKE :q_code OR certificates.title LIKE :q_title OR users.full_name LIKE :q_student)';
+            $params['q_code'] = '%' . $filters['q'] . '%';
+            $params['q_title'] = '%' . $filters['q'] . '%';
+            $params['q_student'] = '%' . $filters['q'] . '%';
         }
 
         $sql = $this->baseSelect() . ($where ? ' WHERE ' . implode(' AND ', $where) : '');
