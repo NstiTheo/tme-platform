@@ -130,6 +130,10 @@ class CourseCatalogController extends Controller
                     'enrollment_id' => (int) $enrollmentId,
                     'progress_percent' => $progress['progress_percent'],
                 ]);
+                if ($enrollment) {
+                    $this->gamification->courseCompleted((int) $user['id'], (int) $enrollmentId, (int) $enrollment['course_id']);
+                    $this->certificates->issueForEnrollment((int) $enrollmentId);
+                }
                 flash('success', 'Curso concluído. Progresso em 100%.');
             } else {
                 flash('success', 'Aula marcada como concluída.');

@@ -8,6 +8,7 @@ class ActivityController extends Controller
     private Submission $submissions;
     private Course $courses;
     private ActionLog $logs;
+    private GamificationService $gamification;
 
     public function __construct()
     {
@@ -15,6 +16,7 @@ class ActivityController extends Controller
         $this->submissions = new Submission();
         $this->courses = new Course();
         $this->logs = new ActionLog();
+        $this->gamification = new GamificationService();
     }
 
     public function myActivities(): void
@@ -86,6 +88,7 @@ class ActivityController extends Controller
                 'submission_id' => $submissionId,
                 'late' => $isLate,
             ]);
+            $this->gamification->activitySubmitted((int) $user['id'], $submissionId, (int) $activity['id']);
 
             flash('success', $isLate ? 'Entrega atrasada registrada.' : 'Entrega enviada com sucesso.');
         } catch (Throwable $exception) {
@@ -234,6 +237,7 @@ class ActivityController extends Controller
             'submission_id' => (int) $submission['id'],
             'score' => $score,
         ]);
+        $this->gamification->activityGraded((int) $submission['student_id'], (int) $submission['id'], $score, (float) $activity['max_score']);
 
         flash('success', 'Entrega corrigida.');
         $this->redirect('/admin/atividades/' . $activity['id']);
