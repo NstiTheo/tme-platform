@@ -7,12 +7,16 @@ class CourseCatalogController extends Controller
     private Course $courses;
     private Enrollment $enrollments;
     private ActionLog $logs;
+    private GamificationService $gamification;
+    private CertificateService $certificates;
 
     public function __construct()
     {
         $this->courses = new Course();
         $this->enrollments = new Enrollment();
         $this->logs = new ActionLog();
+        $this->gamification = new GamificationService();
+        $this->certificates = new CertificateService();
     }
 
     public function index(): void
