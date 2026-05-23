@@ -198,14 +198,38 @@ CREATE TABLE IF NOT EXISTS enrollments (
     class_id BIGINT UNSIGNED NULL,
     subject_id BIGINT UNSIGNED NULL,
     role ENUM('aluno', 'professor') NOT NULL DEFAULT 'aluno',
-    status ENUM('ativo', 'concluido', 'cancelado') NOT NULL DEFAULT 'ativo',
+    status ENUM('ativa', 'concluida', 'cancelada') NOT NULL DEFAULT 'ativa',
     progress_percent DECIMAL(5,2) NOT NULL DEFAULT 0.00,
     enrolled_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    last_activity_at TIMESTAMP NULL,
     completed_at TIMESTAMP NULL,
+    UNIQUE KEY enrollments_user_course_unique (user_id, course_id),
+    KEY enrollments_status_index (status),
+    KEY enrollments_progress_index (progress_percent),
     CONSTRAINT fk_enrollments_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     CONSTRAINT fk_enrollments_course FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
     CONSTRAINT fk_enrollments_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE,
     CONSTRAINT fk_enrollments_subject FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS lesson_progress (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    enrollment_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    course_id BIGINT UNSIGNED NOT NULL,
+    lesson_id BIGINT UNSIGNED NOT NULL,
+    status ENUM('pendente', 'concluida') NOT NULL DEFAULT 'pendente',
+    completed_at TIMESTAMP NULL,
+    last_activity_at TIMESTAMP NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY lesson_progress_enrollment_lesson_unique (enrollment_id, lesson_id),
+    KEY lesson_progress_user_course_index (user_id, course_id),
+    KEY lesson_progress_status_index (status),
+    CONSTRAINT fk_lesson_progress_enrollment FOREIGN KEY (enrollment_id) REFERENCES enrollments(id) ON DELETE CASCADE,
+    CONSTRAINT fk_lesson_progress_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_lesson_progress_course FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
+    CONSTRAINT fk_lesson_progress_lesson FOREIGN KEY (lesson_id) REFERENCES lessons(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS activities (
