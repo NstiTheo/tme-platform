@@ -25,6 +25,31 @@ A TME é uma base MVC própria em PHP para uma plataforma educacional moderna qu
 - Roles, permissões, instituições, cursos, turmas, atividades, comunidade, eventos, certificados, gamificação, financeiro, notificações e logs modelados no banco.
 - Estrutura preparada para importações futuras do INEP e e-MEC.
 
+## Módulo administrativo de cursos
+
+O admin/supervisor acessa `Administração > Cursos admin` para gerenciar o catálogo acadêmico.
+
+Recursos disponíveis:
+
+- CRUD de cursos com título, descrição, categoria, nível, carga horária, preço, status, professor responsável e imagem opcional.
+- Filtros de listagem por status, categoria e professor.
+- Arquivamento de curso em vez de exclusão definitiva.
+- CRUD de módulos vinculados ao curso.
+- CRUD de aulas vinculadas ao curso e opcionalmente a um módulo.
+- Campos de aula: título, descrição, tipo, vídeo/link, conteúdo textual, ordem, duração e status.
+- Cadastro de materiais por aula, com PDF, imagem, link externo, arquivo, livro, apostila ou vídeo.
+- Uploads salvos em `public/uploads/course-images` e `public/uploads/materials`.
+- Logs em `logs` para criação, edição, remoção e arquivamento.
+- CSRF, sessão, middleware de autenticação e proteção por role `administrador/supervisor`.
+
+Alunos aprovados acessam `Meus cursos` para ver cursos publicados, detalhes do curso, módulos, aulas e materiais ativos.
+
+Para bancos existentes, aplique a migration:
+
+```bash
+mysql -u root -p < database/migrations/2026_05_23_admin_courses_module.sql
+```
+
 ## Estrutura
 
 ```text
