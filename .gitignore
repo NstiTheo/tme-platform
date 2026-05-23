@@ -12,6 +12,10 @@
 
 /public/uploads/*
 !/public/uploads/.gitkeep
+!/public/uploads/course-images/
+!/public/uploads/course-images/.gitkeep
+!/public/uploads/materials/
+!/public/uploads/materials/.gitkeep
 
 .DS_Store
 Thumbs.db

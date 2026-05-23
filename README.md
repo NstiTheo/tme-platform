@@ -50,6 +50,30 @@ Para bancos existentes, aplique a migration:
 mysql -u root -p < database/migrations/2026_05_23_admin_courses_module.sql
 ```
 
+## Matrículas e progresso do aluno
+
+Alunos aprovados podem se matricular em cursos publicados pelo catálogo em `Catálogo`.
+
+Recursos disponíveis:
+
+- Botão `Matricular-se` no detalhe do curso publicado.
+- Bloqueio de matrícula duplicada por aluno e curso.
+- Página `Meus cursos` com cursos matriculados.
+- Status de matrícula: `ativa`, `concluida` e `cancelada`.
+- Registro de data de início, última atividade e conclusão.
+- Progresso percentual calculado automaticamente pelas aulas publicadas concluídas.
+- Marcação de aula como concluída com CSRF e validação de vínculo da matrícula.
+- Mudança automática da matrícula para `concluida` ao atingir 100%.
+- Visualização de materiais ativos disponíveis em cada aula.
+- Área administrativa em `Administração > Matrículas`, com filtros por curso, aluno e status.
+- Logs para matrícula criada, aula concluída e curso concluído.
+
+Para bancos existentes, aplique também:
+
+```bash
+mysql -u root -p < database/migrations/2026_05_23_enrollments_progress_module.sql
+```
+
 ## Estrutura
 
 ```text
