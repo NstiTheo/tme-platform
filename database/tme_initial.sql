@@ -82,6 +82,8 @@ CREATE TABLE IF NOT EXISTS user_settings (
     user_id BIGINT UNSIGNED PRIMARY KEY,
     theme ENUM('light', 'dark') NOT NULL DEFAULT 'light',
     primary_color CHAR(7) NOT NULL DEFAULT '#1f6feb',
+    bio_short VARCHAR(280) NULL,
+    avatar_path VARCHAR(255) NULL,
     notifications_enabled TINYINT(1) NOT NULL DEFAULT 1,
     density ENUM('comfortable', 'compact') NOT NULL DEFAULT 'comfortable',
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
