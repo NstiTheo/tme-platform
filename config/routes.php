@@ -9,6 +9,10 @@ return [
     ['GET', '/eventos', [PublicController::class, 'events']],
     ['GET', '/comunidade', [PublicController::class, 'community']],
 
+    ['GET', '/certificados/validar', [CertificateController::class, 'validateForm']],
+    ['POST', '/certificados/validar', [CertificateController::class, 'validatePost']],
+    ['GET', '/certificados/validar/{code}', [CertificateController::class, 'validateCode']],
+
     ['GET', '/biblioteca', [LibraryController::class, 'index']],
     ['GET', '/biblioteca/enviar', [LibraryController::class, 'contribute'], ['auth', 'role:aluno,professor']],
     ['POST', '/biblioteca/enviar', [LibraryController::class, 'storeContribution'], ['auth', 'role:aluno,professor']],
@@ -26,10 +30,18 @@ return [
 
     ['GET', '/portal', [PortalController::class, 'index'], ['auth']],
     ['GET', '/inicio', [PortalController::class, 'index'], ['auth']],
-    ['GET', '/configuracoes', [PortalController::class, 'settings'], ['auth']],
+    ['GET', '/perfil', [ProfileController::class, 'index'], ['auth']],
+    ['GET', '/configuracoes', [ProfileController::class, 'index'], ['auth']],
+    ['POST', '/perfil/dados', [ProfileController::class, 'updateProfile'], ['auth']],
+    ['POST', '/perfil/aparencia', [ProfileController::class, 'updateAppearance'], ['auth']],
+    ['POST', '/perfil/senha', [ProfileController::class, 'updatePassword'], ['auth']],
+    ['GET', '/ranking', [RankingController::class, 'index'], ['auth']],
 
     ['GET', '/dashboard', [DashboardController::class, 'index'], ['auth']],
     ['POST', '/settings', [DashboardController::class, 'updateSettings'], ['auth']],
+
+    ['GET', '/certificados', [CertificateController::class, 'index'], ['auth', 'role:aluno,professor']],
+    ['GET', '/certificados/ver/{code}', [CertificateController::class, 'show'], ['auth']],
 
     ['GET', '/atividades', [ActivityController::class, 'myActivities'], ['auth', 'role:aluno,professor']],
     ['GET', '/atividades/{id}', [ActivityController::class, 'showForStudent'], ['auth', 'role:aluno,professor']],
@@ -50,6 +62,8 @@ return [
     ['POST', '/admin/contas/{id}/aprovar', [AdminController::class, 'approve'], ['auth', 'role:administrador,supervisor']],
     ['POST', '/admin/contas/{id}/recusar', [AdminController::class, 'reject'], ['auth', 'role:administrador,supervisor']],
     ['GET', '/admin/matriculas', [AdminEnrollmentController::class, 'index'], ['auth', 'role:administrador,supervisor']],
+    ['GET', '/admin/certificados', [CertificateController::class, 'adminIndex'], ['auth', 'role:administrador,supervisor']],
+    ['POST', '/admin/certificados/{id}/revogar', [CertificateController::class, 'revoke'], ['auth', 'role:administrador,supervisor']],
 
     ['GET', '/admin/atividades', [ActivityController::class, 'adminIndex'], ['auth', 'role:professor,administrador,supervisor']],
     ['GET', '/admin/atividades/nova', [ActivityController::class, 'create'], ['auth', 'role:professor,administrador,supervisor']],
