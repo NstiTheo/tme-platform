@@ -59,14 +59,18 @@ class Activity extends Model
              INNER JOIN enrollments ON enrollments.course_id = activities.course_id
                 AND enrollments.user_id = :student_id
                 AND enrollments.status IN ("ativa", "concluida")
-             LEFT JOIN submissions ON submissions.activity_id = activities.id AND submissions.student_id = :student_id
-             LEFT JOIN grades ON grades.activity_id = activities.id AND grades.student_id = :student_id
+             LEFT JOIN submissions ON submissions.activity_id = activities.id AND submissions.student_id = :submission_student_id
+             LEFT JOIN grades ON grades.activity_id = activities.id AND grades.student_id = :grade_student_id
              WHERE activities.status IN ("publicada", "encerrada")
              GROUP BY activities.id, courses.title, course_modules.title, lessons.title, teacher.full_name,
                       submissions.id, submissions.status, submissions.submitted_at, grades.score, grades.feedback
              ORDER BY COALESCE(activities.due_at, activities.created_at) ASC'
         );
-        $statement->execute(['student_id' => $studentId]);
+        $statement->execute([
+            'student_id' => $studentId,
+            'submission_student_id' => $studentId,
+            'grade_student_id' => $studentId,
+        ]);
 
         return $statement->fetchAll();
     }
@@ -123,15 +127,20 @@ class Activity extends Model
              INNER JOIN enrollments ON enrollments.course_id = activities.course_id
                 AND enrollments.user_id = :student_id
                 AND enrollments.status IN ("ativa", "concluida")
-             LEFT JOIN submissions ON submissions.activity_id = activities.id AND submissions.student_id = :student_id
-             LEFT JOIN grades ON grades.activity_id = activities.id AND grades.student_id = :student_id
+             LEFT JOIN submissions ON submissions.activity_id = activities.id AND submissions.student_id = :submission_student_id
+             LEFT JOIN grades ON grades.activity_id = activities.id AND grades.student_id = :grade_student_id
              WHERE activities.id = :id AND activities.status IN ("publicada", "encerrada")
              GROUP BY activities.id, courses.title, course_modules.title, lessons.title, teacher.full_name,
                       submissions.id, submissions.status, submissions.content, submissions.file_path,
                       submissions.submitted_at, grades.score, grades.feedback, grades.graded_at
              LIMIT 1'
         );
-        $statement->execute(['id' => $id, 'student_id' => $studentId]);
+        $statement->execute([
+            'id' => $id,
+            'student_id' => $studentId,
+            'submission_student_id' => $studentId,
+            'grade_student_id' => $studentId,
+        ]);
         $activity = $statement->fetch();
 
         return $activity ?: null;
