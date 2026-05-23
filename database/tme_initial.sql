@@ -717,15 +717,18 @@ SELECT id, 'light', '#1f6feb', NOW(), NOW()
 FROM users
 WHERE email = 'admin@tme.local';
 
-INSERT IGNORE INTO gamification_profiles (user_id, xp, level, internal_coins, created_at, updated_at)
-SELECT id, 0, 1, 0, NOW(), NOW()
+INSERT IGNORE INTO gamification_profiles (user_id, xp, xp_total, level, internal_coins, streak_days, created_at, updated_at)
+SELECT id, 0, 0, 1, 0, 0, NOW(), NOW()
 FROM users
-WHERE email = 'admin@tme.local';
+WHERE status = 'aprovado';
 
 INSERT IGNORE INTO badges (slug, name, description, xp_reward) VALUES
-('primeiro-acesso', 'Primeiro acesso', 'Conquista liberada no primeiro acesso aprovado.', 25),
-('perfil-academico', 'Perfil acadêmico', 'Conquista para perfil completo.', 50),
-('participacao-comunidade', 'Participação na comunidade', 'Conquista para publicações acadêmicas aprovadas.', 75);
+('primeiro-login', 'Primeiro Login', 'Primeiro acesso aprovado na TME.', 25),
+('primeiro-curso', 'Primeiro Curso', 'Primeira matricula realizada em um curso.', 40),
+('primeira-aula-concluida', 'Primeira Aula Concluida', 'Primeira aula marcada como concluida.', 40),
+('curso-finalizado', 'Curso Finalizado', 'Primeiro curso concluido na plataforma.', 100),
+('explorador-biblioteca', 'Explorador da Biblioteca', 'Primeiro material favoritado na biblioteca.', 35),
+('aluno-dedicado', 'Aluno Dedicado', 'Marcou pelo menos cinco aulas como concluidas.', 120);
 
 INSERT IGNORE INTO plans (name, description, price, billing_cycle, features, status) VALUES
 ('TME Inicial', 'Plano base para validação da plataforma.', 0.00, 'mensal', JSON_ARRAY('LMS', 'Comunidade', 'Biblioteca'), 'ativo');

@@ -1490,12 +1490,19 @@ td span {
         flex-wrap: wrap;
     }
 
-    .portal-hero {
+    .portal-hero,
+    .portal-gamification-panel,
+    .profile-layout {
         grid-template-columns: 1fr;
     }
 
     .portal-actions {
         justify-content: flex-start;
+    }
+
+    .profile-sidebar {
+        position: static;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
     .hero {
@@ -1510,9 +1517,11 @@ td span {
     .module-grid,
     .library-shelf,
     .course-card-grid,
+    .certificate-grid,
     .detail-grid,
     .filter-form,
-    .filter-form.library-filter-form {
+    .filter-form.library-filter-form,
+    .certificate-filter-form {
         grid-template-columns: 1fr 1fr;
     }
 }
@@ -1548,9 +1557,14 @@ td span {
     .library-shelf,
     .grid-form,
     .course-card-grid,
+    .certificate-grid,
+    .profile-info-grid,
+    .profile-metrics,
     .detail-grid,
     .filter-form,
-    .filter-form.library-filter-form {
+    .filter-form.library-filter-form,
+    .certificate-filter-form,
+    .ranking-filter-form {
         grid-template-columns: 1fr;
     }
 
@@ -1566,8 +1580,25 @@ td span {
     }
 
     .timeline > div,
-    .site-footer {
+    .site-footer,
+    .profile-hero,
+    .security-actions,
+    .ranking-row {
         flex-direction: column;
+    }
+
+    .ranking-row {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .profile-sidebar {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .certificate-border footer {
+        display: grid;
+        grid-template-columns: 1fr;
     }
 
     .auth-panel {
@@ -1576,5 +1607,41 @@ td span {
 
     .user-chip {
         max-width: 100%;
+    }
+}
+
+@media print {
+    body {
+        background: #ffffff;
+        color: #101214;
+    }
+
+    .site-header,
+    .site-footer,
+    .flash-stack,
+    .no-print {
+        display: none !important;
+    }
+
+    main {
+        min-height: auto;
+    }
+
+    .dashboard-shell {
+        width: 100%;
+        padding: 0;
+    }
+
+    .certificate-sheet {
+        width: 100%;
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+    }
+
+    .certificate-border {
+        min-height: 96vh;
+        border-color: #101214;
+        background: #ffffff;
     }
 }
