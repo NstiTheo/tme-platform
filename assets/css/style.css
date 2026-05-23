@@ -1071,6 +1071,14 @@ td span {
         flex-wrap: wrap;
     }
 
+    .portal-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .portal-actions {
+        justify-content: flex-start;
+    }
+
     .hero {
         grid-template-columns: 1fr;
     }
@@ -1143,5 +1151,9 @@ td span {
 
     .auth-panel {
         padding: 22px;
+    }
+
+    .user-chip {
+        max-width: 100%;
     }
 }
