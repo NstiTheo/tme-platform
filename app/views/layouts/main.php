@@ -47,11 +47,13 @@ $publicLinks = [
             <?php if ($currentUser): ?>
                 <a class="<?= $path === '/dashboard' ? 'active' : '' ?>" href="<?= e(url('/dashboard')) ?>">Dashboard</a>
                 <?php if ($currentUser['role_slug'] === 'aluno'): ?>
-                    <a class="<?= str_starts_with($path, '/aluno/cursos') ? 'active' : '' ?>" href="<?= e(url('/aluno/cursos')) ?>">Meus cursos</a>
+                    <a class="<?= str_starts_with($path, '/aluno/cursos') ? 'active' : '' ?>" href="<?= e(url('/aluno/cursos')) ?>">Catálogo</a>
+                    <a class="<?= str_starts_with($path, '/aluno/meus-cursos') ? 'active' : '' ?>" href="<?= e(url('/aluno/meus-cursos')) ?>">Meus cursos</a>
                 <?php endif; ?>
                 <?php if (in_array($currentUser['role_slug'], ['administrador', 'supervisor'], true)): ?>
                     <a class="<?= $path === '/admin/contas-pendentes' ? 'active' : '' ?>" href="<?= e(url('/admin/contas-pendentes')) ?>">Aprovações</a>
                     <a class="<?= str_starts_with($path, '/admin/cursos') ? 'active' : '' ?>" href="<?= e(url('/admin/cursos')) ?>">Cursos admin</a>
+                    <a class="<?= str_starts_with($path, '/admin/matriculas') ? 'active' : '' ?>" href="<?= e(url('/admin/matriculas')) ?>">Matrículas</a>
                 <?php endif; ?>
             <?php endif; ?>
         </nav>

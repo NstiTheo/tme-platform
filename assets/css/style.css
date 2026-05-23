@@ -684,7 +684,9 @@ td span {
 
 .status-badge.publicado,
 .status-badge.publicada,
-.status-badge.ativo {
+.status-badge.ativo,
+.status-badge.ativa,
+.status-badge.concluida {
     background: color-mix(in srgb, var(--success) 18%, var(--surface));
     color: var(--success);
 }
@@ -696,9 +698,78 @@ td span {
 
 .status-badge.arquivado,
 .status-badge.arquivada,
-.status-badge.inativo {
+.status-badge.inativo,
+.status-badge.cancelada {
     background: color-mix(in srgb, var(--danger) 14%, var(--surface));
     color: var(--danger);
+}
+
+.progress-track {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--surface-soft);
+    border: 1px solid var(--border);
+}
+
+.progress-track.large {
+    height: 14px;
+    margin: 22px 0 8px;
+}
+
+.progress-track.table-progress {
+    min-width: 160px;
+    margin-bottom: 8px;
+}
+
+.progress-track span {
+    display: block;
+    height: 100%;
+    min-width: 0;
+    max-width: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--accent), #12a87f);
+}
+
+.enrollment-callout {
+    display: grid;
+    gap: 12px;
+    max-width: 460px;
+    margin-top: 24px;
+    padding: 18px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+.enrollment-callout p {
+    margin: 0;
+}
+
+.lesson-row.completed {
+    background: color-mix(in srgb, var(--success) 7%, transparent);
+}
+
+.lesson-progress-actions {
+    min-width: 170px;
+    justify-content: flex-end;
+}
+
+.lesson-progress-actions small {
+    color: var(--muted);
+}
+
+.lesson-content-preview {
+    max-width: 780px;
+    margin-top: 10px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-soft);
+    color: var(--text);
+    font-size: 0.94rem;
 }
 
 .detail-grid {

@@ -187,6 +187,7 @@ class User extends Model
             'pending_users' => (int) $this->db->query('SELECT COUNT(*) FROM users WHERE status = "pendente"')->fetchColumn(),
             'approved_users' => (int) $this->db->query('SELECT COUNT(*) FROM users WHERE status = "aprovado"')->fetchColumn(),
             'courses' => (int) $this->db->query('SELECT COUNT(*) FROM courses')->fetchColumn(),
+            'enrollments' => (int) $this->db->query('SELECT COUNT(*) FROM enrollments')->fetchColumn(),
             'events' => (int) $this->db->query('SELECT COUNT(*) FROM events')->fetchColumn(),
         ];
     }
