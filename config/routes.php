@@ -23,10 +23,15 @@ return [
 
     ['GET', '/aluno/cursos', [CourseCatalogController::class, 'index'], ['auth', 'role:aluno']],
     ['GET', '/aluno/cursos/{id}', [CourseCatalogController::class, 'show'], ['auth', 'role:aluno']],
+    ['POST', '/aluno/cursos/{id}/matricular', [CourseCatalogController::class, 'enroll'], ['auth', 'role:aluno']],
+    ['GET', '/aluno/meus-cursos', [CourseCatalogController::class, 'myCourses'], ['auth', 'role:aluno']],
+    ['GET', '/aluno/meus-cursos/{id}', [CourseCatalogController::class, 'enrollment'], ['auth', 'role:aluno']],
+    ['POST', '/aluno/meus-cursos/{enrollmentId}/aulas/{lessonId}/concluir', [CourseCatalogController::class, 'completeLesson'], ['auth', 'role:aluno']],
 
     ['GET', '/admin/contas-pendentes', [AdminController::class, 'pendingAccounts'], ['auth', 'role:administrador,supervisor']],
     ['POST', '/admin/contas/{id}/aprovar', [AdminController::class, 'approve'], ['auth', 'role:administrador,supervisor']],
     ['POST', '/admin/contas/{id}/recusar', [AdminController::class, 'reject'], ['auth', 'role:administrador,supervisor']],
+    ['GET', '/admin/matriculas', [AdminEnrollmentController::class, 'index'], ['auth', 'role:administrador,supervisor']],
 
     ['GET', '/admin/cursos', [AdminCourseController::class, 'index'], ['auth', 'role:administrador,supervisor']],
     ['GET', '/admin/cursos/novo', [AdminCourseController::class, 'create'], ['auth', 'role:administrador,supervisor']],
