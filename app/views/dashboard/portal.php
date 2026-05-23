@@ -1,0 +1,122 @@
+<?php
+defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+
+$role = $user['role_slug'];
+$isLearner = in_array($role, ['aluno', 'professor'], true);
+$isTeacher = $role === 'professor';
+$isAdmin = in_array($role, ['administrador', 'supervisor'], true);
+
+$metrics = [];
+$cards = [];
+
+if ($isLearner) {
+    $metrics = [
+        ['label' => 'Matriculas', 'value' => $learningStats['enrolled']],
+        ['label' => 'Progresso medio', 'value' => $learningStats['average_progress'] . '%'],
+        ['label' => 'Cursos concluidos', 'value' => $learningStats['completed']],
+        ['label' => 'Cursos publicados', 'value' => $publishedCoursesCount],
+    ];
+
+    $cards = array_merge($cards, [
+        ['title' => 'Meus cursos', 'text' => 'Continue suas aulas, materiais e progresso.', 'href' => '/meus-cursos', 'action' => 'Abrir'],
+        ['title' => 'Catalogo de cursos', 'text' => 'Explore cursos publicados e inicie novas trilhas.', 'href' => '/aluno/cursos', 'action' => 'Explorar'],
+        ['title' => 'Progresso', 'text' => 'Veja matriculas ativas, conclusoes e ultima atividade.', 'href' => '/meus-cursos', 'action' => 'Acompanhar'],
+        ['title' => 'Biblioteca', 'text' => 'Acesse materiais, leituras e referencias da TME.', 'href' => '/biblioteca', 'action' => 'Abrir'],
+        ['title' => 'Eventos', 'text' => 'Acompanhe palestras, workshops e encontros academicos.', 'href' => '/eventos', 'action' => 'Ver agenda'],
+        ['title' => 'Comunidade', 'text' => 'Participe da rede academica e acompanhe publicacoes.', 'href' => '/comunidade', 'action' => 'Entrar'],
+        ['title' => 'Certificados futuros', 'text' => 'Espaco reservado para certificados, validacao e QR Code.', 'href' => '', 'action' => 'Planejado'],
+    ]);
+}
+
+if ($isTeacher) {
+    $cards = array_merge($cards, [
+        ['title' => 'Minhas turmas', 'text' => 'Gestao de turmas e disciplinas do professor.', 'href' => '/dashboard', 'action' => 'Ver painel'],
+        ['title' => 'Meus cursos publicados', 'text' => 'Area preparada para conteudos assinados pelo docente.', 'href' => '/dashboard', 'action' => 'Acompanhar'],
+        ['title' => 'Criar conteudo', 'text' => 'Fluxo futuro para aulas, materiais e trilhas autorais.', 'href' => '/dashboard', 'action' => 'Preparar'],
+        ['title' => 'Materiais', 'text' => 'Organizacao futura de PDFs, links e arquivos didaticos.', 'href' => '/dashboard', 'action' => 'Ver base'],
+        ['title' => 'Correcoes futuras', 'text' => 'Espaco para atividades, feedbacks e avaliacoes.', 'href' => '', 'action' => 'Planejado'],
+        ['title' => 'Analytics futuro', 'text' => 'Indicadores de engajamento e desempenho por turma.', 'href' => '', 'action' => 'Planejado'],
+    ]);
+}
+
+if ($isAdmin) {
+    $metrics = [
+        ['label' => 'Contas pendentes', 'value' => $counts['pending_users']],
+        ['label' => 'Usuarios aprovados', 'value' => $counts['approved_users']],
+        ['label' => 'Cursos', 'value' => $counts['courses']],
+        ['label' => 'Matriculas', 'value' => $counts['enrollments']],
+    ];
+
+    $cards = array_merge($cards, [
+        ['title' => 'Dashboard administrativo', 'text' => 'Visao operacional por perfil e indicadores iniciais.', 'href' => '/dashboard', 'action' => 'Abrir'],
+        ['title' => 'Aprovacoes', 'text' => 'Analise cadastros pendentes de alunos e professores.', 'href' => '/admin/contas-pendentes', 'action' => 'Revisar'],
+        ['title' => 'Cursos admin', 'text' => 'Gerencie cursos, modulos, aulas e materiais.', 'href' => '/admin/cursos', 'action' => 'Gerenciar'],
+        ['title' => 'Matriculas', 'text' => 'Visualize alunos por curso, status e progresso.', 'href' => '/admin/matriculas', 'action' => 'Ver lista'],
+        ['title' => 'Usuarios', 'text' => 'Base preparada para gestao completa de usuarios.', 'href' => '/admin/contas-pendentes', 'action' => 'Acessar'],
+        ['title' => 'Logs', 'text' => 'Acoes importantes ja sao registradas para auditoria.', 'href' => '', 'action' => 'Planejado'],
+        ['title' => 'Relatorios futuros', 'text' => 'Indicadores academicos, financeiros e operacionais.', 'href' => '', 'action' => 'Planejado'],
+    ]);
+}
+
+if (! $cards) {
+    $metrics = [
+        ['label' => 'Cursos', 'value' => $counts['courses']],
+        ['label' => 'Eventos', 'value' => $counts['events']],
+        ['label' => 'Matriculas', 'value' => $counts['enrollments']],
+        ['label' => 'Perfil', 'value' => role_label($role)],
+    ];
+
+    $cards = [
+        ['title' => 'Dashboard', 'text' => 'Acesse o painel principal do seu perfil.', 'href' => '/dashboard', 'action' => 'Abrir'],
+        ['title' => 'Biblioteca', 'text' => 'Consulte materiais e referencias academicas.', 'href' => '/biblioteca', 'action' => 'Abrir'],
+        ['title' => 'Eventos', 'text' => 'Veja a programacao academica da TME.', 'href' => '/eventos', 'action' => 'Ver'],
+        ['title' => 'Comunidade', 'text' => 'Acompanhe publicacoes e projetos academicos.', 'href' => '/comunidade', 'action' => 'Entrar'],
+    ];
+}
+?>
+
+<section class="dashboard-shell portal-shell">
+    <div class="portal-hero">
+        <div>
+            <span class="eyebrow">Portal TME</span>
+            <h1>Ola, <?= e(explode(' ', trim($user['full_name']))[0] ?: $user['full_name']) ?>.</h1>
+            <p>Esta e sua central inicial autenticada para acessar aprendizagem, gestao, comunidade e atalhos do seu perfil.</p>
+        </div>
+        <div class="portal-actions">
+            <a class="button large" href="<?= e(url('/dashboard')) ?>">Dashboard</a>
+            <?php if ($isLearner): ?>
+                <a class="button ghost large" href="<?= e(url('/meus-cursos')) ?>">Meus cursos</a>
+            <?php elseif ($isAdmin): ?>
+                <a class="button ghost large" href="<?= e(url('/admin/contas-pendentes')) ?>">Administracao</a>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="metric-grid portal-metrics">
+        <?php foreach ($metrics as $metric): ?>
+            <article class="metric">
+                <span><?= e($metric['label']) ?></span>
+                <strong><?= e($metric['value']) ?></strong>
+            </article>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="portal-section-title">
+        <span class="eyebrow">Atalhos</span>
+        <h2>Areas principais</h2>
+    </div>
+
+    <div class="module-grid portal-grid">
+        <?php foreach ($cards as $card): ?>
+            <article class="module-card <?= empty($card['href']) ? 'muted-card' : '' ?>">
+                <h2><?= e($card['title']) ?></h2>
+                <p><?= e($card['text']) ?></p>
+                <?php if (! empty($card['href'])): ?>
+                    <a href="<?= e(url($card['href'])) ?>"><?= e($card['action']) ?></a>
+                <?php else: ?>
+                    <span class="module-card-note"><?= e($card['action']) ?></span>
+                <?php endif; ?>
+            </article>
+        <?php endforeach; ?>
+    </div>
+</section>
