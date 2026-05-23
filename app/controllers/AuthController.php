@@ -14,7 +14,7 @@ class AuthController extends Controller
     public function showLogin(): void
     {
         if (current_user()) {
-            $this->redirect('/dashboard');
+            $this->redirect('/portal');
         }
 
         $this->view('auth/login', ['title' => 'Login']);
@@ -23,7 +23,7 @@ class AuthController extends Controller
     public function showRegister(): void
     {
         if (current_user()) {
-            $this->redirect('/dashboard');
+            $this->redirect('/portal');
         }
 
         $this->view('auth/register', ['title' => 'Cadastro']);
@@ -89,14 +89,14 @@ class AuthController extends Controller
         $_SESSION['user_id'] = (int) $user['id'];
         $this->users->markLastLogin((int) $user['id']);
 
-        $this->redirect('/dashboard');
+        $this->redirect('/portal');
     }
 
     public function logout(): void
     {
         if (! verify_csrf_token($_POST['_csrf'] ?? null)) {
             flash('error', 'Não foi possível encerrar a sessão.');
-            $this->redirect('/dashboard');
+            $this->redirect('/portal');
         }
 
         $_SESSION = [];

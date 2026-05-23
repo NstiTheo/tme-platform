@@ -6,6 +6,10 @@ class PublicController extends Controller
 {
     public function home(): void
     {
+        if (current_user()) {
+            $this->redirect('/portal');
+        }
+
         $this->view('public/home', ['title' => 'Home']);
     }
 
