@@ -1113,7 +1113,8 @@ td span {
     .library-shelf,
     .course-card-grid,
     .detail-grid,
-    .filter-form {
+    .filter-form,
+    .filter-form.library-filter-form {
         grid-template-columns: 1fr 1fr;
     }
 }
@@ -1150,7 +1151,8 @@ td span {
     .grid-form,
     .course-card-grid,
     .detail-grid,
-    .filter-form {
+    .filter-form,
+    .filter-form.library-filter-form {
         grid-template-columns: 1fr;
     }
 
