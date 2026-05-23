@@ -19,6 +19,7 @@ A TME é uma base MVC própria em PHP para uma plataforma educacional moderna qu
 - Home pública e páginas institucionais: Sobre, Cursos, Eventos, Biblioteca, Comunidade, Login e Cadastro.
 - Cadastro de aluno ou professor com status inicial `pendente`.
 - Login permitido apenas para contas `aprovado`.
+- Perfil completo em `/perfil` com personalizacao, biografia, estatisticas, badges e alteracao de senha.
 - Dashboards separados para aluno, professor, supervisor, administrador, secretaria e financeiro.
 - Aprovação e recusa de contas por administrador ou supervisor.
 - Tema claro/escuro e cor principal personalizável por usuário.
@@ -31,6 +32,8 @@ A vitrine publica e a area logada agora sao experiencias separadas:
 
 - Visitantes continuam vendo Home, Sobre, Cursos, Eventos, Biblioteca, Comunidade, Login e Cadastro.
 - Usuarios autenticados sao redirecionados para `/portal` depois do login aprovado.
+- O seletor rapido de tema/cor saiu da navbar; tema, cor principal e preview ficam em `/perfil`.
+- O Portal mostra XP, nivel, moedas, streak e badges recentes.
 - A rota `/inicio` tambem abre o Portal TME.
 - A Home publica (`/`) redireciona usuarios logados para o portal interno.
 - O menu de usuarios logados oculta Login/Cadastro e prioriza Inicio, Dashboard, Cursos, Meus cursos, Biblioteca, Eventos, Comunidade, Configuracoes/Tema e Sair.
