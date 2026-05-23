@@ -90,7 +90,11 @@ class AuthController extends Controller
         session_regenerate_id(true);
         $_SESSION['user_id'] = (int) $user['id'];
         $this->users->markLastLogin((int) $user['id']);
-        $this->gamification->firstLogin((int) $user['id']);
+        try {
+            $this->gamification->firstLogin((int) $user['id']);
+        } catch (Throwable $exception) {
+            (new ActionLog())->record((int) $user['id'], 'gamification.error', ['message' => $exception->getMessage()], 'warning');
+        }
 
         $this->redirect('/portal');
     }

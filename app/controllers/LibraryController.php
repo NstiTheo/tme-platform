@@ -80,7 +80,11 @@ class LibraryController extends Controller
         ]);
 
         if ($favorite) {
-            $this->gamification->libraryFavoriteAdded((int) $user['id'], (int) $item['id']);
+            try {
+                $this->gamification->libraryFavoriteAdded((int) $user['id'], (int) $item['id']);
+            } catch (Throwable $eventException) {
+                $this->logs->record((int) $user['id'], 'gamification.error', ['message' => $eventException->getMessage()], 'warning');
+            }
         }
 
         flash('success', $favorite ? 'Material adicionado aos favoritos.' : 'Material removido dos favoritos.');
