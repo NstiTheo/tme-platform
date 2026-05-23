@@ -557,6 +557,27 @@ button.button {
     font-size: clamp(1.5rem, 2.4vw, 2.1rem);
 }
 
+.portal-gamification-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 18px;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: linear-gradient(135deg, color-mix(in srgb, var(--surface) 86%, var(--accent) 14%), var(--surface));
+}
+
+.portal-gamification-panel h2 {
+    margin: 6px 0;
+    font-size: 1.35rem;
+}
+
+.portal-gamification-panel p {
+    margin: 0;
+    color: var(--muted);
+}
+
 .split {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
