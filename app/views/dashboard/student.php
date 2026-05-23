@@ -15,7 +15,7 @@
     </div>
 
     <div class="module-grid">
-        <article class="module-card"><h2>Minha aprendizagem</h2><p>Acompanhe matrículas, aulas concluídas e progresso por curso.</p><a href="<?= e(url('/aluno/meus-cursos')) ?>">Meus cursos</a></article>
+        <article class="module-card"><h2>Minha aprendizagem</h2><p>Acompanhe matrículas, aulas concluídas e progresso por curso.</p><a href="<?= e(url('/meus-cursos')) ?>">Meus cursos</a></article>
         <article class="module-card"><h2>Catálogo</h2><p>Encontre cursos publicados e faça matrícula com um clique.</p><a href="<?= e(url('/aluno/cursos')) ?>">Ver catálogo</a></article>
         <article class="module-card"><h2>Comunidade</h2><p>Projetos, publicações e comentários com moderação acadêmica.</p></article>
     </div>
