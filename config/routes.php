@@ -18,15 +18,22 @@ return [
 
     ['GET', '/instituicoes/buscar', [InstitutionController::class, 'search']],
 
+    ['GET', '/portal', [PortalController::class, 'index'], ['auth']],
+    ['GET', '/inicio', [PortalController::class, 'index'], ['auth']],
+    ['GET', '/configuracoes', [PortalController::class, 'settings'], ['auth']],
+
     ['GET', '/dashboard', [DashboardController::class, 'index'], ['auth']],
     ['POST', '/settings', [DashboardController::class, 'updateSettings'], ['auth']],
 
-    ['GET', '/aluno/cursos', [CourseCatalogController::class, 'index'], ['auth', 'role:aluno']],
-    ['GET', '/aluno/cursos/{id}', [CourseCatalogController::class, 'show'], ['auth', 'role:aluno']],
-    ['POST', '/aluno/cursos/{id}/matricular', [CourseCatalogController::class, 'enroll'], ['auth', 'role:aluno']],
-    ['GET', '/aluno/meus-cursos', [CourseCatalogController::class, 'myCourses'], ['auth', 'role:aluno']],
-    ['GET', '/aluno/meus-cursos/{id}', [CourseCatalogController::class, 'enrollment'], ['auth', 'role:aluno']],
-    ['POST', '/aluno/meus-cursos/{enrollmentId}/aulas/{lessonId}/concluir', [CourseCatalogController::class, 'completeLesson'], ['auth', 'role:aluno']],
+    ['GET', '/aluno/cursos', [CourseCatalogController::class, 'index'], ['auth', 'role:aluno,professor']],
+    ['GET', '/aluno/cursos/{id}', [CourseCatalogController::class, 'show'], ['auth', 'role:aluno,professor']],
+    ['POST', '/aluno/cursos/{id}/matricular', [CourseCatalogController::class, 'enroll'], ['auth', 'role:aluno,professor']],
+    ['GET', '/meus-cursos', [CourseCatalogController::class, 'myCourses'], ['auth', 'role:aluno,professor']],
+    ['GET', '/meus-cursos/{id}', [CourseCatalogController::class, 'enrollment'], ['auth', 'role:aluno,professor']],
+    ['POST', '/meus-cursos/{enrollmentId}/aulas/{lessonId}/concluir', [CourseCatalogController::class, 'completeLesson'], ['auth', 'role:aluno,professor']],
+    ['GET', '/aluno/meus-cursos', [CourseCatalogController::class, 'myCourses'], ['auth', 'role:aluno,professor']],
+    ['GET', '/aluno/meus-cursos/{id}', [CourseCatalogController::class, 'enrollment'], ['auth', 'role:aluno,professor']],
+    ['POST', '/aluno/meus-cursos/{enrollmentId}/aulas/{lessonId}/concluir', [CourseCatalogController::class, 'completeLesson'], ['auth', 'role:aluno,professor']],
 
     ['GET', '/admin/contas-pendentes', [AdminController::class, 'pendingAccounts'], ['auth', 'role:administrador,supervisor']],
     ['POST', '/admin/contas/{id}/aprovar', [AdminController::class, 'approve'], ['auth', 'role:administrador,supervisor']],
