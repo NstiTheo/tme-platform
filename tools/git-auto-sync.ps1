@@ -388,12 +388,11 @@ $watcher.IncludeSubdirectories = $true
 $watcher.NotifyFilter = [System.IO.NotifyFilters]'FileName, DirectoryName, LastWrite, Size'
 $watcher.EnableRaisingEvents = $true
 
-$subscriptions = @(
-    Register-ObjectEvent -InputObject $watcher -EventName Changed -Action $eventAction -MessageData $state,
-    Register-ObjectEvent -InputObject $watcher -EventName Created -Action $eventAction -MessageData $state,
-    Register-ObjectEvent -InputObject $watcher -EventName Deleted -Action $eventAction -MessageData $state,
-    Register-ObjectEvent -InputObject $watcher -EventName Renamed -Action $eventAction -MessageData $state
-)
+$subscriptions = @()
+$subscriptions += Register-ObjectEvent -InputObject $watcher -EventName Changed -Action $eventAction -MessageData $state
+$subscriptions += Register-ObjectEvent -InputObject $watcher -EventName Created -Action $eventAction -MessageData $state
+$subscriptions += Register-ObjectEvent -InputObject $watcher -EventName Deleted -Action $eventAction -MessageData $state
+$subscriptions += Register-ObjectEvent -InputObject $watcher -EventName Renamed -Action $eventAction -MessageData $state
 
 try {
     while ($true) {
