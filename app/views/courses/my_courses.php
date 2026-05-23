@@ -36,7 +36,7 @@
                             <span><?= e((int) $enrollment['lessons_count']) ?> aulas</span>
                             <span>Início <?= e(date('d/m/Y', strtotime($enrollment['enrolled_at']))) ?></span>
                         </div>
-                        <a class="button" href="<?= e(url('/aluno/meus-cursos/' . $enrollment['id'])) ?>">Abrir curso</a>
+                        <a class="button" href="<?= e(url('/meus-cursos/' . $enrollment['id'])) ?>">Abrir curso</a>
                     </div>
                 </article>
             <?php endforeach; ?>
