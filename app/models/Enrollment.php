@@ -64,9 +64,9 @@ class Enrollment extends Model
         $statement = $this->db->prepare(
             'INSERT INTO enrollments (
                 user_id, course_id, role, status, progress_percent, enrolled_at,
-                last_activity_at, created_at, completed_at
+                last_activity_at, completed_at
              ) VALUES (
-                :user_id, :course_id, "aluno", "ativa", 0.00, NOW(), NOW(), NOW(), NULL
+                :user_id, :course_id, "aluno", "ativa", 0.00, NOW(), NOW(), NULL
              )'
         );
         $statement->execute([
