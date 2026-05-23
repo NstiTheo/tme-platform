@@ -73,7 +73,11 @@ class CourseCatalogController extends Controller
                 'enrollment_id' => $enrollmentId,
                 'course_id' => (int) $course['id'],
             ]);
-            $this->gamification->enrollmentCreated((int) $user['id'], $enrollmentId, (int) $course['id']);
+            try {
+                $this->gamification->enrollmentCreated((int) $user['id'], $enrollmentId, (int) $course['id']);
+            } catch (Throwable $eventException) {
+                $this->logs->record((int) $user['id'], 'gamification.error', ['message' => $eventException->getMessage()], 'warning');
+            }
 
             flash('success', 'Matrícula realizada. Bom estudo!');
             $this->redirect('/meus-cursos/' . $enrollmentId);
@@ -122,7 +126,11 @@ class CourseCatalogController extends Controller
                 'lesson_id' => (int) $lessonId,
                 'progress_percent' => $progress['progress_percent'],
             ]);
-            $this->gamification->lessonCompleted((int) $user['id'], (int) $lessonId, (int) $enrollmentId);
+            try {
+                $this->gamification->lessonCompleted((int) $user['id'], (int) $lessonId, (int) $enrollmentId);
+            } catch (Throwable $eventException) {
+                $this->logs->record((int) $user['id'], 'gamification.error', ['message' => $eventException->getMessage()], 'warning');
+            }
 
             if ($progress['course_completed_now']) {
                 $enrollment = $this->enrollments->find((int) $enrollmentId);
@@ -131,8 +139,12 @@ class CourseCatalogController extends Controller
                     'progress_percent' => $progress['progress_percent'],
                 ]);
                 if ($enrollment) {
-                    $this->gamification->courseCompleted((int) $user['id'], (int) $enrollmentId, (int) $enrollment['course_id']);
-                    $this->certificates->issueForEnrollment((int) $enrollmentId);
+                    try {
+                        $this->gamification->courseCompleted((int) $user['id'], (int) $enrollmentId, (int) $enrollment['course_id']);
+                        $this->certificates->issueForEnrollment((int) $enrollmentId);
+                    } catch (Throwable $eventException) {
+                        $this->logs->record((int) $user['id'], 'certificate_or_gamification.error', ['message' => $eventException->getMessage()], 'warning');
+                    }
                 }
                 flash('success', 'Curso concluído. Progresso em 100%.');
             } else {
