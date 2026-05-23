@@ -466,17 +466,29 @@ CREATE TABLE IF NOT EXISTS events (
 CREATE TABLE IF NOT EXISTS certificates (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NOT NULL,
+    enrollment_id BIGINT UNSIGNED NULL UNIQUE,
     event_id BIGINT UNSIGNED NULL,
     course_id BIGINT UNSIGNED NULL,
+    certificate_type ENUM('curso', 'evento') NOT NULL DEFAULT 'curso',
     code VARCHAR(80) NOT NULL UNIQUE,
     title VARCHAR(180) NOT NULL,
+    workload_hours SMALLINT UNSIGNED NOT NULL DEFAULT 0,
     validation_status ENUM('valido', 'revogado') NOT NULL DEFAULT 'valido',
     qr_code_path VARCHAR(255) NULL,
+    revoked_by BIGINT UNSIGNED NULL,
+    revoked_at TIMESTAMP NULL,
+    revocation_reason VARCHAR(255) NULL,
     issued_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    KEY certificates_user_index (user_id),
+    KEY certificates_course_index (course_id),
+    KEY certificates_status_index (validation_status),
     CONSTRAINT fk_certificates_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_certificates_enrollment FOREIGN KEY (enrollment_id) REFERENCES enrollments(id) ON DELETE SET NULL,
     CONSTRAINT fk_certificates_event FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE SET NULL,
-    CONSTRAINT fk_certificates_course FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE SET NULL
+    CONSTRAINT fk_certificates_course FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE SET NULL,
+    CONSTRAINT fk_certificates_revoked_by FOREIGN KEY (revoked_by) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS gamification_profiles (
