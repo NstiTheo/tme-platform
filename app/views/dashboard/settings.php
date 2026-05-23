@@ -9,7 +9,7 @@
 
     <form class="admin-form form" action="<?= e(url('/settings')) ?>" method="post">
         <?= csrf_field() ?>
-        <input type="hidden" name="redirect_to" value="<?= e(url('/configuracoes')) ?>">
+        <input type="hidden" name="redirect_to" value="/configuracoes">
 
         <label>
             Tema
