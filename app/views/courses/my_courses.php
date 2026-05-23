@@ -3,7 +3,7 @@
 <section class="dashboard-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
-            <span class="eyebrow">Aluno</span>
+            <span class="eyebrow">Aprendizagem</span>
             <h1>Meus cursos</h1>
             <p>Acompanhe suas matrículas, progresso e última atividade.</p>
         </div>

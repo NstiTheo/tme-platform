@@ -2,7 +2,7 @@
 
 <section class="dashboard-shell">
     <div class="dashboard-heading">
-        <span class="eyebrow">Aluno</span>
+        <span class="eyebrow">Aprendizagem</span>
         <h1>Cursos disponíveis</h1>
         <p>Explore cursos publicados pela equipe TME e acompanhe a estrutura de módulos, aulas e materiais.</p>
     </div>
