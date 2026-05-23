@@ -239,6 +239,7 @@ class User extends Model
             'courses' => (int) $this->db->query('SELECT COUNT(*) FROM courses')->fetchColumn(),
             'enrollments' => (int) $this->db->query('SELECT COUNT(*) FROM enrollments')->fetchColumn(),
             'events' => (int) $this->db->query('SELECT COUNT(*) FROM events')->fetchColumn(),
+            'certificates' => (int) $this->db->query('SELECT COUNT(*) FROM certificates')->fetchColumn(),
         ];
     }
 

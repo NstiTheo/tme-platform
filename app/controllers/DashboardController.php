@@ -7,7 +7,10 @@ class DashboardController extends Controller
     public function index(): void
     {
         $user = current_user();
-        $counts = (new User())->dashboardCounts();
+        $users = new User();
+        $counts = $users->dashboardCounts();
+        $gamification = new Gamification();
+        $gamification->ensureProfile((int) $user['id']);
 
         $views = [
             'aluno' => 'dashboard/student',
@@ -24,6 +27,9 @@ class DashboardController extends Controller
             'title' => 'Dashboard',
             'user' => $user,
             'counts' => $counts,
+            'profile' => $gamification->profile((int) $user['id']),
+            'stats' => $users->profileStats((int) $user['id']),
+            'badges' => $gamification->badgesForUser((int) $user['id'], 4),
         ]);
     }
 
