@@ -72,7 +72,8 @@ class CertificateController extends Controller
     public function validateCode(string $code): void
     {
         $certificate = $this->certificates->findByCode($code);
-        $this->logs->record(current_user()['id'] ?? null, 'certificate.validated', [
+        $viewer = current_user();
+        $this->logs->record($viewer ? (int) $viewer['id'] : null, 'certificate.validated', [
             'code' => strtoupper(trim($code)),
             'found' => (bool) $certificate,
             'status' => $certificate['validation_status'] ?? 'nao_encontrado',

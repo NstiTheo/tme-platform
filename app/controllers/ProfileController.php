@@ -35,7 +35,7 @@ class ProfileController extends Controller
         $this->guardCsrf('/perfil');
         $bio = trim($_POST['bio_short'] ?? '');
 
-        if (mb_strlen($bio) > 280) {
+        if (strlen($bio) > 280) {
             flash('error', 'A biografia curta deve ter no maximo 280 caracteres.');
             $this->redirect('/perfil#perfil');
         }
