@@ -191,10 +191,10 @@ class Course extends Model
         return $statement->fetchAll();
     }
 
-    public function structure(int $courseId): array
+    public function structure(int $courseId, bool $publishedOnly = false): array
     {
         $modules = (new CourseModule())->forCourse($courseId);
-        $lessons = (new Lesson())->forCourse($courseId);
+        $lessons = (new Lesson())->forCourse($courseId, $publishedOnly ? 'publicada' : null);
         $materials = (new Material())->forCourse($courseId);
 
         foreach ($lessons as &$lesson) {

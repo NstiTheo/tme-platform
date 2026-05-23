@@ -4,18 +4,33 @@ defined('BASE_PATH') || exit('Acesso direto nao permitido.');
 
 class Lesson extends Model
 {
-    public function forCourse(int $courseId): array
+    public function forCourse(int $courseId, ?string $status = null): array
     {
-        $statement = $this->db->prepare(
-            'SELECT lessons.*, course_modules.title AS module_title
-             FROM lessons
-             LEFT JOIN course_modules ON course_modules.id = lessons.module_id
-             WHERE lessons.course_id = :course_id
-             ORDER BY COALESCE(course_modules.position, 9999), lessons.position, lessons.id'
-        );
-        $statement->execute(['course_id' => $courseId]);
+        $sql = 'SELECT lessons.*, course_modules.title AS module_title
+                FROM lessons
+                LEFT JOIN course_modules ON course_modules.id = lessons.module_id
+                WHERE lessons.course_id = :course_id';
+        $params = ['course_id' => $courseId];
+
+        if ($status !== null) {
+            $sql .= ' AND lessons.status = :status';
+            $params['status'] = $status;
+        }
+
+        $sql .= ' ORDER BY COALESCE(course_modules.position, 9999), lessons.position, lessons.id';
+
+        $statement = $this->db->prepare($sql);
+        $statement->execute($params);
 
         return $statement->fetchAll();
+    }
+
+    public function countPublishedForCourse(int $courseId): int
+    {
+        $statement = $this->db->prepare('SELECT COUNT(*) FROM lessons WHERE course_id = :course_id AND status = "publicada"');
+        $statement->execute(['course_id' => $courseId]);
+
+        return (int) $statement->fetchColumn();
     }
 
     public function find(int $id): ?array
