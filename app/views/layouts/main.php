@@ -34,6 +34,7 @@ if ($isLearner) {
     $internalLinks['/meus-cursos'] = 'Meus cursos';
     $internalLinks['/atividades'] = 'Atividades';
     $internalLinks['/boletim'] = 'Boletim';
+    $internalLinks['/certificados'] = 'Certificados';
 } elseif ($isAdmin) {
     $internalLinks['/admin/cursos'] = 'Cursos';
 }
@@ -41,12 +42,13 @@ if ($isLearner) {
 $internalLinks['/biblioteca'] = 'Biblioteca';
 $internalLinks['/eventos'] = 'Eventos';
 $internalLinks['/comunidade'] = 'Comunidade';
-$internalLinks['/configuracoes'] = 'Configuracoes/Tema';
+$internalLinks['/ranking'] = 'Ranking';
 
 if ($isAdmin) {
     $internalLinks['/admin/contas-pendentes'] = 'Administracao';
     $internalLinks['/admin/atividades'] = 'Atividades admin';
     $internalLinks['/admin/biblioteca'] = 'Biblioteca admin';
+    $internalLinks['/admin/certificados'] = 'Certificados admin';
 } elseif ($role === 'professor') {
     $internalLinks['/admin/atividades'] = 'Gestao atividades';
     $internalLinks['/admin/biblioteca'] = 'Biblioteca admin';
@@ -98,16 +100,10 @@ $isActive = static function (string $href) use ($path): bool {
         <div class="header-actions">
             <?php if ($isAuthenticated): ?>
                 <span class="user-chip">Ola, <?= e(explode(' ', trim($currentUser['full_name']))[0] ?: $currentUser['full_name']) ?></span>
-                <form class="theme-form compact-theme-form" action="<?= e(url('/settings')) ?>" method="post">
-                    <?= csrf_field() ?>
-                    <input type="hidden" name="redirect_to" value="<?= e($path) ?>">
-                    <select name="theme" aria-label="Tema">
-                        <option value="light" <?= $settings['theme'] === 'light' ? 'selected' : '' ?>>Claro</option>
-                        <option value="dark" <?= $settings['theme'] === 'dark' ? 'selected' : '' ?>>Escuro</option>
-                    </select>
-                    <input type="color" name="primary_color" value="<?= e($settings['primary_color']) ?>" aria-label="Cor principal">
-                    <button type="submit" class="icon-button" title="Salvar preferencias">OK</button>
-                </form>
+                <a class="profile-chip" href="<?= e(url('/perfil')) ?>" aria-label="Abrir perfil">
+                    <span><?= e(strtoupper(substr($currentUser['full_name'], 0, 1))) ?></span>
+                    Perfil
+                </a>
                 <form action="<?= e(url('/logout')) ?>" method="post">
                     <?= csrf_field() ?>
                     <button class="button ghost" type="submit">Sair</button>

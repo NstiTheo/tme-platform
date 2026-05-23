@@ -27,6 +27,21 @@
         }
     }
 
+    const profileTheme = document.querySelector('[data-profile-theme]');
+    const profileColor = document.querySelector('[data-profile-color]');
+
+    if (profileTheme) {
+        profileTheme.addEventListener('change', function () {
+            document.body.dataset.theme = profileTheme.value;
+        });
+    }
+
+    if (profileColor) {
+        profileColor.addEventListener('input', function () {
+            document.body.style.setProperty('--accent', profileColor.value);
+        });
+    }
+
     const independentToggle = document.querySelector('[data-independent-toggle]');
     const institutionField = document.querySelector('[data-institution-field]');
     const institutionInput = document.querySelector('[data-institution-search]');
