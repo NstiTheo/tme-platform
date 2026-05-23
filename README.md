@@ -25,6 +25,20 @@ A TME é uma base MVC própria em PHP para uma plataforma educacional moderna qu
 - Roles, permissões, instituições, cursos, turmas, atividades, comunidade, eventos, certificados, gamificação, financeiro, notificações e logs modelados no banco.
 - Estrutura preparada para importações futuras do INEP e e-MEC.
 
+## Experiencia autenticada e Portal TME
+
+A vitrine publica e a area logada agora sao experiencias separadas:
+
+- Visitantes continuam vendo Home, Sobre, Cursos, Eventos, Biblioteca, Comunidade, Login e Cadastro.
+- Usuarios autenticados sao redirecionados para `/portal` depois do login aprovado.
+- A rota `/inicio` tambem abre o Portal TME.
+- A Home publica (`/`) redireciona usuarios logados para o portal interno.
+- O menu de usuarios logados oculta Login/Cadastro e prioriza Inicio, Dashboard, Cursos, Meus cursos, Biblioteca, Eventos, Comunidade, Configuracoes/Tema e Sair.
+- Alunos e professores acessam o catalogo em `/aluno/cursos` e a area neutra `/meus-cursos`.
+- Professores tambem podem estudar como alunos, mantendo acesso a matriculas e progresso.
+- Administradores e supervisores veem atalhos de administracao, aprovacoes, cursos admin e matriculas.
+- `/portal` e `/configuracoes` exigem autenticacao.
+
 ## Módulo administrativo de cursos
 
 O admin/supervisor acessa `Administração > Cursos admin` para gerenciar o catálogo acadêmico.
@@ -42,7 +56,7 @@ Recursos disponíveis:
 - Logs em `logs` para criação, edição, remoção e arquivamento.
 - CSRF, sessão, middleware de autenticação e proteção por role `administrador/supervisor`.
 
-Alunos aprovados acessam `Meus cursos` para ver cursos publicados, detalhes do curso, módulos, aulas e materiais ativos.
+Alunos e professores aprovados acessam `Meus cursos` para ver cursos publicados, detalhes do curso, módulos, aulas e materiais ativos.
 
 Para bancos existentes, aplique a migration:
 
@@ -52,7 +66,7 @@ mysql -u root -p < database/migrations/2026_05_23_admin_courses_module.sql
 
 ## Matrículas e progresso do aluno
 
-Alunos aprovados podem se matricular em cursos publicados pelo catálogo em `Catálogo`.
+Alunos e professores aprovados podem se matricular em cursos publicados pelo catálogo em `Catálogo`.
 
 Recursos disponíveis:
 
