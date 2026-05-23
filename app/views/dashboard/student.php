@@ -15,7 +15,7 @@
     </div>
 
     <div class="module-grid">
-        <article class="module-card"><h2>Minha aprendizagem</h2><p>Cursos, aulas, materiais e progresso aparecerão aqui.</p></article>
+        <article class="module-card"><h2>Minha aprendizagem</h2><p>Cursos publicados, aulas e materiais ficam disponíveis no catálogo inicial.</p><a href="<?= e(url('/aluno/cursos')) ?>">Ver cursos</a></article>
         <article class="module-card"><h2>Comunidade</h2><p>Projetos, publicações e comentários com moderação acadêmica.</p></article>
         <article class="module-card"><h2>Biblioteca</h2><p>Livros, PDFs, apostilas e favoritos em construção.</p></article>
     </div>

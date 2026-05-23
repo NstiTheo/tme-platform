@@ -296,7 +296,7 @@ function Sync-Changes {
 
     $message = New-AutoCommitMessage -Files $stagedFiles
     $messageFile = Join-Path $env:TEMP ("tme-auto-commit-{0}.txt" -f ([guid]::NewGuid().ToString('N')))
-    Set-Content -LiteralPath $messageFile -Value $message -Encoding UTF8
+    Set-Content -LiteralPath $messageFile -Value $message -Encoding ASCII
 
     try {
         Invoke-Git -C $script:ProjectRoot commit -F $messageFile

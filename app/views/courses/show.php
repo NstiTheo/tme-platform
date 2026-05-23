@@ -68,7 +68,29 @@
             </article>
         <?php endforeach; ?>
 
-        <?php if (empty($structure['modules'])): ?>
+        <?php if (! empty($structure['unassigned_lessons'])): ?>
+            <article class="curriculum-module">
+                <header>
+                    <div>
+                        <strong>Aulas do curso</strong>
+                        <p>Aulas publicadas diretamente no curso.</p>
+                    </div>
+                </header>
+                <?php foreach ($structure['unassigned_lessons'] as $lesson): ?>
+                    <div class="lesson-row">
+                        <div>
+                            <strong><?= e($lesson['position']) ?>. <?= e($lesson['title']) ?></strong>
+                            <span><?= e($lesson['lesson_type']) ?> • <?= e((int) $lesson['duration_minutes']) ?> min</span>
+                            <?php if (! empty($lesson['description'])): ?>
+                                <p><?= e($lesson['description']) ?></p>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </article>
+        <?php endif; ?>
+
+        <?php if (empty($structure['modules']) && empty($structure['unassigned_lessons'])): ?>
             <div class="empty-state">
                 <h2>Currículo em montagem</h2>
                 <p>As aulas deste curso ainda serão organizadas em módulos.</p>

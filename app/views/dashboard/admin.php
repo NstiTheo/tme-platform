@@ -16,7 +16,7 @@
 
     <div class="module-grid">
         <article class="module-card"><h2>Aprovação de contas</h2><p>Cadastros de alunos e professores entram como pendentes.</p><a href="<?= e(url('/admin/contas-pendentes')) ?>">Abrir fila</a></article>
-        <article class="module-card"><h2>Permissões</h2><p>Roles e permissões já estão modelados para expansão.</p></article>
+        <article class="module-card"><h2>Cursos</h2><p>Crie cursos, módulos, aulas e materiais com filtros administrativos.</p><a href="<?= e(url('/admin/cursos')) ?>">Gerenciar cursos</a></article>
         <article class="module-card"><h2>Instituições</h2><p>Base preparada para INEP, e-MEC e cadastro manual.</p></article>
     </div>
 </section>
