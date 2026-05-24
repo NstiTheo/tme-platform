@@ -134,6 +134,31 @@ if (! $cards) {
         </div>
     </div>
 
+    <?php if ($isLearner): ?>
+        <div class="portal-linked-panel">
+            <section>
+                <span class="eyebrow">Eventos inscritos</span>
+                <?php if (empty($registeredEvents)): ?>
+                    <p class="muted">Nenhuma inscricao em eventos ainda.</p>
+                <?php else: ?>
+                    <?php foreach (array_slice($registeredEvents, 0, 3) as $event): ?>
+                        <p><strong><?= e($event['title']) ?></strong><br><span class="muted"><?= e($event['starts_at'] ? date('d/m/Y H:i', strtotime($event['starts_at'])) : 'data a definir') ?></span></p>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </section>
+            <section>
+                <span class="eyebrow">Turmas vinculadas</span>
+                <?php if (empty($linkedClasses)): ?>
+                    <p class="muted">Nenhuma turma vinculada ainda.</p>
+                <?php else: ?>
+                    <?php foreach (array_slice($linkedClasses, 0, 3) as $class): ?>
+                        <p><strong><?= e($class['name']) ?></strong><br><span class="muted"><?= e($class['period'] ?: 'periodo a definir') ?></span></p>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </section>
+        </div>
+    <?php endif; ?>
+
     <div class="portal-section-title">
         <span class="eyebrow">Atalhos</span>
         <h2>Areas principais</h2>
