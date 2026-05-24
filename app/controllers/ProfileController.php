@@ -27,6 +27,7 @@ class ProfileController extends Controller
             'profile' => $this->gamification->profile((int) $user['id']),
             'badges' => $this->gamification->badgesForUser((int) $user['id'], 8),
             'stats' => $this->users->profileStats((int) $user['id']),
+            'posts' => (new CommunityPost())->forUser((int) $user['id']),
         ]);
     }
 

@@ -35,6 +35,7 @@ if ($isLearner) {
     $internalLinks['/atividades'] = 'Atividades';
     $internalLinks['/boletim'] = 'Boletim';
     $internalLinks['/certificados'] = 'Certificados';
+    $internalLinks['/turmas'] = 'Turmas';
 } elseif ($isAdmin) {
     $internalLinks['/admin/cursos'] = 'Cursos';
 }
@@ -49,6 +50,9 @@ if ($isAdmin) {
     $internalLinks['/admin/atividades'] = 'Atividades admin';
     $internalLinks['/admin/biblioteca'] = 'Biblioteca admin';
     $internalLinks['/admin/certificados'] = 'Certificados admin';
+    $internalLinks['/admin/comunidade'] = 'Comunidade admin';
+    $internalLinks['/admin/eventos'] = 'Eventos admin';
+    $internalLinks['/admin/turmas'] = 'Turmas admin';
 } elseif ($role === 'professor') {
     $internalLinks['/admin/atividades'] = 'Gestao atividades';
     $internalLinks['/admin/biblioteca'] = 'Biblioteca admin';
