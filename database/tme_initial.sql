@@ -396,6 +396,27 @@ CREATE TABLE IF NOT EXISTS grades (
     CONSTRAINT fk_grades_teacher FOREIGN KEY (teacher_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS attendance_records (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    class_id BIGINT UNSIGNED NOT NULL,
+    subject_id BIGINT UNSIGNED NOT NULL,
+    student_id BIGINT UNSIGNED NOT NULL,
+    recorded_by BIGINT UNSIGNED NULL,
+    attendance_date DATE NOT NULL,
+    status ENUM('presente', 'falta', 'atraso', 'justificado') NOT NULL DEFAULT 'presente',
+    note TEXT NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY attendance_session_student_unique (class_id, subject_id, student_id, attendance_date),
+    KEY attendance_student_index (student_id),
+    KEY attendance_date_index (attendance_date),
+    KEY attendance_status_index (status),
+    CONSTRAINT fk_attendance_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE,
+    CONSTRAINT fk_attendance_subject FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE,
+    CONSTRAINT fk_attendance_student FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_attendance_recorder FOREIGN KEY (recorded_by) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS question_bank (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     creator_id BIGINT UNSIGNED NULL,
@@ -404,7 +425,10 @@ CREATE TABLE IF NOT EXISTS question_bank (
     question_type ENUM('objetiva', 'discursiva') NOT NULL DEFAULT 'objetiva',
     alternatives JSON NULL,
     correct_answer TEXT NULL,
+    points DECIMAL(6,2) NOT NULL DEFAULT 1.00,
+    explanation TEXT NULL,
     difficulty ENUM('facil', 'media', 'dificil') NOT NULL DEFAULT 'media',
+    status ENUM('ativa', 'inativa') NOT NULL DEFAULT 'ativa',
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_question_bank_creator FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE SET NULL,
@@ -415,16 +439,24 @@ CREATE TABLE IF NOT EXISTS exams (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     course_id BIGINT UNSIGNED NULL,
     class_id BIGINT UNSIGNED NULL,
+    subject_id BIGINT UNSIGNED NULL,
     creator_id BIGINT UNSIGNED NULL,
     title VARCHAR(180) NOT NULL,
     description TEXT NULL,
     time_limit_minutes SMALLINT UNSIGNED NULL,
+    starts_at TIMESTAMP NULL,
+    ends_at TIMESTAMP NULL,
+    attempts_allowed TINYINT UNSIGNED NOT NULL DEFAULT 1,
     auto_correction_enabled TINYINT(1) NOT NULL DEFAULT 0,
+    ranking_enabled TINYINT(1) NOT NULL DEFAULT 0,
     status ENUM('rascunho', 'publicado', 'encerrado') NOT NULL DEFAULT 'rascunho',
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    KEY exams_subject_index (subject_id),
+    KEY exams_status_window_index (status, starts_at, ends_at),
     CONSTRAINT fk_exams_course FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE SET NULL,
     CONSTRAINT fk_exams_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE SET NULL,
+    CONSTRAINT fk_exams_subject FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE SET NULL,
     CONSTRAINT fk_exams_creator FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -442,12 +474,41 @@ CREATE TABLE IF NOT EXISTS exam_attempts (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     exam_id BIGINT UNSIGNED NOT NULL,
     student_id BIGINT UNSIGNED NOT NULL,
+    attempt_number TINYINT UNSIGNED NOT NULL DEFAULT 1,
     answers JSON NULL,
+    status ENUM('em_andamento', 'enviada', 'pendente_correcao', 'corrigida') NOT NULL DEFAULT 'em_andamento',
     score DECIMAL(6,2) NULL,
+    objective_score DECIMAL(6,2) NOT NULL DEFAULT 0.00,
+    manual_score DECIMAL(6,2) NOT NULL DEFAULT 0.00,
+    total_score DECIMAL(6,2) NOT NULL DEFAULT 0.00,
     started_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    submitted_at TIMESTAMP NULL,
     finished_at TIMESTAMP NULL,
+    graded_by BIGINT UNSIGNED NULL,
+    graded_at TIMESTAMP NULL,
+    UNIQUE KEY exam_attempts_exam_student_number_unique (exam_id, student_id, attempt_number),
+    KEY exam_attempts_status_index (status),
     CONSTRAINT fk_exam_attempts_exam FOREIGN KEY (exam_id) REFERENCES exams(id) ON DELETE CASCADE,
-    CONSTRAINT fk_exam_attempts_student FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE
+    CONSTRAINT fk_exam_attempts_student FOREIGN KEY (student_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_exam_attempts_grader FOREIGN KEY (graded_by) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS exam_answers (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    attempt_id BIGINT UNSIGNED NOT NULL,
+    question_id BIGINT UNSIGNED NOT NULL,
+    selected_option TEXT NULL,
+    answer_text LONGTEXT NULL,
+    is_correct TINYINT(1) NULL,
+    score_awarded DECIMAL(6,2) NOT NULL DEFAULT 0.00,
+    feedback TEXT NULL,
+    status ENUM('pendente', 'corrigida') NOT NULL DEFAULT 'pendente',
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY exam_answers_attempt_question_unique (attempt_id, question_id),
+    KEY exam_answers_status_index (status),
+    CONSTRAINT fk_exam_answers_attempt FOREIGN KEY (attempt_id) REFERENCES exam_attempts(id) ON DELETE CASCADE,
+    CONSTRAINT fk_exam_answers_question FOREIGN KEY (question_id) REFERENCES question_bank(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS posts (
@@ -691,17 +752,24 @@ CREATE TABLE IF NOT EXISTS logs (
 CREATE TABLE IF NOT EXISTS chat_channels (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     class_id BIGINT UNSIGNED NULL,
+    created_by BIGINT UNSIGNED NULL,
     name VARCHAR(140) NOT NULL,
     channel_type ENUM('turma', 'grupo', 'privado') NOT NULL DEFAULT 'turma',
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_chat_channels_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE SET NULL
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    KEY chat_channels_type_index (channel_type),
+    KEY chat_channels_class_index (class_id),
+    CONSTRAINT fk_chat_channels_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE SET NULL,
+    CONSTRAINT fk_chat_channels_created_by FOREIGN KEY (created_by) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS chat_channel_members (
     channel_id BIGINT UNSIGNED NOT NULL,
     user_id BIGINT UNSIGNED NOT NULL,
     joined_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    last_read_at TIMESTAMP NULL,
     PRIMARY KEY (channel_id, user_id),
+    KEY chat_members_user_index (user_id),
     CONSTRAINT fk_chat_members_channel FOREIGN KEY (channel_id) REFERENCES chat_channels(id) ON DELETE CASCADE,
     CONSTRAINT fk_chat_members_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -713,6 +781,7 @@ CREATE TABLE IF NOT EXISTS chat_messages (
     message TEXT NOT NULL,
     read_at TIMESTAMP NULL,
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    KEY chat_messages_channel_created_index (channel_id, created_at),
     CONSTRAINT fk_chat_messages_channel FOREIGN KEY (channel_id) REFERENCES chat_channels(id) ON DELETE CASCADE,
     CONSTRAINT fk_chat_messages_sender FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
