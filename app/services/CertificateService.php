@@ -57,10 +57,51 @@ class CertificateService
         return $certificate;
     }
 
-    private function uniqueCode(): string
+    public function issueForEventRegistration(int $registrationId): ?array
+    {
+        $existing = $this->certificates->findByEventRegistration($registrationId);
+
+        if ($existing) {
+            return $existing;
+        }
+
+        $events = new Event();
+        $registration = $events->findRegistration($registrationId);
+
+        if (
+            ! $registration ||
+            $registration['status'] !== 'confirmado' ||
+            $registration['event_status'] !== 'encerrado' ||
+            ! (bool) $registration['certificate_enabled']
+        ) {
+            return null;
+        }
+
+        $certificateId = $this->certificates->createEventCertificate([
+            'user_id' => (int) $registration['user_id'],
+            'event_registration_id' => $registrationId,
+            'event_id' => (int) $registration['event_id'],
+            'code' => $this->uniqueCode('EVT'),
+            'title' => 'Certificado de participacao - ' . $registration['event_title'],
+            'workload_hours' => (int) $registration['workload_hours'],
+        ]);
+
+        $events->setCertificate($registrationId, $certificateId);
+        $certificate = $this->certificates->find($certificateId);
+        $this->logs->record((int) $registration['user_id'], 'event.certificate_issued', [
+            'certificate_id' => $certificateId,
+            'event_id' => (int) $registration['event_id'],
+            'registration_id' => $registrationId,
+            'code' => $certificate['code'] ?? null,
+        ]);
+
+        return $certificate;
+    }
+
+    private function uniqueCode(string $type = 'CUR'): string
     {
         do {
-            $code = 'TME-CUR-' . date('Y') . '-' . strtoupper(bin2hex(random_bytes(4)));
+            $code = 'TME-' . $type . '-' . date('Y') . '-' . strtoupper(bin2hex(random_bytes(4)));
         } while ($this->certificates->findByCode($code));
 
         return $code;
