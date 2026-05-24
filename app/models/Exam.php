@@ -586,6 +586,46 @@ class Exam extends Model
         return $statement->fetchAll();
     }
 
+    public function canManage(int $examId, array $user): bool
+    {
+        if (in_array($user['role_slug'], ['administrador', 'supervisor'], true)) {
+            return true;
+        }
+
+        $statement = $this->db->prepare(
+            'SELECT 1
+             FROM exams
+             LEFT JOIN courses ON courses.id = exams.course_id
+             WHERE exams.id = :exam_id
+               AND (
+                    exams.creator_id = :creator_id
+                    OR courses.responsible_teacher_id = :course_teacher_id
+                    OR EXISTS (
+                        SELECT 1 FROM class_subjects
+                        WHERE class_subjects.class_id = exams.class_id
+                          AND class_subjects.teacher_id = :subject_teacher_id
+                          AND class_subjects.status = "ativa"
+                    )
+                    OR EXISTS (
+                        SELECT 1 FROM class_teachers
+                        WHERE class_teachers.class_id = exams.class_id
+                          AND class_teachers.user_id = :class_teacher_id
+                          AND class_teachers.status = "ativo"
+                    )
+               )
+             LIMIT 1'
+        );
+        $statement->execute([
+            'exam_id' => $examId,
+            'creator_id' => (int) $user['id'],
+            'course_teacher_id' => (int) $user['id'],
+            'subject_teacher_id' => (int) $user['id'],
+            'class_teacher_id' => (int) $user['id'],
+        ]);
+
+        return (bool) $statement->fetchColumn();
+    }
+
     public function coursesForSelect(): array
     {
         return $this->db->query('SELECT id, title FROM courses ORDER BY title')->fetchAll();
