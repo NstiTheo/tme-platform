@@ -522,13 +522,16 @@ CREATE TABLE IF NOT EXISTS events (
     institution_id BIGINT UNSIGNED NULL,
     creator_id BIGINT UNSIGNED NULL,
     title VARCHAR(180) NOT NULL,
-    event_type ENUM('palestra', 'workshop', 'aula_ao_vivo', 'olimpiada', 'hackathon', 'outro') NOT NULL DEFAULT 'outro',
+    event_type ENUM('palestra', 'workshop', 'aula_ao_vivo', 'simulado', 'olimpiada', 'hackathon', 'outro') NOT NULL DEFAULT 'palestra',
     description TEXT NULL,
     starts_at TIMESTAMP NULL,
     ends_at TIMESTAMP NULL,
     location VARCHAR(180) NULL,
     is_online TINYINT(1) NOT NULL DEFAULT 0,
     meeting_url VARCHAR(255) NULL,
+    capacity INT UNSIGNED NULL,
+    workload_hours SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+    image_path VARCHAR(255) NULL,
     certificate_enabled TINYINT(1) NOT NULL DEFAULT 0,
     status ENUM('rascunho', 'publicado', 'encerrado') NOT NULL DEFAULT 'rascunho',
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
@@ -537,10 +540,27 @@ CREATE TABLE IF NOT EXISTS events (
     CONSTRAINT fk_events_creator FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS event_registrations (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    event_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    status ENUM('inscrito', 'confirmado', 'cancelado') NOT NULL DEFAULT 'inscrito',
+    registered_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    attended_at TIMESTAMP NULL,
+    certificate_id BIGINT UNSIGNED NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY event_registrations_event_user_unique (event_id, user_id),
+    KEY event_registrations_status_index (status),
+    CONSTRAINT fk_event_registrations_event FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
+    CONSTRAINT fk_event_registrations_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS certificates (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NOT NULL,
     enrollment_id BIGINT UNSIGNED NULL UNIQUE,
+    event_registration_id BIGINT UNSIGNED NULL UNIQUE,
     event_id BIGINT UNSIGNED NULL,
     course_id BIGINT UNSIGNED NULL,
     certificate_type ENUM('curso', 'evento') NOT NULL DEFAULT 'curso',
@@ -560,6 +580,7 @@ CREATE TABLE IF NOT EXISTS certificates (
     KEY certificates_status_index (validation_status),
     CONSTRAINT fk_certificates_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     CONSTRAINT fk_certificates_enrollment FOREIGN KEY (enrollment_id) REFERENCES enrollments(id) ON DELETE SET NULL,
+    CONSTRAINT fk_certificates_event_registration FOREIGN KEY (event_registration_id) REFERENCES event_registrations(id) ON DELETE SET NULL,
     CONSTRAINT fk_certificates_event FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE SET NULL,
     CONSTRAINT fk_certificates_course FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE SET NULL,
     CONSTRAINT fk_certificates_revoked_by FOREIGN KEY (revoked_by) REFERENCES users(id) ON DELETE SET NULL
