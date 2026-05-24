@@ -95,7 +95,7 @@ class ProfileController extends Controller
         }
 
         if ($password !== $confirmation) {
-            flash('error', 'A confirmacao da senha não confere.');
+            flash('error', 'A confirmação da senha não confere.');
             $this->redirect('/perfil#seguranca');
         }
 

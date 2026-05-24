@@ -3,9 +3,9 @@
 <section class="dashboard-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
-            <span class="eyebrow">Gestão academica</span>
+            <span class="eyebrow">Gestão acadêmica</span>
             <h1>Atividades</h1>
-            <p>Crie tarefas, projetos e avaliacoes vinculadas a cursos, modulos e aulas.</p>
+            <p>Crie tarefas, projetos e avaliações vinculadas a cursos, módulos e aulas.</p>
         </div>
         <a class="button large" href="<?= e(url('/admin/atividades/nova')) ?>">Nova atividade</a>
     </div>
@@ -24,7 +24,7 @@
             Status
             <select name="status">
                 <option value="">Todos</option>
-                <?php foreach (['rascunho' => 'Rascunho', 'publicada' => 'Públicada', 'encerrada' => 'Encerrada'] as $value => $label): ?>
+                <?php foreach (['rascunho' => 'Rascunho', 'publicada' => 'Publicada', 'encerrada' => 'Encerrada'] as $value => $label): ?>
                     <option value="<?= e($value) ?>" <?= ($filters['status'] ?? '') === $value ? 'selected' : '' ?>><?= e($label) ?></option>
                 <?php endforeach; ?>
             </select>

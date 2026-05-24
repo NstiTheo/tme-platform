@@ -233,7 +233,7 @@ class ActivityController extends Controller
         $status = trim($_POST['status'] ?? 'corrigida');
 
         if ($score > (float) $activity['max_score']) {
-            flash('error', 'A nota não pode ultrapassar a pontuacao maxima.');
+            flash('error', 'A nota não pode ultrapassar a pontuação máxima.');
             $this->redirect('/admin/atividades/' . $activity['id']);
         }
 
@@ -302,7 +302,7 @@ class ActivityController extends Controller
         $errors = [];
 
         if (strlen($data['title']) < 3) {
-            $errors[] = 'Informe um titulo com pelo menos 3 caracteres.';
+            $errors[] = 'Informe um título com pelo menos 3 caracteres.';
         }
 
         if (! $data['course_id']) {
@@ -318,7 +318,7 @@ class ActivityController extends Controller
         }
 
         if ($data['max_score'] <= 0) {
-            $errors[] = 'A pontuacao maxima deve ser maior que zero.';
+            $errors[] = 'A pontuação máxima deve ser maior que zero.';
         }
 
         return $errors;

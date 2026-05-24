@@ -44,7 +44,7 @@ class Submission extends Model
         $existing = $this->findByActivityAndStudent($activityId, $studentId);
 
         if ($existing && in_array($existing['status'], ['corrigida', 'devolvida'], true)) {
-            throw new RuntimeException('Está entrega já foi corrigida ou devolvida.');
+            throw new RuntimeException('Esta entrega já foi corrigida ou devolvida.');
         }
 
         $statement = $this->db->prepare(

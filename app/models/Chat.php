@@ -206,7 +206,7 @@ class Chat extends Model
         $sender = $this->approvedUser($senderId);
 
         if (! $sender) {
-            throw new RuntimeException('Somente usuarios aprovados podem enviar mensagens.');
+            throw new RuntimeException('Somente usuários aprovados podem enviar mensagens.');
         }
 
         $statement = $this->db->prepare(

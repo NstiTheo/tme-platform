@@ -8,7 +8,7 @@
     </div>
 
     <?php if (empty($events)): ?>
-        <div class="empty-state"><h2>Nenhum evento publicado</h2><p>A agenda academica aparecera aqui.</p></div>
+        <div class="empty-state"><h2>Nenhum evento publicado</h2><p>A agenda acadêmica aparecerá aqui.</p></div>
     <?php else: ?>
         <div class="event-grid">
             <?php foreach ($events as $event): ?>
@@ -21,7 +21,7 @@
                     <div>
                         <span class="status-badge"><?= e($event['event_type']) ?></span>
                         <h2><?= e($event['title']) ?></h2>
-                        <p><?= e($event['description'] ?: 'Evento academico TME.') ?></p>
+                        <p><?= e($event['description'] ?: 'Evento acadêmico TME.') ?></p>
                         <div class="course-meta">
                             <span><?= e($event['starts_at'] ? date('d/m/Y H:i', strtotime($event['starts_at'])) : 'data a definir') ?></span>
                             <span><?= e((int) $event['registrations_count']) ?> inscritos</span>

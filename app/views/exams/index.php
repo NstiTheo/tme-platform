@@ -24,7 +24,7 @@
     <?php if (empty($availableExams)): ?>
         <div class="empty-state">
             <h2>Nenhuma prova publicada</h2>
-            <p>As avaliacoes aparecerao aqui quando forem liberadas para seus cursos ou turmas.</p>
+            <p>As avaliações aparecerão aqui quando forem liberadas para seus cursos ou turmas.</p>
         </div>
     <?php else: ?>
         <div class="course-card-grid">
@@ -33,11 +33,11 @@
                     <div>
                         <span class="status-badge <?= e($exam['status']) ?>"><?= e($exam['status']) ?></span>
                         <h2><?= e($exam['title']) ?></h2>
-                        <p><?= e($exam['description'] ?: 'Prova vinculada a sua jornada academica.') ?></p>
+                        <p><?= e($exam['description'] ?: 'Prova vinculada a sua jornada acadêmica.') ?></p>
                         <div class="course-meta">
                             <span><?= e($exam['course_title'] ?: 'Geral') ?></span>
                             <span><?= e($exam['class_name'] ?: 'Sem turma') ?></span>
-                            <span><?= e((int) $exam['questions_count']) ?> questoes</span>
+                            <span><?= e((int) $exam['questions_count']) ?> questões</span>
                             <span><?= e((int) $exam['attempts_used']) ?>/<?= e((int) $exam['attempts_allowed']) ?> tentativas</span>
                         </div>
                         <a class="button" href="<?= e(url('/provas/' . $exam['id'])) ?>">Abrir prova</a>
@@ -56,7 +56,7 @@
             <?php else: ?>
                 <div class="table-wrap compact-table">
                     <table>
-                        <thead><tr><th>Prova</th><th>Status</th><th>Nota</th><th>Acao</th></tr></thead>
+                        <thead><tr><th>Prova</th><th>Status</th><th>Nota</th><th>Ação</th></tr></thead>
                         <tbody>
                             <?php foreach ($attempts as $attempt): ?>
                                 <tr>

@@ -15,7 +15,7 @@
             Status
             <select name="status">
                 <option value="">Todos</option>
-                <?php foreach (['rascunho' => 'Rascunho', 'publicado' => 'Públicado', 'arquivado' => 'Arquivado'] as $value => $label): ?>
+                <?php foreach (['rascunho' => 'Rascunho', 'publicado' => 'Publicado', 'arquivado' => 'Arquivado'] as $value => $label): ?>
                     <option value="<?= e($value) ?>" <?= ($filters['status'] ?? '') === $value ? 'selected' : '' ?>><?= e($label) ?></option>
                 <?php endforeach; ?>
             </select>

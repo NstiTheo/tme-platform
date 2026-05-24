@@ -2,9 +2,9 @@
 
 <section class="auth-page">
     <div class="auth-panel">
-        <span class="eyebrow">Validação publica</span>
+        <span class="eyebrow">Validação pública</span>
         <h1>Validar certificado TME</h1>
-        <p class="muted">Digite o codigo unico do certificado para verificar autenticidade e status.</p>
+        <p class="muted">Digite o código único do certificado para verificar autenticidade e status.</p>
 
         <form class="form" action="<?= e(url('/certificados/validar')) ?>" method="post">
             <?= csrf_field() ?>

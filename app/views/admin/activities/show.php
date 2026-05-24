@@ -5,7 +5,7 @@
         <div class="dashboard-heading">
             <span class="eyebrow">Atividade</span>
             <h1><?= e($activity['title']) ?></h1>
-            <p><?= e($activity['description'] ?: 'Atividade academica da TME.') ?></p>
+            <p><?= e($activity['description'] ?: 'Atividade acadêmica da TME.') ?></p>
         </div>
         <div class="actions-row">
             <a class="button ghost large" href="<?= e(url('/admin/atividades/' . $activity['id'] . '/editar')) ?>">Editar</a>
@@ -80,7 +80,7 @@
                                         <option value="devolvida" <?= $submission['status'] === 'devolvida' ? 'selected' : '' ?>>Devolvida</option>
                                     </select>
                                     <textarea name="feedback" rows="3" placeholder="Feedback"><?= e($submission['feedback'] ?? '') ?></textarea>
-                                    <button class="button small" type="submit">Salvar correcao</button>
+                                    <button class="button small" type="submit">Salvar correção</button>
                                 </form>
                             </td>
                         </tr>

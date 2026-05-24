@@ -178,7 +178,7 @@ $isGroupActive = static function (array $links) use ($isActive): bool {
             <?php if ($isAuthenticated): ?>
                 <span class="user-chip">Olá, <?= e(explode(' ', trim($currentUser['full_name']))[0] ?: $currentUser['full_name']) ?></span>
                 <div class="notification-menu" data-notification-menu>
-                    <button class="icon-button notification-button" type="button" data-notification-toggle aria-label="Abrir notificacoes">
+                    <button class="icon-button notification-button" type="button" data-notification-toggle aria-label="Abrir notificações">
                         <span>!</span>
                         <?php if ($unreadNotifications > 0): ?>
                             <strong><?= e($unreadNotifications > 99 ? '99+' : $unreadNotifications) ?></strong>
@@ -196,7 +196,7 @@ $isGroupActive = static function (array $links) use ($isActive): bool {
                             <?php endif; ?>
                         </div>
                         <?php if (empty($recentNotifications)): ?>
-                            <p class="notification-empty">Sem notificacoes recentes.</p>
+                            <p class="notification-empty">Sem notificações recentes.</p>
                         <?php else: ?>
                             <?php foreach ($recentNotifications as $notification): ?>
                                 <a class="notification-item <?= empty($notification['read_at']) ? 'unread' : '' ?>" href="<?= e(url($notification['action_url'] ?: '/notificacoes')) ?>">

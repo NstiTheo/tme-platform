@@ -65,7 +65,7 @@ $decodeAlternatives = static function (?string $json): array {
         </div>
 
         <div class="form-actions">
-            <button class="button large" type="submit">Salvar correcao</button>
+            <button class="button large" type="submit">Salvar correção</button>
         </div>
     </form>
 </section>

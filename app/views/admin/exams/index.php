@@ -5,7 +5,7 @@
         <div class="dashboard-heading">
             <span class="eyebrow">Avaliação</span>
             <h1>Provas e simulados</h1>
-            <p>Crie provas com questoes objetivas, discursivas, tentativas e ranking opcional.</p>
+            <p>Crie provas com questões objetivas, discursivas, tentativas e ranking opcional.</p>
         </div>
         <a class="button large" href="<?= e(url('/admin/provas/nova')) ?>">Nova prova</a>
     </div>
@@ -51,7 +51,7 @@
     <?php if (empty($exams)): ?>
         <div class="empty-state">
             <h2>Nenhuma prova encontrada</h2>
-            <p>Crie uma avaliacao para publicar aos alunos vinculados.</p>
+            <p>Crie uma avaliação para publicar aos alunos vinculados.</p>
         </div>
     <?php else: ?>
         <div class="table-wrap">

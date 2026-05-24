@@ -13,7 +13,7 @@ $growthChart = [
     'type' => 'bar',
     'labels' => array_column($analytics['growth'], 'label'),
     'datasets' => [[
-        'label' => 'Crescimento de usuarios',
+        'label' => 'Crescimento de usuários',
         'data' => array_map('intval', array_column($analytics['growth'], 'value')),
     ]],
 ];
@@ -32,7 +32,7 @@ $popularChart = [
         <div class="dashboard-heading">
             <span class="eyebrow">Analytics</span>
             <h1>Dashboard avancado</h1>
-            <p>Indicadores reais integrados aos modulos de usuarios, matriculas, certificados, logs e financeiro.</p>
+            <p>Indicadores reais integrados aos módulos de usuários, matrículas, certificados, logs e financeiro.</p>
         </div>
         <form class="filter-form compact-filter" method="get" action="<?= e(url('/analytics')) ?>">
             <label>

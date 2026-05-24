@@ -26,8 +26,8 @@ $frequencyPercent = $totals['total'] > 0
     <div class="admin-toolbar">
         <div class="dashboard-heading">
             <span class="eyebrow">Minha jornada</span>
-            <h1>Minha frequencia</h1>
-            <p>Acompanhe seu historico por turma, disciplina e periodo.</p>
+            <h1>Minha frequência</h1>
+            <p>Acompanhe seu histórico por turma, disciplina e período.</p>
         </div>
         <a class="button ghost large" href="<?= e(url('/portal')) ?>">Portal</a>
     </div>
@@ -66,7 +66,7 @@ $frequencyPercent = $totals['total'] > 0
     <?php if (empty($records)): ?>
         <div class="empty-state">
             <h2>Nenhum registro encontrado</h2>
-            <p>Quando professores registrarem chamadas, seu historico aparecera aqui.</p>
+            <p>Quando professores registrarem chamadas, seu histórico aparecerá aqui.</p>
         </div>
     <?php else: ?>
         <div class="table-wrap">

@@ -69,7 +69,7 @@ class PlanController extends Controller
                 $result['status'] === 'pago' ? 'success' : 'info',
                 $result['status'] === 'pago'
                     ? 'Plano ativado com sucesso.'
-                    : 'Assinatura criada como pendente. A integracao PIX/cartão está preparada para uma etapa futura.'
+                    : 'Assinatura criada como pendente. A integração PIX/cartão está preparada para uma etapa futura.'
             );
         } catch (Throwable $exception) {
             $this->logs->record((int) $user['id'], 'finance.subscription_error', [
@@ -186,7 +186,7 @@ class PlanController extends Controller
         }
 
         if (! in_array($data['billing_cycle'], ['mensal', 'anual', 'unico'], true)) {
-            $errors[] = 'Selecione uma duracao de cobranca valida.';
+            $errors[] = 'Selecione uma duração de cobrança válida.';
         }
 
         if (! in_array($data['status'], ['ativo', 'inativo'], true)) {

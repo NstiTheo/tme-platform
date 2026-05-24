@@ -12,7 +12,7 @@ $decodeAlternatives = static function (?string $json): array {
         <div class="dashboard-heading">
             <span class="eyebrow">Prova</span>
             <h1><?= e($exam['title']) ?></h1>
-            <p><?= e($exam['description'] ?: 'Sem descricao.') ?></p>
+            <p><?= e($exam['description'] ?: 'Sem descrição.') ?></p>
         </div>
         <div class="actions-row">
             <a class="button ghost large" href="<?= e(url('/admin/provas')) ?>">Voltar</a>
@@ -29,8 +29,8 @@ $decodeAlternatives = static function (?string $json): array {
 
     <div class="admin-detail-grid">
         <section class="detail-card">
-            <span class="eyebrow">Banco de questoes</span>
-            <h2>Adicionar questao</h2>
+            <span class="eyebrow">Banco de questões</span>
+            <h2>Adicionar questão</h2>
             <form class="admin-form form" action="<?= e(url('/admin/provas/' . $exam['id'] . '/questoes')) ?>" method="post">
                 <?= csrf_field() ?>
                 <label>
@@ -76,10 +76,10 @@ $decodeAlternatives = static function (?string $json): array {
                     </label>
                 </div>
                 <label>
-                    Explicacao para correcao
+                    Explicação para correção
                     <textarea name="explanation" rows="3"></textarea>
                 </label>
-                <button class="button" type="submit">Adicionar questao</button>
+                <button class="button" type="submit">Adicionar questão</button>
             </form>
         </section>
 
@@ -87,7 +87,7 @@ $decodeAlternatives = static function (?string $json): array {
             <span class="eyebrow">Estrutura</span>
             <h2>Questões da prova</h2>
             <?php if (empty($questions)): ?>
-                <p class="muted">Nenhuma questao adicionada ainda.</p>
+                <p class="muted">Nenhuma questão adicionada ainda.</p>
             <?php else: ?>
                 <div class="exam-question-list">
                     <?php foreach ($questions as $question): ?>

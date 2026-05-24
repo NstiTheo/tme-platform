@@ -5,7 +5,7 @@
         <div class="dashboard-heading">
             <span class="eyebrow">Administração</span>
             <h1>Eventos</h1>
-            <p>Crie eventos, acompanhe inscritos, confirme presenca e emita certificados de participacao.</p>
+            <p>Crie eventos, acompanhe inscritos, confirme presença e emita certificados de participacao.</p>
         </div>
         <a class="button large" href="<?= e(url('/admin/eventos/novo')) ?>">Novo evento</a>
     </div>

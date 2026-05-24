@@ -4,8 +4,8 @@
     <div class="admin-toolbar">
         <div class="dashboard-heading">
             <span class="eyebrow">Relatórios</span>
-            <h1>Relatório de frequencia</h1>
-            <p>Analise percentuais por turma, aluno, disciplina e periodo.</p>
+            <h1>Relatório de frequência</h1>
+            <p>Analise percentuais por turma, aluno, disciplina e período.</p>
         </div>
         <a class="button ghost large" href="<?= e(url('/frequencia')) ?>">Registrar chamada</a>
     </div>
@@ -59,7 +59,7 @@
     <?php if (empty($rows)): ?>
         <div class="empty-state">
             <h2>Sem dados para o filtro</h2>
-            <p>Registre chamadas para gerar indicadores de frequencia.</p>
+            <p>Registre chamadas para gerar indicadores de frequência.</p>
         </div>
     <?php else: ?>
         <div class="table-wrap">

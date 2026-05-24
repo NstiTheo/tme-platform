@@ -9,9 +9,9 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
     <div class="profile-hero">
         <div class="profile-avatar"><?= e($initials) ?></div>
         <div>
-            <span class="eyebrow">Perfil e configuracoes</span>
+            <span class="eyebrow">Perfil e configurações</span>
             <h1><?= e($firstName) ?></h1>
-            <p>Centralize identidade, aparencia, estatisticas, seguranca e preferencias da sua experiencia TME.</p>
+            <p>Centralize identidade, aparência, estatísticas, segurança e preferências da sua experiência TME.</p>
         </div>
     </div>
 
@@ -27,8 +27,8 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
             <section id="perfil" class="profile-panel">
                 <div class="section-toolbar compact">
                     <div>
-                        <span class="eyebrow">Informacoes</span>
-                        <h2>Dados do usuario</h2>
+                        <span class="eyebrow">Informações</span>
+                        <h2>Dados do usuário</h2>
                     </div>
                     <span class="status-badge <?= e($user['status']) ?>"><?= e($user['status']) ?></span>
                 </div>
@@ -68,7 +68,7 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
                     <?= csrf_field() ?>
                     <label>
                         Biografia curta
-                        <textarea name="bio_short" rows="4" maxlength="280" placeholder="Conte em poucas linhas sua trajetoria academica."><?= e($user['bio_short'] ?? '') ?></textarea>
+                        <textarea name="bio_short" rows="4" maxlength="280" placeholder="Conte em poucas linhas sua trajetória acadêmica."><?= e($user['bio_short'] ?? '') ?></textarea>
                     </label>
                     <button class="button" type="submit">Salvar perfil</button>
                 </form>
@@ -120,7 +120,7 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
                         <strong>Botao, barras de progresso e destaques usam sua cor principal.</strong>
                         <div class="progress-track"><span style="width: 72%;"></span></div>
                     </div>
-                    <button class="button span-2" type="submit">Salvar aparencia</button>
+                    <button class="button span-2" type="submit">Salvar aparência</button>
                 </form>
             </section>
 
@@ -183,7 +183,7 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
                 <div class="security-actions">
                     <div>
                         <strong>Sessoes futuras</strong>
-                        <p class="muted">Área reservada para historico de dispositivos e encerramento remoto.</p>
+                        <p class="muted">Área reservada para histórico de dispositivos e encerramento remoto.</p>
                     </div>
                     <a class="button ghost" href="<?= e(url('/notificacoes')) ?>">Notificações</a>
                     <a class="button ghost" href="<?= e(url('/financeiro')) ?>">Financeiro</a>

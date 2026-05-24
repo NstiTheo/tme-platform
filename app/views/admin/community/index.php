@@ -7,8 +7,8 @@ $typeLabels = ['duvida' => 'Duvida', 'artigo' => 'Artigo', 'projeto' => 'Projeto
 <section class="dashboard-shell">
     <div class="dashboard-heading">
         <span class="eyebrow">Administração</span>
-        <h1>Comunidade academica</h1>
-        <p>Modere posts, aprove conteudos academicos, recuse itens inadequados, arquive ou destaque publicacoes.</p>
+        <h1>Comunidade acadêmica</h1>
+        <p>Modere posts, aprove conteúdos acadêmicos, recuse itens inadequados, arquive ou destaque publicações.</p>
     </div>
 
     <form class="filter-form ranking-filter-form" action="<?= e(url('/admin/comunidade')) ?>" method="get">

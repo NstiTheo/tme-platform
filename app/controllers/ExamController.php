@@ -70,7 +70,7 @@ class ExamController extends Controller
             }
         }
 
-        flash('success', 'Prova criada. Agora adicione questoes.');
+        flash('success', 'Prova criada. Agora adicione questões.');
         $this->redirect('/admin/provas/' . $examId);
     }
 
@@ -229,7 +229,7 @@ class ExamController extends Controller
             ]);
 
             flash('success', $result['has_discursive']
-                ? 'Prova enviada. Questões discursivas aguardam correcao.'
+                ? 'Prova enviada. Questões discursivas aguardam correção.'
                 : 'Prova enviada e corrigida automaticamente.');
         } catch (Throwable $exception) {
             flash('error', $exception->getMessage());
@@ -301,7 +301,7 @@ class ExamController extends Controller
         $errors = [];
 
         if (strlen($data['title']) < 3) {
-            $errors[] = 'Informe um titulo com pelo menos 3 caracteres.';
+            $errors[] = 'Informe um título com pelo menos 3 caracteres.';
         }
 
         if (! in_array($data['status'], ['rascunho', 'publicado', 'encerrado'], true)) {
@@ -309,7 +309,7 @@ class ExamController extends Controller
         }
 
         if ($data['ends_at'] && $data['starts_at'] && strtotime($data['ends_at']) < strtotime($data['starts_at'])) {
-            $errors[] = 'A data final deve ser posterior ao inicio.';
+            $errors[] = 'A data final deve ser posterior ao início.';
         }
 
         return $errors;
@@ -320,11 +320,11 @@ class ExamController extends Controller
         $errors = [];
 
         if (strlen($data['statement_text']) < 5) {
-            $errors[] = 'Informe o enunciado da questao.';
+            $errors[] = 'Informe o enunciado da questão.';
         }
 
         if (! in_array($data['question_type'], ['objetiva', 'discursiva'], true)) {
-            $errors[] = 'Selecione um tipo de questao valido.';
+            $errors[] = 'Selecione um tipo de questão válido.';
         }
 
         if ($data['question_type'] === 'objetiva') {

@@ -247,11 +247,11 @@ class Exam extends Model
         $exam = $this->findAvailableForStudent($examId, $studentId);
 
         if (! $exam) {
-            throw new RuntimeException('Prova não encontrada ou fora do periodo.');
+            throw new RuntimeException('Prova não encontrada ou fora do período.');
         }
 
         if ((int) $exam['questions_count'] === 0) {
-            throw new RuntimeException('Está prova ainda não possui questoes.');
+            throw new RuntimeException('Esta prova ainda não possui questões.');
         }
 
         $count = $this->attemptCount($examId, $studentId);
@@ -338,7 +338,7 @@ class Exam extends Model
         }
 
         if ($attempt['status'] !== 'em_andamento') {
-            throw new RuntimeException('Está tentativa já foi enviada.');
+            throw new RuntimeException('Esta tentativa já foi enviada.');
         }
 
         if ($this->isAttemptExpired($attempt)) {

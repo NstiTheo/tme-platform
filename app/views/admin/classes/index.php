@@ -19,14 +19,14 @@
             <tbody>
                 <?php foreach ($classes as $class): ?>
                     <tr>
-                        <td><strong><?= e($class['name']) ?></strong><span><?= e($class['period'] ?: 'periodo a definir') ?></span></td>
-                        <td><span><?= e($class['institution_name'] ?: 'sem instituicao') ?></span></td>
+                        <td><strong><?= e($class['name']) ?></strong><span><?= e($class['period'] ?: 'período a definir') ?></span></td>
+                        <td><span><?= e($class['institution_name'] ?: 'sem instituição') ?></span></td>
                         <td><span class="status-badge <?= e($class['status']) ?>"><?= e($class['status']) ?></span></td>
                         <td><span><?= e((int) $class['students_count']) ?> alunos</span><span><?= e((int) $class['subjects_count']) ?> disciplinas</span></td>
                         <td class="actions-cell">
                             <a class="button small" href="<?= e(url('/admin/turmas/' . $class['id'])) ?>">Gerenciar</a>
                             <a class="button ghost small" href="<?= e(url('/admin/turmas/' . $class['id'] . '/editar')) ?>">Editar</a>
-                            <form action="<?= e(url('/admin/turmas/' . $class['id'] . '/arquivar')) ?>" method="post" data-confirm="Arquivar está turma?">
+                            <form action="<?= e(url('/admin/turmas/' . $class['id'] . '/arquivar')) ?>" method="post" data-confirm="Arquivar esta turma?">
                                 <?= csrf_field() ?>
                                 <button class="button ghost small" type="submit">Arquivar</button>
                             </form>

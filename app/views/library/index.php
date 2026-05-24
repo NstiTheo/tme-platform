@@ -20,7 +20,7 @@
     <form class="filter-form library-filter-form" action="<?= e(url('/biblioteca')) ?>" method="get">
         <label>
             Busca
-            <input type="search" name="q" value="<?= e($filters['q'] ?? '') ?>" placeholder="Título, descricao ou autor">
+            <input type="search" name="q" value="<?= e($filters['q'] ?? '') ?>" placeholder="Título, descrição ou autor">
         </label>
         <label>
             Categoria

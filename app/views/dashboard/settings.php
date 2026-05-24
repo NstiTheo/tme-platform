@@ -25,7 +25,7 @@
         </label>
 
         <div class="actions-row">
-            <button class="button large" type="submit">Salvar preferencias</button>
+            <button class="button large" type="submit">Salvar preferências</button>
             <a class="button ghost large" href="<?= e(url('/portal')) ?>">Voltar ao portal</a>
         </div>
     </form>

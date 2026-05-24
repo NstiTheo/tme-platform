@@ -10,7 +10,7 @@ $dateValue = $value('due_at') ? date('Y-m-d\TH:i', strtotime($value('due_at'))) 
     <div class="dashboard-heading">
         <span class="eyebrow">Atividades</span>
         <h1><?= e($isEdit ? 'Editar atividade' : 'Nova atividade') ?></h1>
-        <p>Vincule a atividade a um curso e, opcionalmente, a modulo e aula.</p>
+        <p>Vincule a atividade a um curso e, opcionalmente, a módulo e aula.</p>
     </div>
 
     <form class="form grid-form admin-form" action="<?= e($action) ?>" method="post" enctype="multipart/form-data">
@@ -41,9 +41,9 @@ $dateValue = $value('due_at') ? date('Y-m-d\TH:i', strtotime($value('due_at'))) 
         </label>
 
         <label>
-            Modulo opcional
+            Módulo opcional
             <select name="module_id">
-                <option value="">Sem modulo</option>
+                <option value="">Sem módulo</option>
                 <?php foreach ($modules as $module): ?>
                     <option value="<?= e($module['id']) ?>" <?= (string) $value('module_id') === (string) $module['id'] ? 'selected' : '' ?>><?= e($module['course_title']) ?> - <?= e($module['title']) ?></option>
                 <?php endforeach; ?>
@@ -82,7 +82,7 @@ $dateValue = $value('due_at') ? date('Y-m-d\TH:i', strtotime($value('due_at'))) 
         <label>
             Status
             <select name="status">
-                <?php foreach (['rascunho' => 'Rascunho', 'publicada' => 'Públicada', 'encerrada' => 'Encerrada'] as $option => $label): ?>
+                <?php foreach (['rascunho' => 'Rascunho', 'publicada' => 'Publicada', 'encerrada' => 'Encerrada'] as $option => $label): ?>
                     <option value="<?= e($option) ?>" <?= $value('status', 'rascunho') === $option ? 'selected' : '' ?>><?= e($label) ?></option>
                 <?php endforeach; ?>
             </select>

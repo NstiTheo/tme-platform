@@ -35,7 +35,7 @@
                     <p>Assine um plano premium para liberar está matricula.</p>
                     <div class="actions-row">
                         <a class="button large" href="<?= e(url('/planos')) ?>">Ver planos</a>
-                        <a class="button ghost large" href="<?= e(url('/aluno/cursos')) ?>">Voltar ao catalogo</a>
+                        <a class="button ghost large" href="<?= e(url('/aluno/cursos')) ?>">Voltar ao catálogo</a>
                     </div>
                 </div>
             <?php else: ?>

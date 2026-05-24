@@ -58,10 +58,10 @@ $teacherProgressChart = [
         <article class="module-card"><h2>Meus cursos</h2><p>Continue cursos em andamento e revise aulas concluidas.</p><a href="<?= e(url('/meus-cursos')) ?>">Abrir cursos</a></article>
         <article class="module-card"><h2>Atividades</h2><p>Crie tarefas, projetos e acompanhe entregas dos alunos.</p><a href="<?= e(url('/admin/atividades')) ?>">Gerenciar</a></article>
         <article class="module-card"><h2>Correções</h2><p>Avalie entregas com nota, feedback e status.</p><a href="<?= e(url('/admin/atividades')) ?>">Corrigir</a></article>
-        <article class="module-card"><h2>Biblioteca</h2><p>Envie materiais didaticos para moderacao e publicacao.</p><a href="<?= e(url('/admin/biblioteca')) ?>">Materiais</a></article>
+        <article class="module-card"><h2>Biblioteca</h2><p>Envie materiais didáticos para moderação e publicação.</p><a href="<?= e(url('/admin/biblioteca')) ?>">Materiais</a></article>
         <article class="module-card"><h2>Certificados</h2><p>Professores também recebem certificados ao concluir cursos.</p><a href="<?= e(url('/certificados')) ?>">Abrir certificados</a></article>
         <article class="module-card"><h2>Ranking</h2><p>Acompanhe XP, nivel, moedas e badges.</p><a href="<?= e(url('/ranking')) ?>">Ver ranking</a></article>
-        <article class="module-card"><h2>Públicacoes</h2><p>Posts e projetos podem alimentar a comunidade academica.</p><a href="<?= e(url('/comunidade')) ?>">Comunidade</a></article>
+        <article class="module-card"><h2>Publicações</h2><p>Posts e projetos podem alimentar a comunidade acadêmica.</p><a href="<?= e(url('/comunidade')) ?>">Comunidade</a></article>
         <article class="module-card"><h2>Financeiro</h2><p>Carteira de creator preparada para monetizacao 80/20.</p><a href="<?= e(url('/financeiro')) ?>">Abrir financeiro</a></article>
         <article class="module-card"><h2>Notificações</h2><p>Acompanhe avisos de entregas, chat e comunidade.</p><a href="<?= e(url('/notificacoes')) ?>">Abrir central</a></article>
     </div>

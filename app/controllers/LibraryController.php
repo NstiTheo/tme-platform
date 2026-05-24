@@ -115,7 +115,7 @@ class LibraryController extends Controller
         unset($_SESSION['_old']);
         $this->logs->record((int) current_user()['id'], 'library.created', ['library_item_id' => $itemId, 'moderated' => true]);
 
-        flash('success', 'Material enviado para moderacao.');
+        flash('success', 'Material enviado para moderação.');
         $this->redirect('/biblioteca');
     }
 
@@ -277,7 +277,7 @@ class LibraryController extends Controller
         $errors = [];
 
         if (strlen($data['title']) < 3) {
-            $errors[] = 'Informe um titulo com pelo menos 3 caracteres.';
+            $errors[] = 'Informe um título com pelo menos 3 caracteres.';
         }
 
         if (! in_array($data['item_type'], ['pdf', 'livro', 'apostila', 'artigo', 'video', 'link', 'apresentacao', 'imagem', 'arquivo'], true)) {

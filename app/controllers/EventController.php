@@ -50,7 +50,7 @@ class EventController extends Controller
         $event = $this->events->find((int) $id, (int) $user['id']);
 
         if (! $event || $event['status'] !== 'publicado') {
-            flash('error', 'Evento indisponível para inscricao.');
+            flash('error', 'Evento indisponível para inscrição.');
             $this->redirect('/eventos');
         }
 
@@ -185,7 +185,7 @@ class EventController extends Controller
         $certificate = (new CertificateService())->issueForEventRegistration((int) $registration['id']);
 
         if (! $certificate) {
-            flash('error', 'Certificado disponível apenas para evento encerrado, com presenca confirmada e certificado habilitado.');
+            flash('error', 'Certificado disponível apenas para evento encerrado, com presença confirmada e certificado habilitado.');
             $this->redirect('/admin/eventos/' . $registration['event_id']);
         }
 
@@ -195,7 +195,7 @@ class EventController extends Controller
             'certificate_id' => (int) $certificate['id'],
         ]);
 
-        flash('success', 'Certificado de participacao emitido.');
+        flash('success', 'Certificado de participação emitido.');
         $this->redirect('/admin/eventos/' . $registration['event_id']);
     }
 
@@ -223,7 +223,7 @@ class EventController extends Controller
         $errors = [];
 
         if (strlen($data['title']) < 4) {
-            $errors[] = 'Informe um titulo com pelo menos 4 caracteres.';
+            $errors[] = 'Informe um título com pelo menos 4 caracteres.';
         }
 
         if (! in_array($data['event_type'], ['palestra', 'workshop', 'aula_ao_vivo', 'simulado', 'olimpiada', 'hackathon'], true)) {

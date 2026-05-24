@@ -10,7 +10,7 @@
     <form class="filter-form certificate-filter-form" action="<?= e(url('/admin/certificados')) ?>" method="get">
         <label>
             Busca
-            <input type="search" name="q" value="<?= e($filters['q'] ?? '') ?>" placeholder="Código, titulo ou aluno">
+            <input type="search" name="q" value="<?= e($filters['q'] ?? '') ?>" placeholder="Código, título ou aluno">
         </label>
         <label>
             Curso
@@ -86,7 +86,7 @@
                                 <?php if ($certificate['validation_status'] === 'valido'): ?>
                                     <form action="<?= e(url('/admin/certificados/' . $certificate['id'] . '/revogar')) ?>" method="post" data-confirm="Revogar este certificado?">
                                         <?= csrf_field() ?>
-                                        <input type="text" name="revocation_reason" placeholder="Motivo da revogacao" required>
+                                        <input type="text" name="revocation_reason" placeholder="Motivo da revogação" required>
                                         <button class="button ghost small" type="submit">Revogar</button>
                                     </form>
                                 <?php endif; ?>

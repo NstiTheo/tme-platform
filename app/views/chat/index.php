@@ -5,7 +5,7 @@
         <div class="dashboard-heading">
             <span class="eyebrow">Comunicacao interna</span>
             <h1>Chat TME</h1>
-            <p>Converse com usuarios aprovados e acompanhe grupos vinculados as suas turmas.</p>
+            <p>Converse com usuários aprovados e acompanhe grupos vinculados às suas turmas.</p>
         </div>
         <a class="button ghost large" href="<?= e(url('/portal')) ?>">Portal</a>
     </div>
@@ -17,7 +17,7 @@
                 <label>
                     Nova conversa
                     <select name="user_id" required>
-                        <option value="">Selecionar usuario</option>
+                        <option value="">Selecionar usuário</option>
                         <?php foreach ($users as $availableUser): ?>
                             <option value="<?= e($availableUser['id']) ?>">
                                 <?= e($availableUser['full_name']) ?> (<?= e(role_label($availableUser['role_slug'])) ?>)
@@ -49,7 +49,7 @@
             <?php if (! $channel): ?>
                 <div class="empty-state">
                     <h2>Selecione uma conversa</h2>
-                    <p>Use a lista lateral ou inicie uma conversa privada com outro usuario aprovado.</p>
+                    <p>Use a lista lateral ou inicie uma conversa privada com outro usuário aprovado.</p>
                 </div>
             <?php else: ?>
                 <div class="chat-thread-header">

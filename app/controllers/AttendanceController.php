@@ -96,7 +96,7 @@ class AttendanceController extends Controller
         ];
 
         $this->view('attendance/my', [
-            'title' => 'Minha frequencia',
+            'title' => 'Minha frequência',
             'classes' => $this->attendance->classesForStudent((int) $user['id']),
             'filters' => $filters,
             'records' => $this->attendance->historyForStudent((int) $user['id'], $filters),
@@ -126,7 +126,7 @@ class AttendanceController extends Controller
         }
 
         if ($filters['class_id'] && ! $this->attendance->canManageClass($filters['class_id'], $user)) {
-            flash('error', 'Turma indisponível para relatorio.');
+            flash('error', 'Turma indisponível para relatório.');
             $this->redirect('/frequencia/relatorio');
         }
 
@@ -135,7 +135,7 @@ class AttendanceController extends Controller
             : [];
 
         $this->view('attendance/report', [
-            'title' => 'Relatório de frequencia',
+            'title' => 'Relatório de frequência',
             'classes' => $classes,
             'subjects' => $subjects,
             'students' => $this->attendance->studentsWithAttendance(),

@@ -8,7 +8,7 @@
             <p>Veja certificados emitidos automaticamente quando um curso chega a 100% de progresso.</p>
         </div>
         <div class="actions-row">
-            <a class="button ghost large" href="<?= e(url('/certificados/validar')) ?>">Validar codigo</a>
+            <a class="button ghost large" href="<?= e(url('/certificados/validar')) ?>">Validar código</a>
             <a class="button large" href="<?= e(url('/ranking')) ?>">Ranking</a>
         </div>
     </div>
@@ -16,7 +16,7 @@
     <?php if (empty($certificates)): ?>
         <div class="empty-state">
             <h2>Nenhum certificado emitido</h2>
-            <p>Conclua todos os modulos e aulas publicados de um curso para receber o certificado automaticamente.</p>
+            <p>Conclua todos os módulos e aulas publicados de um curso para receber o certificado automaticamente.</p>
         </div>
     <?php else: ?>
         <div class="certificate-grid">

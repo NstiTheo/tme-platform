@@ -62,7 +62,7 @@ class CertificateController extends Controller
         $code = strtoupper(trim($_POST['code'] ?? ''));
 
         if ($code === '') {
-            flash('error', 'Informe o codigo do certificado.');
+            flash('error', 'Informe o código do certificado.');
             $this->redirect('/certificados/validar');
         }
 
@@ -80,7 +80,7 @@ class CertificateController extends Controller
         ]);
 
         $this->view('certificates/validation_result', [
-            'title' => 'Resultado da validacao',
+            'title' => 'Resultado da validação',
             'certificate' => $certificate,
             'code' => strtoupper(trim($code)),
         ]);
@@ -121,7 +121,7 @@ class CertificateController extends Controller
         $reason = trim($_POST['revocation_reason'] ?? '');
 
         if (strlen($reason) < 6) {
-            flash('error', 'Informe um motivo de revogacao com pelo menos 6 caracteres.');
+            flash('error', 'Informe um motivo de revogação com pelo menos 6 caracteres.');
             $this->redirect('/admin/certificados');
         }
 

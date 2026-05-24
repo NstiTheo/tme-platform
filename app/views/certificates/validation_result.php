@@ -10,7 +10,7 @@ $isValid = $certificate && $certificate['validation_status'] === 'valido';
         <h1><?= $isValid ? 'Certificado valido' : 'Certificado invalido' ?></h1>
 
         <?php if (! $certificate): ?>
-            <p class="muted">Nenhum certificado foi encontrado para o codigo <?= e($code) ?>.</p>
+            <p class="muted">Nenhum certificado foi encontrado para o código <?= e($code) ?>.</p>
         <?php else: ?>
             <div class="validation-result <?= $isValid ? 'valid' : 'invalid' ?>">
                 <span class="status-badge <?= e($certificate['validation_status']) ?>"><?= e($certificate['validation_status']) ?></span>
@@ -28,7 +28,7 @@ $isValid = $certificate && $certificate['validation_status'] === 'valido';
         <?php endif; ?>
 
         <div class="actions-row">
-            <a class="button large" href="<?= e(url('/certificados/validar')) ?>">Nova validacao</a>
+            <a class="button large" href="<?= e(url('/certificados/validar')) ?>">Nova validação</a>
             <a class="button ghost large" href="<?= e(url('/')) ?>">Voltar</a>
         </div>
     </div>

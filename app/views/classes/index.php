@@ -15,7 +15,7 @@
                 <article class="module-card">
                     <span class="status-badge <?= e($class['status']) ?>"><?= e($class['status']) ?></span>
                     <h2><?= e($class['name']) ?></h2>
-                    <p><?= e($class['description'] ?: 'Turma academica TME.') ?></p>
+                    <p><?= e($class['description'] ?: 'Turma acadêmica TME.') ?></p>
                     <a href="<?= e(url('/turmas/' . $class['id'])) ?>">Abrir turma</a>
                 </article>
             <?php endforeach; ?>

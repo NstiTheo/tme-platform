@@ -25,7 +25,7 @@ $decodeAlternatives = static function (?string $json): array {
     </div>
 
     <?php if ($attempt['status'] === 'pendente_correcao'): ?>
-        <div class="flash info">Sua prova possui respostas discursivas aguardando correcao manual.</div>
+        <div class="flash info">Sua prova possui respostas discursivas aguardando correção manual.</div>
     <?php endif; ?>
 
     <div class="exam-question-list">

@@ -18,7 +18,7 @@
     <div class="notification-list">
         <?php if (empty($notifications)): ?>
             <div class="empty-state">
-                <h2>Nenhuma notificacao</h2>
+                <h2>Nenhuma notificação</h2>
                 <p>Quando algo importante acontecer, você vera aqui.</p>
             </div>
         <?php endif; ?>
@@ -43,7 +43,7 @@
                             <button class="button small ghost" type="submit">Marcar lida</button>
                         </form>
                     <?php else: ?>
-                        <form action="<?= e(url('/notificacoes/' . $notification['id'] . '/não-lida')) ?>" method="post">
+                        <form action="<?= e(url('/notificacoes/' . $notification['id'] . '/nao-lida')) ?>" method="post">
                             <?= csrf_field() ?>
                             <button class="button small ghost" type="submit">Não lida</button>
                         </form>

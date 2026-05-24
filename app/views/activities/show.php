@@ -58,7 +58,7 @@ $submissionStatus = $submission['status'] ?? 'pendente';
     <?php if (! $canSubmit): ?>
         <div class="empty-state">
             <h2>Prazo encerrado</h2>
-            <p>Está atividade não aceita envios atrasados.</p>
+            <p>Esta atividade não aceita envios atrasados.</p>
         </div>
     <?php elseif ($submission && in_array($submission['status'], ['corrigida', 'devolvida'], true)): ?>
         <div class="empty-state">

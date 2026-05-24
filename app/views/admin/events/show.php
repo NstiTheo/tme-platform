@@ -46,7 +46,7 @@
                         <td class="actions-cell">
                             <form action="<?= e(url('/admin/eventos/inscricoes/' . $registration['id'] . '/presenca')) ?>" method="post">
                                 <?= csrf_field() ?>
-                                <button class="button small" type="submit">Confirmar presenca</button>
+                                <button class="button small" type="submit">Confirmar presença</button>
                             </form>
                             <form action="<?= e(url('/admin/eventos/inscricoes/' . $registration['id'] . '/certificado')) ?>" method="post">
                                 <?= csrf_field() ?>

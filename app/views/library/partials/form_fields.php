@@ -30,7 +30,7 @@
     <label>
         Visibilidade
         <select name="visibility">
-            <?php foreach (['publica' => 'Pública', 'logados' => 'Somente logados', 'curso' => 'Curso especifico', 'privada_admin' => 'Privada/admin'] as $option => $label): ?>
+            <?php foreach (['publica' => 'Pública', 'logados' => 'Somente logados', 'curso' => 'Curso específico', 'privada_admin' => 'Privada/admin'] as $option => $label): ?>
                 <option value="<?= e($option) ?>" <?= $value('visibility', 'publica') === $option ? 'selected' : '' ?>><?= e($label) ?></option>
             <?php endforeach; ?>
         </select>
@@ -55,7 +55,7 @@
         <label>
             Status
             <select name="status">
-                <?php foreach (['rascunho' => 'Rascunho', 'pendente' => 'Pendente', 'publicado' => 'Públicado', 'arquivado' => 'Arquivado'] as $option => $label): ?>
+                <?php foreach (['rascunho' => 'Rascunho', 'pendente' => 'Pendente', 'publicado' => 'Publicado', 'arquivado' => 'Arquivado'] as $option => $label): ?>
                     <option value="<?= e($option) ?>" <?= $value('status', 'pendente') === $option ? 'selected' : '' ?>><?= e($label) ?></option>
                 <?php endforeach; ?>
             </select>
@@ -83,7 +83,7 @@
     </label>
 
     <div class="span-2 actions-row">
-        <button class="button large" type="submit"><?= empty($contribution) ? 'Salvar item' : 'Enviar para moderacao' ?></button>
+        <button class="button large" type="submit"><?= empty($contribution) ? 'Salvar item' : 'Enviar para moderação' ?></button>
         <a class="button ghost large" href="<?= e(empty($contribution) ? url('/admin/biblioteca') : url('/biblioteca')) ?>">Cancelar</a>
     </div>
 </form>

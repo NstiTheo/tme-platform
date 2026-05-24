@@ -21,7 +21,7 @@ $completedAt = $certificate['enrollment_completed_at'] ? date('d/m/Y', strtotime
 
     <?php if (! $isValid): ?>
         <div class="flash warning no-print">
-            Este certificado foi revogado e deve aparecer como invalido na validacao publica.
+            Este certificado foi revogado e deve aparecer como inválido na validação pública.
         </div>
     <?php endif; ?>
 
@@ -50,7 +50,7 @@ $completedAt = $certificate['enrollment_completed_at'] ? date('d/m/Y', strtotime
                     <strong><?= e($issuedAt) ?></strong>
                 </div>
                 <div>
-                    <span>Código unico</span>
+                    <span>Código único</span>
                     <strong><?= e($certificate['code']) ?></strong>
                 </div>
                 <div>

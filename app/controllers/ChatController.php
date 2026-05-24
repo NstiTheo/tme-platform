@@ -20,7 +20,7 @@ class ChatController extends Controller
         $user = current_user();
 
         if ($user['status'] !== 'aprovado') {
-            flash('error', 'Chat disponível apenas para usuarios aprovados.');
+            flash('error', 'Chat disponível apenas para usuários aprovados.');
             $this->redirect('/portal');
         }
 

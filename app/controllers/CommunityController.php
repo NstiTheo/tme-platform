@@ -51,7 +51,7 @@ class CommunityController extends Controller
         unset($_SESSION['_old']);
         $this->logs->record((int) $user['id'], 'community.post_created', ['post_id' => $postId, 'status' => $data['status']]);
 
-        flash('success', $data['status'] === 'aprovado' ? 'Post publicado.' : 'Post enviado para moderacao.');
+        flash('success', $data['status'] === 'aprovado' ? 'Post publicado.' : 'Post enviado para moderação.');
         $this->redirect('/comunidade');
     }
 
@@ -203,11 +203,11 @@ class CommunityController extends Controller
         }
 
         if (strlen($data['title']) < 4) {
-            $errors[] = 'Informe um titulo com pelo menos 4 caracteres.';
+            $errors[] = 'Informe um título com pelo menos 4 caracteres.';
         }
 
         if (strlen($data['content']) < 10) {
-            $errors[] = 'Escreva um conteudo com pelo menos 10 caracteres.';
+            $errors[] = 'Escreva um conteúdo com pelo menos 10 caracteres.';
         }
 
         return $errors;

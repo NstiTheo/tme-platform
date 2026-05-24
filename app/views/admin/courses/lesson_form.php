@@ -45,7 +45,7 @@ $value = static fn (string $key, mixed $default = ''): mixed => old($key, $lesso
         <label>
             Status
             <select name="status">
-                <?php foreach (['rascunho' => 'Rascunho', 'publicada' => 'Públicada', 'arquivada' => 'Arquivada'] as $option => $label): ?>
+                <?php foreach (['rascunho' => 'Rascunho', 'publicada' => 'Publicada', 'arquivada' => 'Arquivada'] as $option => $label): ?>
                     <option value="<?= e($option) ?>" <?= $value('status', 'rascunho') === $option ? 'selected' : '' ?>><?= e($label) ?></option>
                 <?php endforeach; ?>
             </select>

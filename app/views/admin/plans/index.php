@@ -27,7 +27,7 @@
                     <tr>
                         <td>
                             <strong><?= e($plan['name']) ?></strong>
-                            <span class="muted"><?= e($plan['description'] ?: 'Sem descricao') ?></span>
+                            <span class="muted"><?= e($plan['description'] ?: 'Sem descrição') ?></span>
                         </td>
                         <td>R$ <?= e(number_format((float) $plan['price'], 2, ',', '.')) ?></td>
                         <td><?= e((int) $plan['duration_days']) ?> dias</td>

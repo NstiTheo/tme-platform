@@ -27,7 +27,7 @@
         </section>
         <section class="profile-panel">
             <h2>Materiais futuros</h2>
-            <p class="muted">Área preparada para materiais, calendario, frequencia e ranking por turma.</p>
+            <p class="muted">Área preparada para materiais, calendário, frequência e ranking por turma.</p>
         </section>
     </div>
 </section>

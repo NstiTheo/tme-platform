@@ -3,9 +3,9 @@
 <section class="dashboard-shell chat-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
-            <span class="eyebrow">Segurança e moderacao</span>
+            <span class="eyebrow">Segurança e moderação</span>
             <h1>Auditoria de chat</h1>
-            <p>Visualização restrita para seguranca, moderacao e apuracao de incidentes.</p>
+            <p>Visualização restrita para segurança, moderação e apuração de incidentes.</p>
         </div>
         <a class="button ghost large" href="<?= e(url('/chat')) ?>">Meu chat</a>
     </div>

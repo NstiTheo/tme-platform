@@ -5,7 +5,7 @@
         <div class="dashboard-heading">
             <span class="eyebrow">Prova</span>
             <h1><?= e($exam['title']) ?></h1>
-            <p><?= e($exam['description'] ?: 'Leia as informacoes antes de iniciar sua tentativa.') ?></p>
+            <p><?= e($exam['description'] ?: 'Leia as informações antes de iniciar sua tentativa.') ?></p>
         </div>
         <a class="button ghost large" href="<?= e(url('/provas')) ?>">Voltar</a>
     </div>

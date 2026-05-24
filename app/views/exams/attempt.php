@@ -5,7 +5,7 @@
         <div class="dashboard-heading">
             <span class="eyebrow">Tentativa em andamento</span>
             <h1><?= e($attempt['title']) ?></h1>
-            <p>Responda as questoes e envie dentro do tempo limite.</p>
+            <p>Responda as questões e envie dentro do tempo limite.</p>
         </div>
         <?php if ($remainingSeconds !== null): ?>
             <div class="exam-timer" data-exam-timer="<?= e($remainingSeconds) ?>">

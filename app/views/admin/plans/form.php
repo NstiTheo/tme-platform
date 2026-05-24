@@ -9,7 +9,7 @@ $value = static fn (string $key, mixed $default = ''): mixed => old($key, $plan[
     <div class="dashboard-heading">
         <span class="eyebrow">Planos</span>
         <h1><?= $isEdit ? 'Editar plano' : 'Novo plano' ?></h1>
-        <p>Configure preco, duracao, beneficios e status. Pagamentos reais entram em uma integração futura.</p>
+        <p>Configure preço, duração, benefícios e status. Pagamentos reais entram em uma integração futura.</p>
     </div>
 
     <form class="form grid-form admin-form" action="<?= e($action) ?>" method="post">
