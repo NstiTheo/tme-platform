@@ -68,6 +68,26 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
                     </label>
                     <button class="button" type="submit">Salvar perfil</button>
                 </form>
+
+                <div class="section-toolbar compact">
+                    <div>
+                        <span class="eyebrow">Comunidade</span>
+                        <h2>Meus posts</h2>
+                    </div>
+                    <a class="button ghost small" href="<?= e(url('/comunidade')) ?>">Abrir feed</a>
+                </div>
+                <div class="profile-post-list">
+                    <?php if (empty($posts)): ?>
+                        <p class="muted">Seus posts academicos aparecerao aqui.</p>
+                    <?php else: ?>
+                        <?php foreach ($posts as $post): ?>
+                            <article>
+                                <strong><?= e($post['title']) ?></strong>
+                                <span class="status-badge <?= e($post['status']) ?>"><?= e($post['status']) ?></span>
+                            </article>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
             </section>
 
             <section id="aparencia" class="profile-panel">

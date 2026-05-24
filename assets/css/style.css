@@ -813,7 +813,9 @@ td span {
 .status-badge.ativa,
 .status-badge.aprovado,
 .status-badge.concluida,
-.status-badge.corrigida {
+.status-badge.corrigida,
+.status-badge.confirmado,
+.status-badge.inscrito {
     background: color-mix(in srgb, var(--success) 18%, var(--surface));
     color: var(--success);
 }
@@ -829,6 +831,7 @@ td span {
 .status-badge.arquivado,
 .status-badge.arquivada,
 .status-badge.inativo,
+.status-badge.inativa,
 .status-badge.cancelada,
 .status-badge.atrasada,
 .status-badge.recusado {
@@ -1455,6 +1458,113 @@ td span {
     font-weight: 800;
 }
 
+.community-layout {
+    display: grid;
+    grid-template-columns: 340px minmax(0, 1fr);
+    gap: 20px;
+    align-items: start;
+}
+
+.community-composer {
+    position: sticky;
+    top: 96px;
+}
+
+.community-feed,
+.comment-list {
+    display: grid;
+    gap: 14px;
+}
+
+.post-card,
+.comment-card,
+.event-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface);
+}
+
+.post-card,
+.comment-card {
+    padding: 20px;
+}
+
+.post-card.featured {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+    background: linear-gradient(135deg, color-mix(in srgb, var(--surface) 88%, var(--accent) 12%), var(--surface));
+}
+
+.post-card-header,
+.post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.post-card h1,
+.post-card h2,
+.event-card h2 {
+    margin: 12px 0 8px;
+}
+
+.post-card p,
+.post-content,
+.comment-card p {
+    color: var(--text);
+}
+
+.post-meta,
+.comment-card span {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.event-card {
+    overflow: hidden;
+}
+
+.event-card img,
+.event-card .course-card-placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.event-card > div {
+    padding: 20px;
+}
+
+.class-link-grid,
+.detail-columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.profile-post-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.profile-post-list article {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--surface-soft);
+}
+
 .site-footer {
     display: flex;
     justify-content: space-between;
@@ -1519,6 +1629,10 @@ td span {
     .library-shelf,
     .course-card-grid,
     .certificate-grid,
+    .event-grid,
+    .community-layout,
+    .class-link-grid,
+    .detail-columns,
     .detail-grid,
     .filter-form,
     .filter-form.library-filter-form,
@@ -1559,6 +1673,10 @@ td span {
     .grid-form,
     .course-card-grid,
     .certificate-grid,
+    .event-grid,
+    .community-layout,
+    .class-link-grid,
+    .detail-columns,
     .profile-info-grid,
     .profile-metrics,
     .detail-grid,
