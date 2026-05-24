@@ -1,0 +1,65 @@
+<?php
+defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+
+$isValid = $certificate['validation_status'] === 'valido';
+$issuedAt = $certificate['issued_at'] ? date('d/m/Y', strtotime($certificate['issued_at'])) : date('d/m/Y');
+$completedAt = $certificate['enrollment_completed_at'] ? date('d/m/Y', strtotime($certificate['enrollment_completed_at'])) : $issuedAt;
+?>
+
+<section class="dashboard-shell certificate-view">
+    <div class="admin-toolbar no-print">
+        <div class="dashboard-heading">
+            <span class="eyebrow">Certificado</span>
+            <h1><?= e($certificate['code']) ?></h1>
+            <p>Visualizacao HTML pronta para impressao ou salvamento em PDF pelo navegador.</p>
+        </div>
+        <div class="actions-row">
+            <button class="button large" type="button" onclick="window.print()">Imprimir/Salvar PDF</button>
+            <a class="button ghost large" href="<?= e(url('/certificados')) ?>">Voltar</a>
+        </div>
+    </div>
+
+    <?php if (! $isValid): ?>
+        <div class="flash warning no-print">
+            Este certificado foi revogado e deve aparecer como invalido na validacao publica.
+        </div>
+    <?php endif; ?>
+
+    <article class="certificate-sheet <?= $isValid ? '' : 'revoked' ?>">
+        <div class="certificate-border">
+            <header>
+                <span class="brand-mark">TME</span>
+                <div>
+                    <strong>Theo Mind Educacional</strong>
+                    <small>Tecnologia, ensino e evolucao em uma unica plataforma.</small>
+                </div>
+            </header>
+
+            <div class="certificate-body">
+                <span class="eyebrow">Certificado de conclusao</span>
+                <h2>Certificamos que</h2>
+                <h1><?= e($certificate['student_name']) ?></h1>
+                <p>concluiu com aproveitamento o curso</p>
+                <h3><?= e($certificate['course_title'] ?: $certificate['title']) ?></h3>
+                <p>com carga horaria de <strong><?= e((int) $certificate['workload_hours']) ?> horas</strong>, finalizado em <?= e($completedAt) ?>.</p>
+            </div>
+
+            <footer>
+                <div>
+                    <span>Emitido em</span>
+                    <strong><?= e($issuedAt) ?></strong>
+                </div>
+                <div>
+                    <span>Codigo unico</span>
+                    <strong><?= e($certificate['code']) ?></strong>
+                </div>
+                <div>
+                    <span>Status</span>
+                    <strong><?= e($isValid ? 'Valido' : 'Revogado') ?></strong>
+                </div>
+            </footer>
+
+            <div class="qr-placeholder">QR futuro</div>
+        </div>
+    </article>
+</section>

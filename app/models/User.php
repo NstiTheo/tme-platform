@@ -9,6 +9,7 @@ class User extends Model
         $statement = $this->db->prepare(
             'SELECT users.*, roles.slug AS role_slug, roles.name AS role_name,
                     user_settings.theme, user_settings.primary_color,
+                    user_settings.bio_short, user_settings.avatar_path,
                     institutions.name AS institution_name
              FROM users
              INNER JOIN roles ON roles.id = users.role_id
@@ -181,6 +182,55 @@ class User extends Model
         ]);
     }
 
+    public function updateProfileInfo(int $userId, string $bioShort): void
+    {
+        $statement = $this->db->prepare(
+            'INSERT INTO user_settings (user_id, theme, primary_color, bio_short, created_at, updated_at)
+             VALUES (:user_id, :theme, :primary_color, :bio_short, NOW(), NOW())
+             ON DUPLICATE KEY UPDATE bio_short = VALUES(bio_short), updated_at = NOW()'
+        );
+
+        $statement->execute([
+            'user_id' => $userId,
+            'theme' => config('app.default_theme', 'light'),
+            'primary_color' => config('app.default_primary_color', '#1f6feb'),
+            'bio_short' => $bioShort ?: null,
+        ]);
+    }
+
+    public function updatePassword(int $userId, string $passwordHash): void
+    {
+        $statement = $this->db->prepare(
+            'UPDATE users
+             SET password_hash = :password_hash, updated_at = NOW()
+             WHERE id = :id'
+        );
+        $statement->execute([
+            'password_hash' => $passwordHash,
+            'id' => $userId,
+        ]);
+    }
+
+    public function profileStats(int $userId): array
+    {
+        $queries = [
+            'enrolled_courses' => 'SELECT COUNT(*) FROM enrollments WHERE user_id = :user_id',
+            'completed_courses' => 'SELECT COUNT(*) FROM enrollments WHERE user_id = :user_id AND status = "concluida"',
+            'submitted_activities' => 'SELECT COUNT(*) FROM submissions WHERE student_id = :user_id',
+            'certificates' => 'SELECT COUNT(*) FROM certificates WHERE user_id = :user_id',
+        ];
+
+        $stats = [];
+
+        foreach ($queries as $key => $sql) {
+            $statement = $this->db->prepare($sql);
+            $statement->execute(['user_id' => $userId]);
+            $stats[$key] = (int) $statement->fetchColumn();
+        }
+
+        return $stats;
+    }
+
     public function dashboardCounts(): array
     {
         return [
@@ -189,6 +239,7 @@ class User extends Model
             'courses' => (int) $this->db->query('SELECT COUNT(*) FROM courses')->fetchColumn(),
             'enrollments' => (int) $this->db->query('SELECT COUNT(*) FROM enrollments')->fetchColumn(),
             'events' => (int) $this->db->query('SELECT COUNT(*) FROM events')->fetchColumn(),
+            'certificates' => (int) $this->db->query('SELECT COUNT(*) FROM certificates')->fetchColumn(),
         ];
     }
 
@@ -222,8 +273,8 @@ class User extends Model
     private function createGamificationProfile(int $userId): void
     {
         $statement = $this->db->prepare(
-            'INSERT INTO gamification_profiles (user_id, xp, level, internal_coins, created_at, updated_at)
-             VALUES (:user_id, 0, 1, 0, NOW(), NOW())'
+            'INSERT INTO gamification_profiles (user_id, xp, xp_total, level, internal_coins, streak_days, created_at, updated_at)
+             VALUES (:user_id, 0, 0, 1, 0, 0, NOW(), NOW())'
         );
 
         $statement->execute(['user_id' => $userId]);

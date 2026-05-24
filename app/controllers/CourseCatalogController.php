@@ -7,12 +7,16 @@ class CourseCatalogController extends Controller
     private Course $courses;
     private Enrollment $enrollments;
     private ActionLog $logs;
+    private GamificationService $gamification;
+    private CertificateService $certificates;
 
     public function __construct()
     {
         $this->courses = new Course();
         $this->enrollments = new Enrollment();
         $this->logs = new ActionLog();
+        $this->gamification = new GamificationService();
+        $this->certificates = new CertificateService();
     }
 
     public function index(): void
@@ -60,7 +64,7 @@ class CourseCatalogController extends Controller
 
         if ($existing) {
             flash('info', 'Você já possui matrícula neste curso.');
-            $this->redirect('/aluno/meus-cursos/' . $existing['id']);
+            $this->redirect('/meus-cursos/' . $existing['id']);
         }
 
         try {
@@ -69,9 +73,14 @@ class CourseCatalogController extends Controller
                 'enrollment_id' => $enrollmentId,
                 'course_id' => (int) $course['id'],
             ]);
+            try {
+                $this->gamification->enrollmentCreated((int) $user['id'], $enrollmentId, (int) $course['id']);
+            } catch (Throwable $eventException) {
+                $this->logs->record((int) $user['id'], 'gamification.error', ['message' => $eventException->getMessage()], 'warning');
+            }
 
             flash('success', 'Matrícula realizada. Bom estudo!');
-            $this->redirect('/aluno/meus-cursos/' . $enrollmentId);
+            $this->redirect('/meus-cursos/' . $enrollmentId);
         } catch (PDOException $exception) {
             flash('error', 'Não foi possível criar a matrícula. Verifique se você já está matriculado.');
             $this->redirect('/aluno/cursos/' . $course['id']);
@@ -98,6 +107,7 @@ class CourseCatalogController extends Controller
             'enrollment' => $enrollment,
             'structure' => $this->courses->structure((int) $enrollment['course_id'], true),
             'progressMap' => $this->enrollments->progressMap((int) $enrollment['id']),
+            'certificate' => (new Certificate())->findByEnrollment((int) $enrollment['id']),
         ]);
     }
 
@@ -105,7 +115,7 @@ class CourseCatalogController extends Controller
     {
         if (! verify_csrf_token($_POST['_csrf'] ?? null)) {
             flash('error', 'Sua sessão expirou. Tente novamente.');
-            $this->redirect('/aluno/meus-cursos/' . $enrollmentId);
+            $this->redirect('/meus-cursos/' . $enrollmentId);
         }
 
         $user = current_user();
@@ -117,12 +127,26 @@ class CourseCatalogController extends Controller
                 'lesson_id' => (int) $lessonId,
                 'progress_percent' => $progress['progress_percent'],
             ]);
+            try {
+                $this->gamification->lessonCompleted((int) $user['id'], (int) $lessonId, (int) $enrollmentId);
+            } catch (Throwable $eventException) {
+                $this->logs->record((int) $user['id'], 'gamification.error', ['message' => $eventException->getMessage()], 'warning');
+            }
 
             if ($progress['course_completed_now']) {
+                $enrollment = $this->enrollments->find((int) $enrollmentId);
                 $this->logs->record((int) $user['id'], 'course.completed', [
                     'enrollment_id' => (int) $enrollmentId,
                     'progress_percent' => $progress['progress_percent'],
                 ]);
+                if ($enrollment) {
+                    try {
+                        $this->gamification->courseCompleted((int) $user['id'], (int) $enrollmentId, (int) $enrollment['course_id']);
+                        $this->certificates->issueForEnrollment((int) $enrollmentId);
+                    } catch (Throwable $eventException) {
+                        $this->logs->record((int) $user['id'], 'certificate_or_gamification.error', ['message' => $eventException->getMessage()], 'warning');
+                    }
+                }
                 flash('success', 'Curso concluído. Progresso em 100%.');
             } else {
                 flash('success', 'Aula marcada como concluída.');
@@ -131,7 +155,7 @@ class CourseCatalogController extends Controller
             flash('error', $exception->getMessage());
         }
 
-        $this->redirect('/aluno/meus-cursos/' . $enrollmentId);
+        $this->redirect('/meus-cursos/' . $enrollmentId);
     }
 
     private function findStudentEnrollmentOrRedirect(int $id, int $userId): array
@@ -140,7 +164,7 @@ class CourseCatalogController extends Controller
 
         if (! $enrollment) {
             flash('error', 'Matrícula não encontrada.');
-            $this->redirect('/aluno/meus-cursos');
+            $this->redirect('/meus-cursos');
         }
 
         return $enrollment;

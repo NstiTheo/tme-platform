@@ -16,6 +16,14 @@
 !/public/uploads/course-images/.gitkeep
 !/public/uploads/materials/
 !/public/uploads/materials/.gitkeep
+!/public/uploads/activity-attachments/
+!/public/uploads/activity-attachments/.gitkeep
+!/public/uploads/activity-submissions/
+!/public/uploads/activity-submissions/.gitkeep
+!/public/uploads/library/
+!/public/uploads/library/.gitkeep
+!/public/uploads/library-covers/
+!/public/uploads/library-covers/.gitkeep
 
 .DS_Store
 Thumbs.db

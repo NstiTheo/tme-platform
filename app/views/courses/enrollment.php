@@ -23,6 +23,12 @@
                     <span>Concluído em <?= e(date('d/m/Y', strtotime($enrollment['completed_at']))) ?></span>
                 <?php endif; ?>
             </div>
+            <?php if (! empty($certificate)): ?>
+                <div class="actions-row">
+                    <a class="button large" href="<?= e(url('/certificados/ver/' . $certificate['code'])) ?>">Ver certificado</a>
+                    <a class="button ghost large" href="<?= e(url('/certificados/validar/' . $certificate['code'])) ?>">Validar codigo</a>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 

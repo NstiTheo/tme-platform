@@ -19,11 +19,28 @@ A TME é uma base MVC própria em PHP para uma plataforma educacional moderna qu
 - Home pública e páginas institucionais: Sobre, Cursos, Eventos, Biblioteca, Comunidade, Login e Cadastro.
 - Cadastro de aluno ou professor com status inicial `pendente`.
 - Login permitido apenas para contas `aprovado`.
+- Perfil completo em `/perfil` com personalizacao, biografia, estatisticas, badges e alteracao de senha.
 - Dashboards separados para aluno, professor, supervisor, administrador, secretaria e financeiro.
 - Aprovação e recusa de contas por administrador ou supervisor.
 - Tema claro/escuro e cor principal personalizável por usuário.
 - Roles, permissões, instituições, cursos, turmas, atividades, comunidade, eventos, certificados, gamificação, financeiro, notificações e logs modelados no banco.
 - Estrutura preparada para importações futuras do INEP e e-MEC.
+
+## Experiencia autenticada e Portal TME
+
+A vitrine publica e a area logada agora sao experiencias separadas:
+
+- Visitantes continuam vendo Home, Sobre, Cursos, Eventos, Biblioteca, Comunidade, Login e Cadastro.
+- Usuarios autenticados sao redirecionados para `/portal` depois do login aprovado.
+- O seletor rapido de tema/cor saiu da navbar; tema, cor principal e preview ficam em `/perfil`.
+- O Portal mostra XP, nivel, moedas, streak e badges recentes.
+- A rota `/inicio` tambem abre o Portal TME.
+- A Home publica (`/`) redireciona usuarios logados para o portal interno.
+- O menu de usuarios logados oculta Login/Cadastro e prioriza Inicio, Dashboard, Cursos, Meus cursos, Biblioteca, Eventos, Comunidade, Configuracoes/Tema e Sair.
+- Alunos e professores acessam o catalogo em `/aluno/cursos` e a area neutra `/meus-cursos`.
+- Professores tambem podem estudar como alunos, mantendo acesso a matriculas e progresso.
+- Administradores e supervisores veem atalhos de administracao, aprovacoes, cursos admin e matriculas.
+- `/portal` e `/configuracoes` exigem autenticacao.
 
 ## Módulo administrativo de cursos
 
@@ -42,7 +59,7 @@ Recursos disponíveis:
 - Logs em `logs` para criação, edição, remoção e arquivamento.
 - CSRF, sessão, middleware de autenticação e proteção por role `administrador/supervisor`.
 
-Alunos aprovados acessam `Meus cursos` para ver cursos publicados, detalhes do curso, módulos, aulas e materiais ativos.
+Alunos e professores aprovados acessam `Meus cursos` para ver cursos publicados, detalhes do curso, módulos, aulas e materiais ativos.
 
 Para bancos existentes, aplique a migration:
 
@@ -52,7 +69,7 @@ mysql -u root -p < database/migrations/2026_05_23_admin_courses_module.sql
 
 ## Matrículas e progresso do aluno
 
-Alunos aprovados podem se matricular em cursos publicados pelo catálogo em `Catálogo`.
+Alunos e professores aprovados podem se matricular em cursos publicados pelo catálogo em `Catálogo`.
 
 Recursos disponíveis:
 
@@ -72,6 +89,98 @@ Para bancos existentes, aplique também:
 
 ```bash
 mysql -u root -p < database/migrations/2026_05_23_enrollments_progress_module.sql
+```
+
+## Atividades, entregas e notas
+
+Professores, administradores e supervisores gerenciam atividades em `/admin/atividades`.
+Alunos e professores matriculados acompanham tarefas em `/atividades` e notas em `/boletim`.
+
+Recursos disponiveis:
+
+- CRUD de atividades vinculadas a curso, modulo e aula, com base futura para turma/disciplina.
+- Campos: titulo, descricao, tipo, pontuacao maxima, prazo, status, instrucoes e anexo opcional.
+- Tipos: `texto`, `arquivo`, `quiz`, `tarefa_pratica` e `projeto`.
+- Entrega textual e/ou arquivo pelo aluno matriculado.
+- Bloqueio de envio apos prazo quando a atividade nao permite atraso.
+- Entregas atrasadas marcadas automaticamente quando permitido.
+- Status de entrega: `pendente`, `enviada`, `atrasada`, `corrigida` e `devolvida`.
+- Correcao por professor/admin/supervisor com nota, feedback e status.
+- Boletim simples por curso.
+- Logs para criacao, envio, encerramento e correcao.
+- Uploads em `public/uploads/activity-attachments` e `public/uploads/activity-submissions`.
+
+## Biblioteca digital
+
+A biblioteca publica/interna fica em `/biblioteca` e a gestao em `/admin/biblioteca`.
+Ela e separada dos materiais de aulas, mas usa os mesmos padroes visuais, CSRF, PDO e logs.
+
+Recursos disponiveis:
+
+- CRUD administrativo de itens da biblioteca para administrador, supervisor e professor.
+- Envio de materiais por aluno/professor em `/biblioteca/enviar`, sempre entrando como `pendente`.
+- Campos: titulo, descricao, categoria, disciplina, tipo, visibilidade, autor, arquivo/link, capa e status.
+- Tipos: PDF, livro, apostila, artigo, video, link, apresentacao, imagem e arquivo.
+- Visibilidade: publica, somente logados, curso especifico e privada/admin.
+- Busca por titulo, categoria, disciplina e tipo.
+- Favoritos por usuario em `/biblioteca/favoritos`.
+- Historico simples de acesso/leitura em `library_access_logs`.
+- Moderacao por administrador/supervisor com aprovacao, recusa e arquivamento.
+- Logs para criacao, aprovacao, recusa, visualizacao e favorito.
+- Uploads em `public/uploads/library` e `public/uploads/library-covers`.
+
+Para bancos existentes, aplique tambem:
+
+```bash
+mysql -u root -p < database/migrations/2026_05_23_activities_library_module.sql
+```
+
+## Certificados
+
+Alunos e professores acessam `/certificados` para consultar certificados emitidos automaticamente. A validacao publica fica em `/certificados/validar`.
+
+Recursos disponiveis:
+
+- Emissao automatica quando uma matricula chega a 100% de progresso.
+- Codigo unico no formato `TME-CUR-ANO-CODIGO`.
+- Visualizacao HTML do certificado em `/certificados/ver/{codigo}`.
+- Botao `Imprimir/Salvar PDF` usando o print do navegador.
+- Validacao publica por codigo, marcando certificados revogados como invalidos.
+- Area administrativa em `/admin/certificados` para listar, filtrar e revogar certificados com motivo.
+- Estrutura preparada para QR Code futuro.
+- Logs para emissao, visualizacao, validacao e revogacao.
+
+## Gamificacao
+
+A TME agora possui XP, niveis, moedas internas, streak, badges e ranking inicial.
+
+Recursos disponiveis:
+
+- Perfil de gamificacao para cada usuario aprovado.
+- Regras centralizadas em `app/services/GamificationService.php`.
+- XP por login inicial, matricula, aula concluida, curso concluido, atividade enviada, boa nota, favorito de biblioteca e certificado emitido.
+- Badges iniciais: Primeiro Login, Primeiro Curso, Primeira Aula Concluida, Curso Finalizado, Explorador da Biblioteca e Aluno Dedicado.
+- Ranking global e ranking filtrado por curso em `/ranking`.
+- Portal e Perfil exibem XP, nivel, moedas, streak e conquistas recentes.
+- Eventos de XP evitam duplicidade por acao/referencia e registram logs.
+
+## Perfil e configuracoes
+
+Preferencias e dados do usuario foram centralizados em `/perfil` e `/configuracoes`.
+
+Recursos disponiveis:
+
+- Informacoes do usuario, instituicao, area de interesse e biografia curta.
+- Placeholder para foto de perfil futura.
+- Tema claro/escuro e cor principal com preview antes de salvar.
+- Estatisticas: XP, nivel, cursos matriculados, cursos concluidos, atividades entregues, certificados e badges recentes.
+- Alteracao de senha com senha atual, confirmacao e `password_hash`.
+- Logout e area reservada para sessoes futuras.
+
+Para bancos existentes, aplique tambem:
+
+```bash
+mysql -u root -p < database/migrations/2026_05_23_certificates_gamification_profile.sql
 ```
 
 ## Estrutura

@@ -8,15 +8,67 @@ $currentUser = current_user();
 $settings = current_settings();
 $pageTitle = isset($title) ? $title . ' | ' . $appName : $appName;
 $path = current_path();
+$isAuthenticated = (bool) $currentUser;
+$role = $currentUser['role_slug'] ?? null;
+$isLearner = in_array($role, ['aluno', 'professor'], true);
+$isAdmin = in_array($role, ['administrador', 'supervisor'], true);
 
-$publicLinks = [
+$guestLinks = [
     '/' => 'Home',
     '/sobre' => 'Sobre',
     '/cursos' => 'Cursos',
     '/eventos' => 'Eventos',
     '/biblioteca' => 'Biblioteca',
     '/comunidade' => 'Comunidade',
+    '/login' => 'Login',
+    '/cadastro' => 'Cadastro',
 ];
+
+$internalLinks = [
+    '/portal' => 'Inicio',
+    '/dashboard' => 'Dashboard',
+];
+
+if ($isLearner) {
+    $internalLinks['/aluno/cursos'] = 'Cursos';
+    $internalLinks['/meus-cursos'] = 'Meus cursos';
+    $internalLinks['/atividades'] = 'Atividades';
+    $internalLinks['/boletim'] = 'Boletim';
+    $internalLinks['/certificados'] = 'Certificados';
+} elseif ($isAdmin) {
+    $internalLinks['/admin/cursos'] = 'Cursos';
+}
+
+$internalLinks['/biblioteca'] = 'Biblioteca';
+$internalLinks['/eventos'] = 'Eventos';
+$internalLinks['/comunidade'] = 'Comunidade';
+$internalLinks['/ranking'] = 'Ranking';
+
+if ($isAdmin) {
+    $internalLinks['/admin/contas-pendentes'] = 'Administracao';
+    $internalLinks['/admin/atividades'] = 'Atividades admin';
+    $internalLinks['/admin/biblioteca'] = 'Biblioteca admin';
+    $internalLinks['/admin/certificados'] = 'Certificados admin';
+} elseif ($role === 'professor') {
+    $internalLinks['/admin/atividades'] = 'Gestao atividades';
+    $internalLinks['/admin/biblioteca'] = 'Biblioteca admin';
+}
+
+$isActive = static function (string $href) use ($path): bool {
+    if ($href === '/') {
+        return $path === '/';
+    }
+
+    if ($href === '/admin/contas-pendentes') {
+        return str_starts_with($path, '/admin');
+    }
+
+    if ($href === '/meus-cursos') {
+        return str_starts_with($path, '/meus-cursos') || str_starts_with($path, '/aluno/meus-cursos');
+    }
+
+    return $path === $href || str_starts_with($path, $href . '/');
+};
 ?>
 <!doctype html>
 <html lang="pt-BR">
@@ -28,8 +80,8 @@ $publicLinks = [
     <link rel="stylesheet" href="<?= e(asset('assets/css/themes.css')) ?>">
 </head>
 <body data-theme="<?= e($settings['theme']) ?>" data-base-url="<?= e(rtrim(url('/'), '/')) ?>" style="--accent: <?= e($settings['primary_color']) ?>;">
-    <header class="site-header">
-        <a class="brand" href="<?= e(url('/')) ?>" aria-label="TME Home">
+    <header class="site-header <?= $isAuthenticated ? 'authenticated' : 'public' ?>">
+        <a class="brand" href="<?= e(url($isAuthenticated ? '/portal' : '/')) ?>" aria-label="TME">
             <span class="brand-mark">TME</span>
             <span>
                 <strong>Theo Mind Educacional</strong>
@@ -37,46 +89,25 @@ $publicLinks = [
             </span>
         </a>
 
-        <button class="nav-toggle" type="button" data-nav-toggle aria-label="Abrir menu">☰</button>
+        <button class="nav-toggle" type="button" data-nav-toggle aria-label="Abrir menu">Menu</button>
 
         <nav class="site-nav" data-site-nav>
-            <?php foreach ($publicLinks as $href => $label): ?>
-                <a class="<?= $path === $href ? 'active' : '' ?>" href="<?= e(url($href)) ?>"><?= e($label) ?></a>
+            <?php foreach (($isAuthenticated ? $internalLinks : $guestLinks) as $href => $label): ?>
+                <a class="<?= $isActive($href) ? 'active' : '' ?>" href="<?= e(url($href)) ?>"><?= e($label) ?></a>
             <?php endforeach; ?>
-
-            <?php if ($currentUser): ?>
-                <a class="<?= $path === '/dashboard' ? 'active' : '' ?>" href="<?= e(url('/dashboard')) ?>">Dashboard</a>
-                <?php if ($currentUser['role_slug'] === 'aluno'): ?>
-                    <a class="<?= str_starts_with($path, '/aluno/cursos') ? 'active' : '' ?>" href="<?= e(url('/aluno/cursos')) ?>">Catálogo</a>
-                    <a class="<?= str_starts_with($path, '/aluno/meus-cursos') ? 'active' : '' ?>" href="<?= e(url('/aluno/meus-cursos')) ?>">Meus cursos</a>
-                <?php endif; ?>
-                <?php if (in_array($currentUser['role_slug'], ['administrador', 'supervisor'], true)): ?>
-                    <a class="<?= $path === '/admin/contas-pendentes' ? 'active' : '' ?>" href="<?= e(url('/admin/contas-pendentes')) ?>">Aprovações</a>
-                    <a class="<?= str_starts_with($path, '/admin/cursos') ? 'active' : '' ?>" href="<?= e(url('/admin/cursos')) ?>">Cursos admin</a>
-                    <a class="<?= str_starts_with($path, '/admin/matriculas') ? 'active' : '' ?>" href="<?= e(url('/admin/matriculas')) ?>">Matrículas</a>
-                <?php endif; ?>
-            <?php endif; ?>
         </nav>
 
         <div class="header-actions">
-            <?php if ($currentUser): ?>
-                <form class="theme-form" action="<?= e(url('/settings')) ?>" method="post">
-                    <?= csrf_field() ?>
-                    <input type="hidden" name="redirect_to" value="<?= e($path) ?>">
-                    <select name="theme" aria-label="Tema">
-                        <option value="light" <?= $settings['theme'] === 'light' ? 'selected' : '' ?>>Claro</option>
-                        <option value="dark" <?= $settings['theme'] === 'dark' ? 'selected' : '' ?>>Escuro</option>
-                    </select>
-                    <input type="color" name="primary_color" value="<?= e($settings['primary_color']) ?>" aria-label="Cor principal">
-                    <button type="submit" class="icon-button" title="Salvar preferências">✓</button>
-                </form>
+            <?php if ($isAuthenticated): ?>
+                <span class="user-chip">Ola, <?= e(explode(' ', trim($currentUser['full_name']))[0] ?: $currentUser['full_name']) ?></span>
+                <a class="profile-chip" href="<?= e(url('/perfil')) ?>" aria-label="Abrir perfil">
+                    <span><?= e(strtoupper(substr($currentUser['full_name'], 0, 1))) ?></span>
+                    Perfil
+                </a>
                 <form action="<?= e(url('/logout')) ?>" method="post">
                     <?= csrf_field() ?>
                     <button class="button ghost" type="submit">Sair</button>
                 </form>
-            <?php else: ?>
-                <a class="button ghost" href="<?= e(url('/login')) ?>">Login</a>
-                <a class="button" href="<?= e(url('/cadastro')) ?>">Cadastro</a>
             <?php endif; ?>
         </div>
     </header>
@@ -105,7 +136,7 @@ $publicLinks = [
     </main>
 
     <footer class="site-footer">
-        <span>© <?= date('Y') ?> TME — Theo Mind Educacional</span>
+        <span>&copy; <?= date('Y') ?> TME - Theo Mind Educacional</span>
         <span><?= e($slogan) ?></span>
     </footer>
 

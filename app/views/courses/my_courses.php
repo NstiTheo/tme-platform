@@ -3,7 +3,7 @@
 <section class="dashboard-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
-            <span class="eyebrow">Aluno</span>
+            <span class="eyebrow">Aprendizagem</span>
             <h1>Meus cursos</h1>
             <p>Acompanhe suas matrículas, progresso e última atividade.</p>
         </div>
@@ -36,7 +36,7 @@
                             <span><?= e((int) $enrollment['lessons_count']) ?> aulas</span>
                             <span>Início <?= e(date('d/m/Y', strtotime($enrollment['enrolled_at']))) ?></span>
                         </div>
-                        <a class="button" href="<?= e(url('/aluno/meus-cursos/' . $enrollment['id'])) ?>">Abrir curso</a>
+                        <a class="button" href="<?= e(url('/meus-cursos/' . $enrollment['id'])) ?>">Abrir curso</a>
                     </div>
                 </article>
             <?php endforeach; ?>
