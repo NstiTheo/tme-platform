@@ -1,5 +1,5 @@
 <?php
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 $isEdit = (bool) $activity;
 $value = static fn (string $key, mixed $default = ''): mixed => old($key, $activity[$key] ?? $default);
@@ -17,7 +17,7 @@ $dateValue = $value('due_at') ? date('Y-m-d\TH:i', strtotime($value('due_at'))) 
         <?= csrf_field() ?>
 
         <label class="span-2">
-            Titulo
+            Título
             <input type="text" name="title" value="<?= e($value('title')) ?>" required>
         </label>
 
@@ -70,7 +70,7 @@ $dateValue = $value('due_at') ? date('Y-m-d\TH:i', strtotime($value('due_at'))) 
         </label>
 
         <label>
-            Pontuacao maxima
+            Pontuação maxima
             <input type="number" name="max_score" min="0.01" step="0.01" value="<?= e($value('max_score', '10.00')) ?>">
         </label>
 
@@ -82,7 +82,7 @@ $dateValue = $value('due_at') ? date('Y-m-d\TH:i', strtotime($value('due_at'))) 
         <label>
             Status
             <select name="status">
-                <?php foreach (['rascunho' => 'Rascunho', 'publicada' => 'Publicada', 'encerrada' => 'Encerrada'] as $option => $label): ?>
+                <?php foreach (['rascunho' => 'Rascunho', 'publicada' => 'Públicada', 'encerrada' => 'Encerrada'] as $option => $label): ?>
                     <option value="<?= e($option) ?>" <?= $value('status', 'rascunho') === $option ? 'selected' : '' ?>><?= e($label) ?></option>
                 <?php endforeach; ?>
             </select>
@@ -94,7 +94,7 @@ $dateValue = $value('due_at') ? date('Y-m-d\TH:i', strtotime($value('due_at'))) 
         </label>
 
         <label class="span-2">
-            Descricao
+            Descrição
             <textarea name="description" rows="4"><?= e($value('description')) ?></textarea>
         </label>
 

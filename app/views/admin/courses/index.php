@@ -1,4 +1,4 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell">
     <div class="admin-toolbar">
@@ -15,7 +15,7 @@
             Status
             <select name="status">
                 <option value="">Todos</option>
-                <?php foreach (['rascunho' => 'Rascunho', 'publicado' => 'Publicado', 'arquivado' => 'Arquivado'] as $value => $label): ?>
+                <?php foreach (['rascunho' => 'Rascunho', 'publicado' => 'Públicado', 'arquivado' => 'Arquivado'] as $value => $label): ?>
                     <option value="<?= e($value) ?>" <?= ($filters['status'] ?? '') === $value ? 'selected' : '' ?>><?= e($label) ?></option>
                 <?php endforeach; ?>
             </select>

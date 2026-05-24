@@ -1,4 +1,4 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell chat-shell" data-chat-refresh="45000">
     <div class="admin-toolbar">

@@ -1,9 +1,9 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell exams-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
-            <span class="eyebrow">Avaliacoes</span>
+            <span class="eyebrow">Avaliações</span>
             <h1>Provas e simulados</h1>
             <p>Acesse provas publicadas, acompanhe tentativas e veja seu desempenho por disciplina.</p>
         </div>
@@ -49,7 +49,7 @@
 
     <div class="admin-detail-grid">
         <section class="detail-card">
-            <span class="eyebrow">Historico</span>
+            <span class="eyebrow">Histórico</span>
             <h2>Minhas tentativas</h2>
             <?php if (empty($attempts)): ?>
                 <p class="muted">Nenhuma tentativa iniciada.</p>

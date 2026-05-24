@@ -1,9 +1,9 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell exams-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
-            <span class="eyebrow">Avaliacao</span>
+            <span class="eyebrow">Avaliação</span>
             <h1>Provas e simulados</h1>
             <p>Crie provas com questoes objetivas, discursivas, tentativas e ranking opcional.</p>
         </div>
@@ -59,12 +59,12 @@
                 <thead>
                     <tr>
                         <th>Prova</th>
-                        <th>Vinculo</th>
-                        <th>Periodo</th>
-                        <th>Questoes</th>
+                        <th>Vínculo</th>
+                        <th>Período</th>
+                        <th>Questões</th>
                         <th>Tentativas</th>
                         <th>Status</th>
-                        <th>Acoes</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>

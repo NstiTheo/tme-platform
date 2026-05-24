@@ -1,5 +1,5 @@
 <?php
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 $lessonProgress = $progressMap[(int) $lesson['id']] ?? null;
 $isCompleted = $lessonProgress && $lessonProgress['status'] === 'concluida';

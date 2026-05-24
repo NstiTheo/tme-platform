@@ -1,6 +1,6 @@
 <?php
 
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 class Router
 {
@@ -31,7 +31,7 @@ class Router
         }
 
         http_response_code(404);
-        (new Controller())->view('errors/404', ['title' => 'Pagina nao encontrada']);
+        (new Controller())->view('errors/404', ['title' => 'Página não encontrada']);
     }
 
     private function normalizePath(string $path): string

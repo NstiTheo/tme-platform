@@ -1,5 +1,5 @@
 <?php
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 $adminActivityChart = [
     'type' => 'line',
@@ -13,7 +13,7 @@ $adminPopularChart = [
     'type' => 'bar',
     'labels' => array_column($dashboardAnalytics['popular_courses'] ?? [], 'label'),
     'datasets' => [[
-        'label' => 'Matriculas',
+        'label' => 'Matrículas',
         'data' => array_map('intval', array_column($dashboardAnalytics['popular_courses'] ?? [], 'value')),
     ]],
 ];
@@ -22,13 +22,13 @@ $adminPopularChart = [
 <section class="dashboard-shell">
     <div class="dashboard-heading">
         <span class="eyebrow">Administrador</span>
-        <h1>Administracao TME</h1>
+        <h1>Administração TME</h1>
         <p>Controle inicial de usuarios, permissoes, aprovacoes, cursos, atividades, biblioteca e matriculas.</p>
     </div>
 
     <div class="metric-grid">
         <article class="metric"><span>Contas pendentes</span><strong><?= e($counts['pending_users']) ?></strong></article>
-        <article class="metric"><span>Usuarios aprovados</span><strong><?= e($counts['approved_users']) ?></strong></article>
+        <article class="metric"><span>Usuários aprovados</span><strong><?= e($counts['approved_users']) ?></strong></article>
         <article class="metric"><span>Cursos</span><strong><?= e($counts['courses']) ?></strong></article>
         <article class="metric"><span>Certificados</span><strong><?= e($counts['certificates']) ?></strong></article>
     </div>
@@ -49,7 +49,7 @@ $adminPopularChart = [
     <div class="module-grid">
         <article class="module-card"><h2>Aprovacao de contas</h2><p>Cadastros de alunos e professores entram como pendentes.</p><a href="<?= e(url('/admin/contas-pendentes')) ?>">Abrir fila</a></article>
         <article class="module-card"><h2>Cursos</h2><p>Crie cursos, modulos, aulas e materiais com filtros administrativos.</p><a href="<?= e(url('/admin/cursos')) ?>">Gerenciar cursos</a></article>
-        <article class="module-card"><h2>Matriculas</h2><p>Veja alunos matriculados, status e progresso por curso.</p><a href="<?= e(url('/admin/matriculas')) ?>">Ver matriculas</a></article>
+        <article class="module-card"><h2>Matrículas</h2><p>Veja alunos matriculados, status e progresso por curso.</p><a href="<?= e(url('/admin/matriculas')) ?>">Ver matriculas</a></article>
         <article class="module-card"><h2>Atividades</h2><p>Crie tarefas e corrija entregas com nota e feedback.</p><a href="<?= e(url('/admin/atividades')) ?>">Gerenciar atividades</a></article>
         <article class="module-card"><h2>Biblioteca</h2><p>Modere materiais enviados e gerencie publicacoes.</p><a href="<?= e(url('/admin/biblioteca')) ?>">Gerenciar biblioteca</a></article>
         <article class="module-card"><h2>Certificados</h2><p>Liste certificados emitidos e revogue registros invalidos.</p><a href="<?= e(url('/admin/certificados')) ?>">Gerenciar certificados</a></article>

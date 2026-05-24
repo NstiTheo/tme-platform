@@ -1,5 +1,5 @@
 <?php
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 $decodeAlternatives = static function (?string $json): array {
     $decoded = $json ? json_decode($json, true) : [];
@@ -24,7 +24,7 @@ $decodeAlternatives = static function (?string $json): array {
         <article class="metric"><span>Status</span><strong><?= e($exam['status']) ?></strong></article>
         <article class="metric"><span>Tempo</span><strong><?= e((int) $exam['time_limit_minutes']) ?> min</strong></article>
         <article class="metric"><span>Tentativas</span><strong><?= e((int) $exam['attempts_allowed']) ?></strong></article>
-        <article class="metric"><span>Questoes</span><strong><?= e(count($questions)) ?></strong></article>
+        <article class="metric"><span>Questões</span><strong><?= e(count($questions)) ?></strong></article>
     </div>
 
     <div class="admin-detail-grid">
@@ -85,7 +85,7 @@ $decodeAlternatives = static function (?string $json): array {
 
         <section class="detail-card">
             <span class="eyebrow">Estrutura</span>
-            <h2>Questoes da prova</h2>
+            <h2>Questões da prova</h2>
             <?php if (empty($questions)): ?>
                 <p class="muted">Nenhuma questao adicionada ainda.</p>
             <?php else: ?>
@@ -123,7 +123,7 @@ $decodeAlternatives = static function (?string $json): array {
         <?php else: ?>
             <div class="table-wrap">
                 <table>
-                    <thead><tr><th>Aluno</th><th>Status</th><th>Nota objetiva</th><th>Nota total</th><th>Envio</th><th>Acoes</th></tr></thead>
+                    <thead><tr><th>Aluno</th><th>Status</th><th>Nota objetiva</th><th>Nota total</th><th>Envio</th><th>Ações</th></tr></thead>
                     <tbody>
                         <?php foreach ($attempts as $attempt): ?>
                             <tr>

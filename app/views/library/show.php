@@ -1,4 +1,4 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell">
     <div class="detail-grid">
@@ -15,7 +15,7 @@
             <div class="course-meta spacious">
                 <span><?= e($item['item_type']) ?></span>
                 <span><?= e($item['subject'] ?: 'Geral') ?></span>
-                <span><?= e($item['author'] ?: 'Autor nao informado') ?></span>
+                <span><?= e($item['author'] ?: 'Autor não informado') ?></span>
                 <span><?= e((int) $item['access_count']) ?> acessos</span>
             </div>
 

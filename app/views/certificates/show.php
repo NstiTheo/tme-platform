@@ -1,5 +1,5 @@
 <?php
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 $isValid = $certificate['validation_status'] === 'valido';
 $issuedAt = $certificate['issued_at'] ? date('d/m/Y', strtotime($certificate['issued_at'])) : date('d/m/Y');
@@ -11,7 +11,7 @@ $completedAt = $certificate['enrollment_completed_at'] ? date('d/m/Y', strtotime
         <div class="dashboard-heading">
             <span class="eyebrow">Certificado</span>
             <h1><?= e($certificate['code']) ?></h1>
-            <p>Visualizacao HTML pronta para impressao ou salvamento em PDF pelo navegador.</p>
+            <p>Visualização HTML pronta para impressao ou salvamento em PDF pelo navegador.</p>
         </div>
         <div class="actions-row">
             <button class="button large" type="button" onclick="window.print()">Imprimir/Salvar PDF</button>
@@ -50,7 +50,7 @@ $completedAt = $certificate['enrollment_completed_at'] ? date('d/m/Y', strtotime
                     <strong><?= e($issuedAt) ?></strong>
                 </div>
                 <div>
-                    <span>Codigo unico</span>
+                    <span>Código unico</span>
                     <strong><?= e($certificate['code']) ?></strong>
                 </div>
                 <div>

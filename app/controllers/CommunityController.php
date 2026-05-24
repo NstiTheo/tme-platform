@@ -1,6 +1,6 @@
 <?php
 
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 class CommunityController extends Controller
 {
@@ -61,7 +61,7 @@ class CommunityController extends Controller
         $post = $this->posts->find((int) $id, $user ? (int) $user['id'] : null, true);
 
         if (! $post) {
-            flash('error', 'Post nao encontrado ou indisponivel.');
+            flash('error', 'Post não encontrado ou indisponível.');
             $this->redirect('/comunidade');
         }
 
@@ -80,7 +80,7 @@ class CommunityController extends Controller
         $post = $this->posts->find((int) $id, (int) $user['id'], true);
 
         if (! $post) {
-            flash('error', 'Post nao encontrado.');
+            flash('error', 'Post não encontrado.');
             $this->redirect('/comunidade');
         }
 
@@ -157,7 +157,7 @@ class CommunityController extends Controller
         $post = $this->posts->find((int) $id, (int) $user['id'], true);
 
         if (! $post) {
-            flash('error', 'Post nao encontrado.');
+            flash('error', 'Post não encontrado.');
             $this->redirect('/comunidade');
         }
 

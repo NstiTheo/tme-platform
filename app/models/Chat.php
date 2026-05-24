@@ -1,6 +1,6 @@
 <?php
 
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 class Chat extends Model
 {
@@ -124,7 +124,7 @@ class Chat extends Model
         $recipient = $this->approvedUser($otherUserId);
 
         if (! $recipient) {
-            throw new RuntimeException('Usuario indisponivel para conversa.');
+            throw new RuntimeException('Usuário indisponível para conversa.');
         }
 
         $statement = $this->db->prepare(

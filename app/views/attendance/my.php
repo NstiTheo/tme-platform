@@ -1,5 +1,5 @@
 <?php
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 $totals = [
     'total' => 0,
@@ -33,8 +33,8 @@ $frequencyPercent = $totals['total'] > 0
     </div>
 
     <div class="metric-grid">
-        <article class="metric"><span>Frequencia</span><strong><?= e(number_format($frequencyPercent, 2, ',', '.')) ?>%</strong></article>
-        <article class="metric"><span>Presencas</span><strong><?= e($totals['present']) ?></strong></article>
+        <article class="metric"><span>Frequência</span><strong><?= e(number_format($frequencyPercent, 2, ',', '.')) ?>%</strong></article>
+        <article class="metric"><span>Presenças</span><strong><?= e($totals['present']) ?></strong></article>
         <article class="metric"><span>Atrasos</span><strong><?= e($totals['late']) ?></strong></article>
         <article class="metric"><span>Faltas</span><strong><?= e($totals['absence']) ?></strong></article>
     </div>
@@ -56,7 +56,7 @@ $frequencyPercent = $totals['total'] > 0
             <input type="date" name="date_from" value="<?= e($filters['date_from'] ?? '') ?>">
         </label>
         <label>
-            Ate
+            Até
             <input type="date" name="date_to" value="<?= e($filters['date_to'] ?? '') ?>">
         </label>
         <button class="button" type="submit">Filtrar</button>

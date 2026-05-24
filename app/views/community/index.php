@@ -1,5 +1,5 @@
 <?php
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 $typeLabels = [
     'duvida' => 'Duvida',
@@ -33,20 +33,20 @@ $typeLabels = [
                 </select>
             </label>
             <label>
-                Titulo
+                Título
                 <input type="text" name="title" value="<?= e(old('title')) ?>" required>
             </label>
             <label>
-                Conteudo
+                Conteúdo
                 <textarea name="content" rows="5" required><?= e(old('content')) ?></textarea>
             </label>
-            <button class="button" type="submit">Publicar para moderacao</button>
+            <button class="button" type="submit">Públicar para moderacao</button>
         </form>
 
         <div class="community-feed">
             <?php if (empty($posts)): ?>
                 <div class="empty-state">
-                    <h2>Feed em construcao</h2>
+                    <h2>Feed em construção</h2>
                     <p>Posts aprovados pela moderacao aparecerao aqui.</p>
                 </div>
             <?php else: ?>

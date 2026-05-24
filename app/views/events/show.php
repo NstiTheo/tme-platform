@@ -1,4 +1,4 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell">
     <div class="detail-grid">
@@ -22,7 +22,7 @@
             <?php if (! $user): ?>
                 <a class="button large" href="<?= e(url('/login')) ?>">Entrar para se inscrever</a>
             <?php elseif ($event['viewer_registration_status']): ?>
-                <span class="status-badge <?= e($event['viewer_registration_status']) ?>">Inscricao <?= e($event['viewer_registration_status']) ?></span>
+                <span class="status-badge <?= e($event['viewer_registration_status']) ?>">Inscrição <?= e($event['viewer_registration_status']) ?></span>
             <?php else: ?>
                 <form action="<?= e(url('/eventos/' . $event['id'] . '/inscrever')) ?>" method="post">
                     <?= csrf_field() ?>

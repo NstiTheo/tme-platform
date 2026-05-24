@@ -1,4 +1,4 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell">
     <div class="admin-toolbar">
@@ -29,7 +29,7 @@
 
     <div class="section-toolbar">
         <span class="eyebrow">Entregas</span>
-        <h2>Correcoes</h2>
+        <h2>Correções</h2>
     </div>
 
     <?php if (empty($submissions)): ?>

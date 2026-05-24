@@ -1,12 +1,12 @@
 <?php
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 $typeLabels = ['duvida' => 'Duvida', 'artigo' => 'Artigo', 'projeto' => 'Projeto', 'material' => 'Material', 'conquista' => 'Conquista', 'aviso' => 'Aviso'];
 ?>
 
 <section class="dashboard-shell">
     <div class="dashboard-heading">
-        <span class="eyebrow">Administracao</span>
+        <span class="eyebrow">Administração</span>
         <h1>Comunidade academica</h1>
         <p>Modere posts, aprove conteudos academicos, recuse itens inadequados, arquive ou destaque publicacoes.</p>
     </div>
@@ -42,7 +42,7 @@ $typeLabels = ['duvida' => 'Duvida', 'artigo' => 'Artigo', 'projeto' => 'Projeto
                     <th>Autor</th>
                     <th>Status</th>
                     <th>Interacoes</th>
-                    <th>Acoes</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>

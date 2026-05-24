@@ -1,9 +1,9 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
-            <span class="eyebrow">Administracao</span>
+            <span class="eyebrow">Administração</span>
             <h1>Planos</h1>
             <p>Gerencie planos gratuitos e premium para assinaturas, pagamentos futuros e acesso premium.</p>
         </div>
@@ -15,11 +15,11 @@
             <thead>
                 <tr>
                     <th>Plano</th>
-                    <th>Preco</th>
-                    <th>Duracao</th>
+                    <th>Preço</th>
+                    <th>Duração</th>
                     <th>Tipo</th>
                     <th>Status</th>
-                    <th>Acoes</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>

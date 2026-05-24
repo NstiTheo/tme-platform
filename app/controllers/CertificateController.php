@@ -1,6 +1,6 @@
 <?php
 
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 class CertificateController extends Controller
 {
@@ -114,7 +114,7 @@ class CertificateController extends Controller
         $certificate = $this->certificates->find((int) $id);
 
         if (! $certificate) {
-            flash('error', 'Certificado nao encontrado.');
+            flash('error', 'Certificado não encontrado.');
             $this->redirect('/admin/certificados');
         }
 
@@ -142,7 +142,7 @@ class CertificateController extends Controller
         $certificate = $this->certificates->findByCode($code);
 
         if (! $certificate) {
-            flash('error', 'Certificado nao encontrado.');
+            flash('error', 'Certificado não encontrado.');
             $this->redirect($fallback);
         }
 

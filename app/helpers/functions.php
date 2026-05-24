@@ -1,6 +1,6 @@
 <?php
 
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 function env(string $key, mixed $default = null): mixed
 {

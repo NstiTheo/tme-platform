@@ -1,5 +1,5 @@
 <?php
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 $decodeAlternatives = static function (?string $json): array {
     $decoded = $json ? json_decode($json, true) : [];

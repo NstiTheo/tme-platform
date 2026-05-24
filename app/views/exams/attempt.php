@@ -1,4 +1,4 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell exams-shell">
     <div class="admin-toolbar sticky-exam-header">
@@ -15,7 +15,7 @@
         <?php endif; ?>
     </div>
 
-    <form class="admin-form form exam-attempt-form" action="<?= e(url('/provas/tentativas/' . $attempt['id'] . '/enviar')) ?>" method="post" data-confirm="Enviar esta tentativa agora?">
+    <form class="admin-form form exam-attempt-form" action="<?= e(url('/provas/tentativas/' . $attempt['id'] . '/enviar')) ?>" method="post" data-confirm="Enviar está tentativa agora?">
         <?= csrf_field() ?>
         <div class="exam-question-list">
             <?php foreach ($questions as $question): ?>

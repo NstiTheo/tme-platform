@@ -1,5 +1,5 @@
 <?php
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 $role = $user['role_slug'];
 $isLearner = in_array($role, ['aluno', 'professor'], true);
@@ -11,9 +11,9 @@ $cards = [];
 
 if ($isLearner) {
     $metrics = [
-        ['label' => 'Matriculas', 'value' => $learningStats['enrolled']],
-        ['label' => 'Progresso medio', 'value' => $learningStats['average_progress'] . '%'],
-        ['label' => 'Cursos concluidos', 'value' => $learningStats['completed']],
+        ['label' => 'Matrículas', 'value' => $learningStats['enrolled']],
+        ['label' => 'Progresso médio', 'value' => $learningStats['average_progress'] . '%'],
+        ['label' => 'Cursos concluídos', 'value' => $learningStats['completed']],
         ['label' => 'XP', 'value' => (int) ($gamificationProfile['xp_total'] ?? 0)],
         ['label' => 'Nivel', 'value' => (int) ($gamificationProfile['level'] ?? 1)],
         ['label' => 'Eventos inscritos', 'value' => count($registeredEvents ?? [])],
@@ -24,7 +24,7 @@ if ($isLearner) {
 
     $cards = array_merge($cards, [
         ['title' => 'Meus cursos', 'text' => 'Continue suas aulas, materiais e progresso.', 'href' => '/meus-cursos', 'action' => 'Abrir'],
-        ['title' => 'Catalogo de cursos', 'text' => 'Explore cursos publicados e inicie novas trilhas.', 'href' => '/aluno/cursos', 'action' => 'Explorar'],
+        ['title' => 'Catálogo de cursos', 'text' => 'Explore cursos publicados e inicie novas trilhas.', 'href' => '/aluno/cursos', 'action' => 'Explorar'],
         ['title' => 'Progresso', 'text' => 'Veja matriculas ativas, conclusoes e ultima atividade.', 'href' => '/meus-cursos', 'action' => 'Acompanhar'],
         ['title' => 'Atividades', 'text' => 'Entregue tarefas dos cursos e acompanhe correcoes.', 'href' => '/atividades', 'action' => 'Ver tarefas'],
         ['title' => 'Boletim', 'text' => 'Veja notas simples por curso e entregas corrigidas.', 'href' => '/boletim', 'action' => 'Abrir'],
@@ -40,40 +40,40 @@ if ($isLearner) {
         ['title' => 'Ranking', 'text' => 'Compare XP, niveis, badges e conquistas da comunidade.', 'href' => '/ranking', 'action' => 'Ver ranking'],
         ['title' => 'Planos', 'text' => 'Escolha acesso gratuito ou premium e acompanhe sua assinatura.', 'href' => '/planos', 'action' => 'Ver planos'],
         ['title' => 'Financeiro', 'text' => 'Veja historico financeiro, moedas internas e carteira futura.', 'href' => '/financeiro', 'action' => 'Abrir'],
-        ['title' => 'Notificacoes', 'text' => 'Acompanhe alertas de cursos, chat, provas e conquistas.', 'href' => '/notificacoes', 'action' => 'Ver central'],
+        ['title' => 'Notificações', 'text' => 'Acompanhe alertas de cursos, chat, provas e conquistas.', 'href' => '/notificacoes', 'action' => 'Ver central'],
     ]);
 }
 
 if ($isTeacher) {
     $cards = array_merge($cards, [
-        ['title' => 'Minhas turmas', 'text' => 'Gestao de turmas e disciplinas do professor.', 'href' => '/dashboard', 'action' => 'Ver painel'],
-        ['title' => 'Meus cursos publicados', 'text' => 'Area preparada para conteudos assinados pelo docente.', 'href' => '/dashboard', 'action' => 'Acompanhar'],
+        ['title' => 'Minhas turmas', 'text' => 'Gestão de turmas e disciplinas do professor.', 'href' => '/dashboard', 'action' => 'Ver painel'],
+        ['title' => 'Meus cursos publicados', 'text' => 'Área preparada para conteudos assinados pelo docente.', 'href' => '/dashboard', 'action' => 'Acompanhar'],
         ['title' => 'Chamada', 'text' => 'Registre frequencia por turma, disciplina e data.', 'href' => '/frequencia', 'action' => 'Registrar'],
         ['title' => 'Provas e simulados', 'text' => 'Crie avaliacoes com objetivas, discursivas e tentativas.', 'href' => '/admin/provas', 'action' => 'Gerenciar'],
         ['title' => 'Criar atividade', 'text' => 'Publique tarefas, projetos e avaliacoes dos cursos.', 'href' => '/admin/atividades/nova', 'action' => 'Criar'],
         ['title' => 'Materiais', 'text' => 'Envie materiais para a biblioteca e acompanhe moderacao.', 'href' => '/admin/biblioteca', 'action' => 'Gerenciar'],
-        ['title' => 'Correcoes futuras', 'text' => 'Espaco para atividades, feedbacks e avaliacoes.', 'href' => '', 'action' => 'Planejado'],
+        ['title' => 'Correções futuras', 'text' => 'Espaco para atividades, feedbacks e avaliacoes.', 'href' => '', 'action' => 'Planejado'],
         ['title' => 'Analytics futuro', 'text' => 'Indicadores de engajamento e desempenho por turma.', 'href' => '', 'action' => 'Planejado'],
-        ['title' => 'Monetizacao creator', 'text' => 'Carteira preparada para repasse 80/20 de conteudos futuros.', 'href' => '/financeiro', 'action' => 'Abrir'],
+        ['title' => 'Monetização creator', 'text' => 'Carteira preparada para repasse 80/20 de conteudos futuros.', 'href' => '/financeiro', 'action' => 'Abrir'],
     ]);
 }
 
 if ($isAdmin) {
     $metrics = [
         ['label' => 'Contas pendentes', 'value' => $counts['pending_users']],
-        ['label' => 'Usuarios aprovados', 'value' => $counts['approved_users']],
+        ['label' => 'Usuários aprovados', 'value' => $counts['approved_users']],
         ['label' => 'Cursos', 'value' => $counts['courses']],
-        ['label' => 'Matriculas', 'value' => $counts['enrollments']],
+        ['label' => 'Matrículas', 'value' => $counts['enrollments']],
         ['label' => 'Receita paga', 'value' => 'R$ ' . number_format((float) ($financeSummary['paid_total'] ?? 0), 2, ',', '.')],
     ];
 
     $cards = array_merge($cards, [
         ['title' => 'Dashboard administrativo', 'text' => 'Visao operacional por perfil e indicadores iniciais.', 'href' => '/dashboard', 'action' => 'Abrir'],
-        ['title' => 'Aprovacoes', 'text' => 'Analise cadastros pendentes de alunos e professores.', 'href' => '/admin/contas-pendentes', 'action' => 'Revisar'],
+        ['title' => 'Aprovações', 'text' => 'Analise cadastros pendentes de alunos e professores.', 'href' => '/admin/contas-pendentes', 'action' => 'Revisar'],
         ['title' => 'Cursos admin', 'text' => 'Gerencie cursos, modulos, aulas e materiais.', 'href' => '/admin/cursos', 'action' => 'Gerenciar'],
-        ['title' => 'Matriculas', 'text' => 'Visualize alunos por curso, status e progresso.', 'href' => '/admin/matriculas', 'action' => 'Ver lista'],
+        ['title' => 'Matrículas', 'text' => 'Visualize alunos por curso, status e progresso.', 'href' => '/admin/matriculas', 'action' => 'Ver lista'],
         ['title' => 'Atividades', 'text' => 'Crie tarefas e corrija entregas com nota e feedback.', 'href' => '/admin/atividades', 'action' => 'Gerenciar'],
-        ['title' => 'Frequencia', 'text' => 'Registre chamadas e consulte relatorios por turma.', 'href' => '/frequencia', 'action' => 'Abrir'],
+        ['title' => 'Frequência', 'text' => 'Registre chamadas e consulte relatorios por turma.', 'href' => '/frequencia', 'action' => 'Abrir'],
         ['title' => 'Provas admin', 'text' => 'Crie provas, acompanhe tentativas e corrija discursivas.', 'href' => '/admin/provas', 'action' => 'Gerenciar'],
         ['title' => 'Biblioteca admin', 'text' => 'Aprove, recuse e publique materiais educacionais.', 'href' => '/admin/biblioteca', 'action' => 'Moderar'],
         ['title' => 'Certificados', 'text' => 'Liste certificados emitidos e revogue registros invalidos.', 'href' => '/admin/certificados', 'action' => 'Gerenciar'],
@@ -84,11 +84,11 @@ if ($isAdmin) {
         ['title' => 'Planos admin', 'text' => 'Gerencie planos gratuitos, premium e beneficios.', 'href' => '/admin/planos', 'action' => 'Gerenciar'],
         ['title' => 'Analytics', 'text' => 'Acompanhe crescimento, atividade e cursos populares.', 'href' => '/analytics', 'action' => 'Abrir'],
         ['title' => 'Financeiro', 'text' => 'Veja historico financeiro e estrutura de pagamentos.', 'href' => '/financeiro', 'action' => 'Abrir'],
-        ['title' => 'Notificacoes', 'text' => 'Central de avisos persistentes do sistema.', 'href' => '/notificacoes', 'action' => 'Abrir'],
+        ['title' => 'Notificações', 'text' => 'Central de avisos persistentes do sistema.', 'href' => '/notificacoes', 'action' => 'Abrir'],
         ['title' => 'Ranking', 'text' => 'Acompanhe XP, niveis e conquistas da comunidade.', 'href' => '/ranking', 'action' => 'Ver ranking'],
-        ['title' => 'Usuarios', 'text' => 'Base preparada para gestao completa de usuarios.', 'href' => '/admin/contas-pendentes', 'action' => 'Acessar'],
-        ['title' => 'Logs', 'text' => 'Acoes importantes ja sao registradas para auditoria.', 'href' => '', 'action' => 'Planejado'],
-        ['title' => 'Relatorios futuros', 'text' => 'Indicadores academicos, financeiros e operacionais.', 'href' => '', 'action' => 'Planejado'],
+        ['title' => 'Usuários', 'text' => 'Base preparada para gestao completa de usuarios.', 'href' => '/admin/contas-pendentes', 'action' => 'Acessar'],
+        ['title' => 'Logs', 'text' => 'Ações importantes já são registradas para auditoria.', 'href' => '', 'action' => 'Planejado'],
+        ['title' => 'Relatórios futuros', 'text' => 'Indicadores academicos, financeiros e operacionais.', 'href' => '', 'action' => 'Planejado'],
     ]);
 }
 
@@ -96,7 +96,7 @@ if (! $cards) {
     $metrics = [
         ['label' => 'Cursos', 'value' => $counts['courses']],
         ['label' => 'Eventos', 'value' => $counts['events']],
-        ['label' => 'Matriculas', 'value' => $counts['enrollments']],
+        ['label' => 'Matrículas', 'value' => $counts['enrollments']],
         ['label' => 'Perfil', 'value' => role_label($role)],
     ];
 
@@ -113,15 +113,15 @@ if (! $cards) {
     <div class="portal-hero">
         <div>
             <span class="eyebrow">Portal TME</span>
-            <h1>Ola, <?= e(explode(' ', trim($user['full_name']))[0] ?: $user['full_name']) ?>.</h1>
-            <p>Esta e sua central inicial autenticada para acessar aprendizagem, gestao, comunidade e atalhos do seu perfil.</p>
+            <h1>Olá, <?= e(explode(' ', trim($user['full_name']))[0] ?: $user['full_name']) ?>.</h1>
+            <p>Está e sua central inicial autenticada para acessar aprendizagem, gestao, comunidade e atalhos do seu perfil.</p>
         </div>
         <div class="portal-actions">
             <a class="button large" href="<?= e(url('/dashboard')) ?>">Dashboard</a>
             <?php if ($isLearner): ?>
                 <a class="button ghost large" href="<?= e(url('/meus-cursos')) ?>">Meus cursos</a>
             <?php elseif ($isAdmin): ?>
-                <a class="button ghost large" href="<?= e(url('/admin/contas-pendentes')) ?>">Administracao</a>
+                <a class="button ghost large" href="<?= e(url('/admin/contas-pendentes')) ?>">Administração</a>
             <?php endif; ?>
         </div>
     </div>
@@ -179,7 +179,7 @@ if (! $cards) {
 
     <div class="portal-section-title">
         <span class="eyebrow">Atalhos</span>
-        <h2>Areas principais</h2>
+        <h2>Áreas principais</h2>
     </div>
 
     <div class="module-grid portal-grid">

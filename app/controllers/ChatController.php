@@ -1,6 +1,6 @@
 <?php
 
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 class ChatController extends Controller
 {
@@ -20,7 +20,7 @@ class ChatController extends Controller
         $user = current_user();
 
         if ($user['status'] !== 'aprovado') {
-            flash('error', 'Chat disponivel apenas para usuarios aprovados.');
+            flash('error', 'Chat disponível apenas para usuarios aprovados.');
             $this->redirect('/portal');
         }
 
@@ -32,7 +32,7 @@ class ChatController extends Controller
 
         if ($channelId) {
             if (! $this->chat->canAccessChannel($channelId, $user)) {
-                flash('error', 'Conversa indisponivel.');
+                flash('error', 'Conversa indisponível.');
                 $this->redirect('/chat');
             }
 
@@ -77,7 +77,7 @@ class ChatController extends Controller
         $channel = $this->chat->findChannel((int) $channelId);
 
         if (! $channel || ! $this->chat->canAccessChannel((int) $channelId, $user)) {
-            flash('error', 'Conversa indisponivel.');
+            flash('error', 'Conversa indisponível.');
             $this->redirect('/chat');
         }
 

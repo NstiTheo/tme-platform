@@ -1,11 +1,11 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
             <span class="eyebrow">Aprendizagem</span>
             <h1>Minhas atividades</h1>
-            <p>Acompanhe tarefas dos cursos em que voce esta matriculado, prazos, entregas e correcoes.</p>
+            <p>Acompanhe tarefas dos cursos em que você está matriculado, prazos, entregas e correcoes.</p>
         </div>
         <div class="actions-row">
             <a class="button ghost large" href="<?= e(url('/boletim')) ?>">Boletim</a>
@@ -17,7 +17,7 @@
 
     <?php if (empty($activities)): ?>
         <div class="empty-state">
-            <h2>Nenhuma atividade disponivel</h2>
+            <h2>Nenhuma atividade disponível</h2>
             <p>As atividades aparecerao aqui quando seus cursos publicarem tarefas.</p>
         </div>
     <?php else: ?>

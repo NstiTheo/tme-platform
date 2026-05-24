@@ -1,6 +1,6 @@
 <?php
 
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 class AuthMiddleware
 {
@@ -10,7 +10,7 @@ class AuthMiddleware
             return;
         }
 
-        flash('info', 'Faça login para acessar esta área.');
+        flash('info', 'Faça login para acessar está área.');
         redirect_to('/login');
     }
 }

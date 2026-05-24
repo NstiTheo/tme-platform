@@ -1,6 +1,6 @@
 <?php
 
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 class ExamController extends Controller
 {
@@ -107,7 +107,7 @@ class ExamController extends Controller
             'question_id' => $questionId,
         ]);
 
-        flash('success', 'Questao adicionada.');
+        flash('success', 'Questão adicionada.');
         $this->redirect('/admin/provas/' . $exam['id']);
     }
 
@@ -116,7 +116,7 @@ class ExamController extends Controller
         $attempt = $this->findManageableAttempt((int) $attemptId);
 
         $this->view('admin/exams/attempt', [
-            'title' => 'Correcao de prova',
+            'title' => 'Correção de prova',
             'attempt' => $attempt,
             'answers' => $this->exams->answersForAttempt((int) $attempt['id']),
         ]);
@@ -161,7 +161,7 @@ class ExamController extends Controller
         $exam = $this->exams->findAvailableForStudent((int) $id, (int) $user['id']);
 
         if (! $exam) {
-            flash('error', 'Prova nao encontrada ou indisponivel.');
+            flash('error', 'Prova não encontrada ou indisponível.');
             $this->redirect('/provas');
         }
 
@@ -198,7 +198,7 @@ class ExamController extends Controller
         $attempt = $this->exams->findAttemptForStudent((int) $attemptId, (int) $user['id']);
 
         if (! $attempt) {
-            flash('error', 'Tentativa nao encontrada.');
+            flash('error', 'Tentativa não encontrada.');
             $this->redirect('/provas');
         }
 
@@ -229,7 +229,7 @@ class ExamController extends Controller
             ]);
 
             flash('success', $result['has_discursive']
-                ? 'Prova enviada. Questoes discursivas aguardam correcao.'
+                ? 'Prova enviada. Questões discursivas aguardam correcao.'
                 : 'Prova enviada e corrigida automaticamente.');
         } catch (Throwable $exception) {
             flash('error', $exception->getMessage());
@@ -245,7 +245,7 @@ class ExamController extends Controller
         $attempt = $this->exams->findAttemptForStudent((int) $attemptId, (int) $user['id']);
 
         if (! $attempt) {
-            flash('error', 'Resultado nao encontrado.');
+            flash('error', 'Resultado não encontrado.');
             $this->redirect('/provas');
         }
 
@@ -329,7 +329,7 @@ class ExamController extends Controller
 
         if ($data['question_type'] === 'objetiva') {
             if (count($data['alternatives']) < 2) {
-                $errors[] = 'Questoes objetivas precisam de pelo menos duas alternativas.';
+                $errors[] = 'Questões objetivas precisam de pelo menos duas alternativas.';
             }
 
             if ($data['correct_answer'] === '') {
@@ -349,7 +349,7 @@ class ExamController extends Controller
         $exam = $this->exams->find($id);
 
         if (! $exam || ! $this->exams->canManage($id, current_user())) {
-            flash('error', 'Prova nao encontrada ou indisponivel.');
+            flash('error', 'Prova não encontrada ou indisponível.');
             $this->redirect('/admin/provas');
         }
 
@@ -361,7 +361,7 @@ class ExamController extends Controller
         $attempt = $this->exams->findAttempt($attemptId);
 
         if (! $attempt || ! $this->exams->canManage((int) $attempt['exam_id'], current_user())) {
-            flash('error', 'Tentativa nao encontrada ou indisponivel.');
+            flash('error', 'Tentativa não encontrada ou indisponível.');
             $this->redirect('/admin/provas');
         }
 

@@ -1,8 +1,8 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell">
     <div class="dashboard-heading">
-        <span class="eyebrow">Administracao</span>
+        <span class="eyebrow">Administração</span>
         <h1>Certificados emitidos</h1>
         <p>Acompanhe certificados gerados automaticamente, valide codigos e revogue registros quando necessario.</p>
     </div>
@@ -10,7 +10,7 @@
     <form class="filter-form certificate-filter-form" action="<?= e(url('/admin/certificados')) ?>" method="get">
         <label>
             Busca
-            <input type="search" name="q" value="<?= e($filters['q'] ?? '') ?>" placeholder="Codigo, titulo ou aluno">
+            <input type="search" name="q" value="<?= e($filters['q'] ?? '') ?>" placeholder="Código, titulo ou aluno">
         </label>
         <label>
             Curso
@@ -54,9 +54,9 @@
                     <tr>
                         <th>Aluno</th>
                         <th>Curso</th>
-                        <th>Codigo</th>
+                        <th>Código</th>
                         <th>Status</th>
-                        <th>Acoes</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>

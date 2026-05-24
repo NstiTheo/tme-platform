@@ -1,11 +1,11 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
             <span class="eyebrow">Evento</span>
             <h1><?= e($event['title']) ?></h1>
-            <p><?= e($event['description'] ?: 'Gestao de inscritos e certificados.') ?></p>
+            <p><?= e($event['description'] ?: 'Gestão de inscritos e certificados.') ?></p>
         </div>
         <a class="button ghost large" href="<?= e(url('/admin/eventos')) ?>">Voltar</a>
     </div>
@@ -14,7 +14,7 @@
         <article class="metric"><span>Status</span><strong><?= e($event['status']) ?></strong></article>
         <article class="metric"><span>Inscritos</span><strong><?= e((int) $event['registrations_count']) ?></strong></article>
         <article class="metric"><span>Carga</span><strong><?= e((int) $event['workload_hours']) ?>h</strong></article>
-        <article class="metric"><span>Certificado</span><strong><?= (bool) $event['certificate_enabled'] ? 'Sim' : 'Nao' ?></strong></article>
+        <article class="metric"><span>Certificado</span><strong><?= (bool) $event['certificate_enabled'] ? 'Sim' : 'Não' ?></strong></article>
     </div>
 
     <form class="filter-form ranking-filter-form" action="<?= e(url('/admin/eventos/' . $event['id'] . '/status')) ?>" method="post">
@@ -31,18 +31,18 @@
     </form>
 
     <div class="section-toolbar">
-        <span class="eyebrow">Inscricoes</span>
+        <span class="eyebrow">Inscrições</span>
         <h2>Participantes</h2>
     </div>
     <div class="table-wrap">
         <table>
-            <thead><tr><th>Usuario</th><th>Status</th><th>Certificado</th><th>Acoes</th></tr></thead>
+            <thead><tr><th>Usuário</th><th>Status</th><th>Certificado</th><th>Ações</th></tr></thead>
             <tbody>
                 <?php foreach ($registrations as $registration): ?>
                     <tr>
                         <td><strong><?= e($registration['full_name']) ?></strong><span><?= e($registration['email']) ?></span></td>
                         <td><span class="status-badge <?= e($registration['status']) ?>"><?= e($registration['status']) ?></span></td>
-                        <td><span><?= e($registration['certificate_code'] ?: 'nao emitido') ?></span></td>
+                        <td><span><?= e($registration['certificate_code'] ?: 'não emitido') ?></span></td>
                         <td class="actions-cell">
                             <form action="<?= e(url('/admin/eventos/inscricoes/' . $registration['id'] . '/presenca')) ?>" method="post">
                                 <?= csrf_field() ?>

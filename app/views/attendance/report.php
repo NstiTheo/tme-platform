@@ -1,10 +1,10 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell attendance-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
-            <span class="eyebrow">Relatorios</span>
-            <h1>Relatorio de frequencia</h1>
+            <span class="eyebrow">Relatórios</span>
+            <h1>Relatório de frequencia</h1>
             <p>Analise percentuais por turma, aluno, disciplina e periodo.</p>
         </div>
         <a class="button ghost large" href="<?= e(url('/frequencia')) ?>">Registrar chamada</a>
@@ -49,7 +49,7 @@
             <input type="date" name="date_from" value="<?= e($filters['date_from'] ?? '') ?>">
         </label>
         <label>
-            Ate
+            Até
             <input type="date" name="date_to" value="<?= e($filters['date_to'] ?? '') ?>">
         </label>
         <button class="button" type="submit">Filtrar</button>
@@ -69,7 +69,7 @@
                         <th>Aluno</th>
                         <th>Turma</th>
                         <th>Disciplina</th>
-                        <th>Presencas</th>
+                        <th>Presenças</th>
                         <th>Atrasos</th>
                         <th>Justificadas</th>
                         <th>Faltas</th>

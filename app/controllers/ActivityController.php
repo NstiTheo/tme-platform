@@ -1,6 +1,6 @@
 <?php
 
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 class ActivityController extends Controller
 {
@@ -38,7 +38,7 @@ class ActivityController extends Controller
         $activity = $this->activities->findForStudent((int) $id, (int) $user['id']);
 
         if (! $activity) {
-            flash('error', 'Atividade nao encontrada para seus cursos.');
+            flash('error', 'Atividade não encontrada para seus cursos.');
             $this->redirect('/atividades');
         }
 
@@ -57,14 +57,14 @@ class ActivityController extends Controller
         $activity = $this->activities->findForStudent((int) $id, (int) $user['id']);
 
         if (! $activity) {
-            flash('error', 'Atividade nao encontrada para seus cursos.');
+            flash('error', 'Atividade não encontrada para seus cursos.');
             $this->redirect('/atividades');
         }
 
         $isLate = $this->isLate($activity);
 
         if ($isLate && ! (bool) $activity['allow_late']) {
-            flash('error', 'O prazo desta atividade encerrou e envios atrasados nao estao habilitados.');
+            flash('error', 'O prazo desta atividade encerrou e envios atrasados não estao habilitados.');
             $this->redirect('/atividades/' . $activity['id']);
         }
 
@@ -221,7 +221,7 @@ class ActivityController extends Controller
         $submission = $this->submissions->find((int) $submissionId);
 
         if (! $submission) {
-            flash('error', 'Entrega nao encontrada.');
+            flash('error', 'Entrega não encontrada.');
             $this->redirect('/admin/atividades');
         }
 
@@ -233,7 +233,7 @@ class ActivityController extends Controller
         $status = trim($_POST['status'] ?? 'corrigida');
 
         if ($score > (float) $activity['max_score']) {
-            flash('error', 'A nota nao pode ultrapassar a pontuacao maxima.');
+            flash('error', 'A nota não pode ultrapassar a pontuacao maxima.');
             $this->redirect('/admin/atividades/' . $activity['id']);
         }
 
@@ -330,7 +330,7 @@ class ActivityController extends Controller
         $user = current_user();
 
         if (! $activity) {
-            flash('error', 'Atividade nao encontrada.');
+            flash('error', 'Atividade não encontrada.');
             $this->redirect('/admin/atividades');
         }
 
@@ -376,7 +376,7 @@ class ActivityController extends Controller
         }
 
         if (($_FILES[$field]['error'] ?? UPLOAD_ERR_OK) !== UPLOAD_ERR_OK) {
-            flash('error', 'Nao foi possivel receber o arquivo enviado.');
+            flash('error', 'Não foi possível receber o arquivo enviado.');
             return null;
         }
 
@@ -389,7 +389,7 @@ class ActivityController extends Controller
         $mime = mime_content_type($tmp) ?: 'application/octet-stream';
 
         if (! in_array($mime, $allowedMimes, true)) {
-            flash('error', 'Tipo de arquivo nao permitido.');
+            flash('error', 'Tipo de arquivo não permitido.');
             return null;
         }
 
@@ -403,7 +403,7 @@ class ActivityController extends Controller
         }
 
         if (! move_uploaded_file($tmp, BASE_PATH . '/public/' . $relative)) {
-            flash('error', 'Nao foi possivel salvar o arquivo enviado.');
+            flash('error', 'Não foi possível salvar o arquivo enviado.');
             return null;
         }
 

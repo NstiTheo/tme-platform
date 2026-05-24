@@ -1,5 +1,5 @@
 <?php
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 $isEdit = (bool) $course;
 $value = static fn (string $key, mixed $default = ''): mixed => old($key, $course[$key] ?? $default);
@@ -56,7 +56,7 @@ $value = static fn (string $key, mixed $default = ''): mixed => old($key, $cours
         <label>
             Status
             <select name="status">
-                <?php foreach (['rascunho' => 'Rascunho', 'publicado' => 'Publicado', 'arquivado' => 'Arquivado'] as $option => $label): ?>
+                <?php foreach (['rascunho' => 'Rascunho', 'publicado' => 'Públicado', 'arquivado' => 'Arquivado'] as $option => $label): ?>
                     <option value="<?= e($option) ?>" <?= $value('status', 'rascunho') === $option ? 'selected' : '' ?>><?= e($label) ?></option>
                 <?php endforeach; ?>
             </select>

@@ -1,5 +1,5 @@
 <?php
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 $firstName = explode(' ', trim($user['full_name']))[0] ?: $user['full_name'];
 $initials = strtoupper(substr($user['full_name'], 0, 1));
@@ -18,9 +18,9 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
     <div class="profile-layout">
         <aside class="profile-sidebar">
             <a href="#perfil">Perfil</a>
-            <a href="#aparencia">Aparencia</a>
-            <a href="#estatisticas">Estatisticas</a>
-            <a href="#seguranca">Seguranca</a>
+            <a href="#aparencia">Aparência</a>
+            <a href="#estatisticas">Estatísticas</a>
+            <a href="#seguranca">Segurança</a>
         </aside>
 
         <div class="profile-content">
@@ -47,12 +47,12 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
                         <strong><?= e(role_label($user['role_slug'])) ?></strong>
                     </div>
                     <div>
-                        <span>Instituicao</span>
+                        <span>Instituição</span>
                         <strong><?= e($user['institution_name'] ?: 'Independente') ?></strong>
                     </div>
                     <div>
-                        <span>Area de interesse</span>
-                        <strong><?= e($user['interest_area'] ?: 'Nao informada') ?></strong>
+                        <span>Área de interesse</span>
+                        <strong><?= e($user['interest_area'] ?: 'Não informada') ?></strong>
                     </div>
                     <div>
                         <span>Foto de perfil</span>
@@ -98,7 +98,7 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
                 <div class="section-toolbar compact">
                     <div>
                         <span class="eyebrow">Personalizacao</span>
-                        <h2>Aparencia</h2>
+                        <h2>Aparência</h2>
                     </div>
                 </div>
 
@@ -128,7 +128,7 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
                 <div class="section-toolbar compact">
                     <div>
                         <span class="eyebrow">Gamificacao</span>
-                        <h2>Estatisticas</h2>
+                        <h2>Estatísticas</h2>
                     </div>
                     <a class="button ghost small" href="<?= e(url('/ranking')) ?>">Ver ranking</a>
                 </div>
@@ -141,7 +141,7 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
                     <article class="metric"><span>Atividades</span><strong><?= e($stats['submitted_activities']) ?></strong></article>
                     <article class="metric"><span>Certificados</span><strong><?= e($stats['certificates']) ?></strong></article>
                     <article class="metric"><span>Moedas</span><strong><?= e((int) ($profile['internal_coins'] ?? 0)) ?></strong></article>
-                    <article class="metric"><span>Notificacoes</span><strong><?= e((int) $unreadNotifications) ?></strong></article>
+                    <article class="metric"><span>Notificações</span><strong><?= e((int) $unreadNotifications) ?></strong></article>
                 </div>
 
                 <div class="badge-strip">
@@ -158,7 +158,7 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
             <section id="seguranca" class="profile-panel">
                 <div class="section-toolbar compact">
                     <div>
-                        <span class="eyebrow">Seguranca</span>
+                        <span class="eyebrow">Segurança</span>
                         <h2>Acesso</h2>
                     </div>
                 </div>
@@ -183,9 +183,9 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
                 <div class="security-actions">
                     <div>
                         <strong>Sessoes futuras</strong>
-                        <p class="muted">Area reservada para historico de dispositivos e encerramento remoto.</p>
+                        <p class="muted">Área reservada para historico de dispositivos e encerramento remoto.</p>
                     </div>
-                    <a class="button ghost" href="<?= e(url('/notificacoes')) ?>">Notificacoes</a>
+                    <a class="button ghost" href="<?= e(url('/notificacoes')) ?>">Notificações</a>
                     <a class="button ghost" href="<?= e(url('/financeiro')) ?>">Financeiro</a>
                     <form action="<?= e(url('/logout')) ?>" method="post">
                         <?= csrf_field() ?>

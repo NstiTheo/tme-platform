@@ -28,17 +28,17 @@ A TME é uma base MVC própria em PHP para uma plataforma educacional moderna qu
 
 ## Experiencia autenticada e Portal TME
 
-A vitrine publica e a area logada agora sao experiencias separadas:
+A vitrine publica e a area logada agora são experiencias separadas:
 
 - Visitantes continuam vendo Home, Sobre, Cursos, Eventos, Biblioteca, Comunidade, Login e Cadastro.
-- Usuarios autenticados sao redirecionados para `/portal` depois do login aprovado.
+- Usuários autenticados são redirecionados para `/portal` depois do login aprovado.
 - O seletor rapido de tema/cor saiu da navbar; tema, cor principal e preview ficam em `/perfil`.
 - O Portal mostra XP, nivel, moedas, streak e badges recentes.
-- A rota `/inicio` tambem abre o Portal TME.
+- A rota `/inicio` também abre o Portal TME.
 - A Home publica (`/`) redireciona usuarios logados para o portal interno.
-- O menu de usuarios logados oculta Login/Cadastro e prioriza Inicio, Dashboard, Cursos, Meus cursos, Biblioteca, Eventos, Comunidade, Configuracoes/Tema e Sair.
+- O menu de usuarios logados oculta Login/Cadastro e prioriza Início, Dashboard, Cursos, Meus cursos, Biblioteca, Eventos, Comunidade, Configurações/Tema e Sair.
 - Alunos e professores acessam o catalogo em `/aluno/cursos` e a area neutra `/meus-cursos`.
-- Professores tambem podem estudar como alunos, mantendo acesso a matriculas e progresso.
+- Professores também podem estudar como alunos, mantendo acesso a matriculas e progresso.
 - Administradores e supervisores veem atalhos de administracao, aprovacoes, cursos admin e matriculas.
 - `/portal` e `/configuracoes` exigem autenticacao.
 
@@ -102,10 +102,10 @@ Recursos disponiveis:
 - Campos: titulo, descricao, tipo, pontuacao maxima, prazo, status, instrucoes e anexo opcional.
 - Tipos: `texto`, `arquivo`, `quiz`, `tarefa_pratica` e `projeto`.
 - Entrega textual e/ou arquivo pelo aluno matriculado.
-- Bloqueio de envio apos prazo quando a atividade nao permite atraso.
+- Bloqueio de envio após prazo quando a atividade não permite atraso.
 - Entregas atrasadas marcadas automaticamente quando permitido.
 - Status de entrega: `pendente`, `enviada`, `atrasada`, `corrigida` e `devolvida`.
-- Correcao por professor/admin/supervisor com nota, feedback e status.
+- Correção por professor/admin/supervisor com nota, feedback e status.
 - Boletim simples por curso.
 - Logs para criacao, envio, encerramento e correcao.
 - Uploads em `public/uploads/activity-attachments` e `public/uploads/activity-submissions`.
@@ -124,12 +124,12 @@ Recursos disponiveis:
 - Visibilidade: publica, somente logados, curso especifico e privada/admin.
 - Busca por titulo, categoria, disciplina e tipo.
 - Favoritos por usuario em `/biblioteca/favoritos`.
-- Historico simples de acesso/leitura em `library_access_logs`.
+- Histórico simples de acesso/leitura em `library_access_logs`.
 - Moderacao por administrador/supervisor com aprovacao, recusa e arquivamento.
 - Logs para criacao, aprovacao, recusa, visualizacao e favorito.
 - Uploads em `public/uploads/library` e `public/uploads/library-covers`.
 
-Para bancos existentes, aplique tambem:
+Para bancos existentes, aplique também:
 
 ```bash
 mysql -u root -p < database/migrations/2026_05_23_activities_library_module.sql
@@ -141,12 +141,12 @@ Alunos e professores acessam `/certificados` para consultar certificados emitido
 
 Recursos disponiveis:
 
-- Emissao automatica quando uma matricula chega a 100% de progresso.
-- Codigo unico no formato `TME-CUR-ANO-CODIGO`.
-- Visualizacao HTML do certificado em `/certificados/ver/{codigo}`.
+- Emissão automatica quando uma matricula chega a 100% de progresso.
+- Código unico no formato `TME-CUR-ANO-CODIGO`.
+- Visualização HTML do certificado em `/certificados/ver/{codigo}`.
 - Botao `Imprimir/Salvar PDF` usando o print do navegador.
-- Validacao publica por codigo, marcando certificados revogados como invalidos.
-- Area administrativa em `/admin/certificados` para listar, filtrar e revogar certificados com motivo.
+- Validação publica por codigo, marcando certificados revogados como invalidos.
+- Área administrativa em `/admin/certificados` para listar, filtrar e revogar certificados com motivo.
 - Estrutura preparada para QR Code futuro.
 - Logs para emissao, visualizacao, validacao e revogacao.
 
@@ -166,18 +166,18 @@ Recursos disponiveis:
 
 ## Perfil e configuracoes
 
-Preferencias e dados do usuario foram centralizados em `/perfil` e `/configuracoes`.
+Preferências e dados do usuario foram centralizados em `/perfil` e `/configuracoes`.
 
 Recursos disponiveis:
 
 - Informacoes do usuario, instituicao, area de interesse e biografia curta.
 - Placeholder para foto de perfil futura.
 - Tema claro/escuro e cor principal com preview antes de salvar.
-- Estatisticas: XP, nivel, cursos matriculados, cursos concluidos, atividades entregues, certificados e badges recentes.
+- Estatísticas: XP, nivel, cursos matriculados, cursos concluidos, atividades entregues, certificados e badges recentes.
 - Alteracao de senha com senha atual, confirmacao e `password_hash`.
 - Logout e area reservada para sessoes futuras.
 
-Para bancos existentes, aplique tambem:
+Para bancos existentes, aplique também:
 
 ```bash
 mysql -u root -p < database/migrations/2026_05_23_certificates_gamification_profile.sql
@@ -205,7 +205,7 @@ Recursos disponiveis:
 
 - Cadastro administrativo de eventos com titulo, descricao, tipo, data/hora, local/link, vagas, carga horaria, status e imagem opcional.
 - Tipos: palestra, workshop, aula ao vivo, simulado, olimpiada e hackathon.
-- Usuario logado pode se inscrever, com bloqueio de inscricao duplicada.
+- Usuário logado pode se inscrever, com bloqueio de inscricao duplicada.
 - Admin visualiza inscritos, confirma presenca e altera status do evento.
 - Evento `encerrado`, com presenca confirmada e certificado habilitado, pode gerar certificado de participacao.
 - Portal mostra eventos inscritos do usuario.
@@ -219,19 +219,19 @@ Recursos disponiveis:
 
 - CRUD inicial de turmas com nome, descricao, instituicao, periodo e status.
 - Cadastro de disciplinas com nome, descricao, area, carga horaria e status.
-- Vinculo de alunos a turmas.
-- Vinculo de professores a turmas e disciplinas.
+- Vínculo de alunos a turmas.
+- Vínculo de professores a turmas e disciplinas.
 - Detalhe da turma com disciplinas, alunos, professores e area preparada para materiais futuros.
 - Estrutura preparada para calendario, frequencia e ranking por turma.
 - Logs de criacao e vinculos.
 
-Para bancos existentes, aplique tambem:
+Para bancos existentes, aplique também:
 
 ```bash
 mysql -u root -p < database/migrations/2026_05_24_community_events_classes.sql
 ```
 
-## Frequencia
+## Frequência
 
 Admin, supervisor e professor registram chamada em `/frequencia`; alunos e professores acompanham seu historico em `/minha-frequencia`.
 
@@ -240,7 +240,7 @@ Recursos disponiveis:
 - Selecao de turma, disciplina e data.
 - Marcacao por aluno como `presente`, `falta`, `atraso` ou `justificado`.
 - Observacao individual por aluno.
-- Relatorio em `/frequencia/relatorio` por turma, disciplina, aluno e periodo.
+- Relatório em `/frequencia/relatorio` por turma, disciplina, aluno e periodo.
 - Percentual de frequencia calculado automaticamente.
 - Sem notificacao ou alerta para responsaveis.
 - Logs de chamada e alteracoes relevantes.
@@ -256,26 +256,26 @@ Recursos disponiveis:
 - Alternativas, resposta correta e pontuacao por questao.
 - Tentativas com controle simples de tempo no navegador e validacao no envio.
 - Respostas salvas por tentativa.
-- Correcao automatica de objetivas.
-- Discursivas ficam como `pendente_correcao` ate correcao manual.
+- Correção automatica de objetivas.
+- Discursivas ficam como `pendente_correcao` até correcao manual.
 - Resultado individual, desempenho por disciplina e ranking por prova quando habilitado.
 - Logs de criacao, tentativa, envio e correcao.
 
 ## Chat interno
 
-Usuarios aprovados acessam `/chat`; administradores e supervisores podem auditar conversas em `/admin/chat` para seguranca e moderacao.
+Usuários aprovados acessam `/chat`; administradores e supervisores podem auditar conversas em `/admin/chat` para seguranca e moderacao.
 
 Recursos disponiveis:
 
 - Mensagens privadas entre usuarios aprovados.
 - Grupos automaticos por turma para alunos e professores vinculados.
-- Lista de conversas com indicador simples de nao lidas.
+- Lista de conversas com indicador simples de não lidas.
 - Leitura e envio de mensagens com CSRF e controle por permissao.
-- Atualizacao simples por refresh periodico quando o usuario nao esta digitando.
+- Atualizacao simples por refresh periodico quando o usuario não está digitando.
 - Bloqueio de envio para usuarios pendentes ou recusados.
 - Logs de envio, leitura/auditoria e moderacao.
 
-Para bancos existentes, aplique tambem:
+Para bancos existentes, aplique também:
 
 ```bash
 mysql -u root -p < database/migrations/2026_05_24_attendance_exams_chat.sql
@@ -290,28 +290,28 @@ Recursos disponiveis:
 - Planos gratuitos e premium com nome, descricao, preco, duracao, beneficios e status.
 - Assinatura de plano por usuario logado, com transacao e assinatura persistidas.
 - Status financeiros: `pendente`, `pago`, `cancelado`, `expirado` e `estornado`.
-- Estrutura inicial para PIX/cartao via campos de gateway, referencia, vencimento e expiracao.
+- Estrutura inicial para PIX/cartão via campos de gateway, referencia, vencimento e expiracao.
 - Controle premium por plano e middleware `premium` para recursos futuros.
 - Cursos podem ser marcados como `gratuito` ou `premium`; curso premium exige assinatura ativa.
-- Historico financeiro do usuario e carteira creator preparada para monetizacao 80/20.
+- Histórico financeiro do usuario e carteira creator preparada para monetizacao 80/20.
 - Moedas internas seguem integradas ao perfil de gamificacao.
 - Logs financeiros para criacao/edicao de planos e pedidos de assinatura.
 
-## Notificacoes
+## Notificações
 
 A navbar autenticada possui icone de notificacoes com contador e dropdown. A central completa fica em `/notificacoes`.
 
 Recursos disponiveis:
 
-- Notificacoes persistidas no banco com tipo, prioridade, link de acao e leitura.
+- Notificações persistidas no banco com tipo, prioridade, link de acao e leitura.
 - Servico central em `app/services/NotificationService.php`.
-- Marcar notificacao como lida/nao lida e marcar todas como lidas.
+- Marcar notificacao como lida/não lida e marcar todas como lidas.
 - Eventos notificados: matricula, curso concluido, certificado emitido, atividade corrigida, comentario em post, mensagem no chat, inscricao em evento, prova liberada e badge conquistada.
 - Logs de envio em `logs` pela acao `notification.sent`.
 
 ## Analytics e dashboard avancado
 
-Dashboards de aluno, professor e administrador agora exibem metricas reais e graficos com Chart.js. Administradores e supervisores tambem acessam `/analytics`.
+Dashboards de aluno, professor e administrador agora exibem metricas reais e graficos com Chart.js. Administradores e supervisores também acessam `/analytics`.
 
 Recursos disponiveis:
 
@@ -319,9 +319,9 @@ Recursos disponiveis:
 - Professor: alunos ativos, entregas pendentes, desempenho medio e progresso medio dos cursos.
 - Aluno: progresso geral, frequencia, XP semanal, desempenho em provas e certificados.
 - Filtro por periodo em `/analytics`.
-- Fallback em canvas simples quando o CDN do Chart.js nao estiver disponivel.
+- Fallback em canvas simples quando o CDN do Chart.js não estiver disponível.
 
-Para bancos existentes, aplique tambem:
+Para bancos existentes, aplique também:
 
 ```bash
 mysql -u root -p < database/migrations/2026_05_24_finance_notifications_analytics.sql

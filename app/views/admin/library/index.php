@@ -1,9 +1,9 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
-            <span class="eyebrow">Administracao</span>
+            <span class="eyebrow">Administração</span>
             <h1>Biblioteca</h1>
             <p>Gerencie materiais publicos, restritos, pendentes e arquivados.</p>
         </div>
@@ -61,7 +61,7 @@
                         <th>Visibilidade</th>
                         <th>Autor</th>
                         <th>Status</th>
-                        <th>Acoes</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>

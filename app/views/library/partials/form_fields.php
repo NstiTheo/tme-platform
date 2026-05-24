@@ -1,10 +1,10 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <form class="form grid-form admin-form" action="<?= e($action) ?>" method="post" enctype="multipart/form-data">
     <?= csrf_field() ?>
 
     <label class="span-2">
-        Titulo
+        Título
         <input type="text" name="title" value="<?= e($value('title')) ?>" required>
     </label>
 
@@ -30,7 +30,7 @@
     <label>
         Visibilidade
         <select name="visibility">
-            <?php foreach (['publica' => 'Publica', 'logados' => 'Somente logados', 'curso' => 'Curso especifico', 'privada_admin' => 'Privada/admin'] as $option => $label): ?>
+            <?php foreach (['publica' => 'Pública', 'logados' => 'Somente logados', 'curso' => 'Curso especifico', 'privada_admin' => 'Privada/admin'] as $option => $label): ?>
                 <option value="<?= e($option) ?>" <?= $value('visibility', 'publica') === $option ? 'selected' : '' ?>><?= e($label) ?></option>
             <?php endforeach; ?>
         </select>
@@ -55,7 +55,7 @@
         <label>
             Status
             <select name="status">
-                <?php foreach (['rascunho' => 'Rascunho', 'pendente' => 'Pendente', 'publicado' => 'Publicado', 'arquivado' => 'Arquivado'] as $option => $label): ?>
+                <?php foreach (['rascunho' => 'Rascunho', 'pendente' => 'Pendente', 'publicado' => 'Públicado', 'arquivado' => 'Arquivado'] as $option => $label): ?>
                     <option value="<?= e($option) ?>" <?= $value('status', 'pendente') === $option ? 'selected' : '' ?>><?= e($label) ?></option>
                 <?php endforeach; ?>
             </select>
@@ -63,7 +63,7 @@
     <?php endif; ?>
 
     <label class="span-2">
-        Descricao
+        Descrição
         <textarea name="description" rows="5"><?= e($value('description')) ?></textarea>
     </label>
 

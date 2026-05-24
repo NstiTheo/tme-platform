@@ -1,4 +1,4 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell">
     <div class="dashboard-heading">
@@ -10,7 +10,7 @@
     <form class="admin-form form grid-form" action="<?= e($action) ?>" method="post" enctype="multipart/form-data">
         <?= csrf_field() ?>
         <label>
-            Titulo
+            Título
             <input type="text" name="title" value="<?= e(old('title')) ?>" required>
         </label>
         <label>
@@ -66,7 +66,7 @@
             Habilitar certificado de participacao
         </label>
         <label class="span-2">
-            Descricao
+            Descrição
             <textarea name="description" rows="5"><?= e(old('description')) ?></textarea>
         </label>
         <button class="button span-2" type="submit">Salvar evento</button>

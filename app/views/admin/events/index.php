@@ -1,9 +1,9 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
-            <span class="eyebrow">Administracao</span>
+            <span class="eyebrow">Administração</span>
             <h1>Eventos</h1>
             <p>Crie eventos, acompanhe inscritos, confirme presenca e emita certificados de participacao.</p>
         </div>
@@ -12,7 +12,7 @@
 
     <div class="table-wrap">
         <table>
-            <thead><tr><th>Evento</th><th>Data</th><th>Status</th><th>Inscritos</th><th>Acoes</th></tr></thead>
+            <thead><tr><th>Evento</th><th>Data</th><th>Status</th><th>Inscritos</th><th>Ações</th></tr></thead>
             <tbody>
                 <?php foreach ($events as $event): ?>
                     <tr>

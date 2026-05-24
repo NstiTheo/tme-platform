@@ -1,9 +1,9 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="dashboard-shell">
     <div class="admin-toolbar">
         <div class="dashboard-heading">
-            <span class="eyebrow">Gestao academica</span>
+            <span class="eyebrow">Gestão academica</span>
             <h1>Atividades</h1>
             <p>Crie tarefas, projetos e avaliacoes vinculadas a cursos, modulos e aulas.</p>
         </div>
@@ -24,7 +24,7 @@
             Status
             <select name="status">
                 <option value="">Todos</option>
-                <?php foreach (['rascunho' => 'Rascunho', 'publicada' => 'Publicada', 'encerrada' => 'Encerrada'] as $value => $label): ?>
+                <?php foreach (['rascunho' => 'Rascunho', 'publicada' => 'Públicada', 'encerrada' => 'Encerrada'] as $value => $label): ?>
                     <option value="<?= e($value) ?>" <?= ($filters['status'] ?? '') === $value ? 'selected' : '' ?>><?= e($label) ?></option>
                 <?php endforeach; ?>
             </select>
@@ -57,7 +57,7 @@
                         <th>Prazo</th>
                         <th>Entregas</th>
                         <th>Status</th>
-                        <th>Acoes</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,7 +78,7 @@
                                 <a class="button small" href="<?= e(url('/admin/atividades/' . $activity['id'])) ?>">Ver</a>
                                 <a class="button ghost small" href="<?= e(url('/admin/atividades/' . $activity['id'] . '/editar')) ?>">Editar</a>
                                 <?php if ($activity['status'] !== 'encerrada'): ?>
-                                    <form action="<?= e(url('/admin/atividades/' . $activity['id'] . '/encerrar')) ?>" method="post" data-confirm="Encerrar esta atividade?">
+                                    <form action="<?= e(url('/admin/atividades/' . $activity['id'] . '/encerrar')) ?>" method="post" data-confirm="Encerrar está atividade?">
                                         <?= csrf_field() ?>
                                         <button class="button ghost small" type="submit">Encerrar</button>
                                     </form>

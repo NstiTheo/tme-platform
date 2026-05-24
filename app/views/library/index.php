@@ -1,4 +1,4 @@
-<?php defined('BASE_PATH') || exit('Acesso direto nao permitido.'); ?>
+<?php defined('BASE_PATH') || exit('Acesso direto não permitido.'); ?>
 
 <section class="<?= $isPublicPage ? 'page-section compact' : 'dashboard-shell' ?>">
     <div class="admin-toolbar">
@@ -20,7 +20,7 @@
     <form class="filter-form library-filter-form" action="<?= e(url('/biblioteca')) ?>" method="get">
         <label>
             Busca
-            <input type="search" name="q" value="<?= e($filters['q'] ?? '') ?>" placeholder="Titulo, descricao ou autor">
+            <input type="search" name="q" value="<?= e($filters['q'] ?? '') ?>" placeholder="Título, descricao ou autor">
         </label>
         <label>
             Categoria

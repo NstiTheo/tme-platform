@@ -1,6 +1,6 @@
 <?php
 
-defined('BASE_PATH') || exit('Acesso direto nao permitido.');
+defined('BASE_PATH') || exit('Acesso direto não permitido.');
 
 class LibraryController extends Controller
 {
@@ -38,7 +38,7 @@ class LibraryController extends Controller
         $item = $this->library->findVisible((int) $id, $user);
 
         if (! $item) {
-            flash('error', 'Material nao encontrado ou indisponivel.');
+            flash('error', 'Material não encontrado ou indisponível.');
             $this->redirect('/biblioteca');
         }
 
@@ -70,7 +70,7 @@ class LibraryController extends Controller
         $item = $this->library->findVisible((int) $id, $user);
 
         if (! $item) {
-            flash('error', 'Material nao encontrado ou indisponivel.');
+            flash('error', 'Material não encontrado ou indisponível.');
             $this->redirect('/biblioteca');
         }
 
@@ -316,7 +316,7 @@ class LibraryController extends Controller
         $user = current_user();
 
         if (! $item) {
-            flash('error', 'Item da biblioteca nao encontrado.');
+            flash('error', 'Item da biblioteca não encontrado.');
             $this->redirect('/admin/biblioteca');
         }
 
@@ -344,7 +344,7 @@ class LibraryController extends Controller
         }
 
         if (($_FILES[$field]['error'] ?? UPLOAD_ERR_OK) !== UPLOAD_ERR_OK) {
-            flash('error', 'Nao foi possivel receber o arquivo enviado.');
+            flash('error', 'Não foi possível receber o arquivo enviado.');
             return null;
         }
 
@@ -357,7 +357,7 @@ class LibraryController extends Controller
         $mime = mime_content_type($tmp) ?: 'application/octet-stream';
 
         if (! in_array($mime, $allowedMimes, true)) {
-            flash('error', 'Tipo de arquivo nao permitido.');
+            flash('error', 'Tipo de arquivo não permitido.');
             return null;
         }
 
@@ -371,7 +371,7 @@ class LibraryController extends Controller
         }
 
         if (! move_uploaded_file($tmp, BASE_PATH . '/public/' . $relative)) {
-            flash('error', 'Nao foi possivel salvar o arquivo enviado.');
+            flash('error', 'Não foi possível salvar o arquivo enviado.');
             return null;
         }
 
