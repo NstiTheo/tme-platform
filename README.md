@@ -231,6 +231,56 @@ Para bancos existentes, aplique tambem:
 mysql -u root -p < database/migrations/2026_05_24_community_events_classes.sql
 ```
 
+## Frequencia
+
+Admin, supervisor e professor registram chamada em `/frequencia`; alunos e professores acompanham seu historico em `/minha-frequencia`.
+
+Recursos disponiveis:
+
+- Selecao de turma, disciplina e data.
+- Marcacao por aluno como `presente`, `falta`, `atraso` ou `justificado`.
+- Observacao individual por aluno.
+- Relatorio em `/frequencia/relatorio` por turma, disciplina, aluno e periodo.
+- Percentual de frequencia calculado automaticamente.
+- Sem notificacao ou alerta para responsaveis.
+- Logs de chamada e alteracoes relevantes.
+
+## Simulados e provas
+
+A gestao fica em `/admin/provas`; alunos e professores acessam as avaliacoes em `/provas`.
+
+Recursos disponiveis:
+
+- Criacao de provas com titulo, descricao, curso, turma, disciplina, tempo limite, periodo, tentativas, status e ranking opcional.
+- Banco de questoes com objetivas e discursivas.
+- Alternativas, resposta correta e pontuacao por questao.
+- Tentativas com controle simples de tempo no navegador e validacao no envio.
+- Respostas salvas por tentativa.
+- Correcao automatica de objetivas.
+- Discursivas ficam como `pendente_correcao` ate correcao manual.
+- Resultado individual, desempenho por disciplina e ranking por prova quando habilitado.
+- Logs de criacao, tentativa, envio e correcao.
+
+## Chat interno
+
+Usuarios aprovados acessam `/chat`; administradores e supervisores podem auditar conversas em `/admin/chat` para seguranca e moderacao.
+
+Recursos disponiveis:
+
+- Mensagens privadas entre usuarios aprovados.
+- Grupos automaticos por turma para alunos e professores vinculados.
+- Lista de conversas com indicador simples de nao lidas.
+- Leitura e envio de mensagens com CSRF e controle por permissao.
+- Atualizacao simples por refresh periodico quando o usuario nao esta digitando.
+- Bloqueio de envio para usuarios pendentes ou recusados.
+- Logs de envio, leitura/auditoria e moderacao.
+
+Para bancos existentes, aplique tambem:
+
+```bash
+mysql -u root -p < database/migrations/2026_05_24_attendance_exams_chat.sql
+```
+
 ## Estrutura
 
 ```text
