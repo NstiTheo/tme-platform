@@ -62,6 +62,42 @@ class AdminClassController extends Controller
         ]);
     }
 
+    public function editClass(string $id): void
+    {
+        $class = $this->findClass((int) $id);
+
+        $this->view('admin/classes/class_form', $this->classFormData('Editar turma', $class, url('/admin/turmas/' . $class['id'] . '/atualizar')));
+    }
+
+    public function updateClass(string $id): void
+    {
+        $class = $this->findClass((int) $id);
+        $this->guardCsrf('/admin/turmas/' . $class['id'] . '/editar');
+        $data = $this->classPayload();
+
+        if (strlen($data['name']) < 3) {
+            flash('error', 'Informe o nome da turma.');
+            $this->redirect('/admin/turmas/' . $class['id'] . '/editar');
+        }
+
+        $this->classes->update((int) $class['id'], $data);
+        $this->logs->record((int) current_user()['id'], 'class.updated', ['class_id' => (int) $class['id']]);
+
+        flash('success', 'Turma atualizada.');
+        $this->redirect('/admin/turmas/' . $class['id']);
+    }
+
+    public function archiveClass(string $id): void
+    {
+        $class = $this->findClass((int) $id);
+        $this->guardCsrf('/admin/turmas/' . $class['id']);
+        $this->classes->archive((int) $class['id']);
+        $this->logs->record((int) current_user()['id'], 'class.archived', ['class_id' => (int) $class['id']], 'warning');
+
+        flash('success', 'Turma arquivada.');
+        $this->redirect('/admin/turmas');
+    }
+
     public function createSubject(): void
     {
         $this->view('admin/classes/subject_form', [
@@ -85,6 +121,46 @@ class AdminClassController extends Controller
         $this->logs->record((int) current_user()['id'], 'subject.created', ['subject_id' => $id]);
 
         flash('success', 'Disciplina criada.');
+        $this->redirect('/admin/turmas');
+    }
+
+    public function editSubject(string $id): void
+    {
+        $subject = $this->findSubject((int) $id);
+
+        $this->view('admin/classes/subject_form', [
+            'title' => 'Editar disciplina',
+            'subject' => $subject,
+            'action' => url('/admin/disciplinas/' . $subject['id'] . '/atualizar'),
+        ]);
+    }
+
+    public function updateSubject(string $id): void
+    {
+        $subject = $this->findSubject((int) $id);
+        $this->guardCsrf('/admin/disciplinas/' . $subject['id'] . '/editar');
+        $data = $this->subjectPayload();
+
+        if (strlen($data['name']) < 3) {
+            flash('error', 'Informe o nome da disciplina.');
+            $this->redirect('/admin/disciplinas/' . $subject['id'] . '/editar');
+        }
+
+        $this->subjects->update((int) $subject['id'], $data);
+        $this->logs->record((int) current_user()['id'], 'subject.updated', ['subject_id' => (int) $subject['id']]);
+
+        flash('success', 'Disciplina atualizada.');
+        $this->redirect('/admin/turmas');
+    }
+
+    public function archiveSubject(string $id): void
+    {
+        $subject = $this->findSubject((int) $id);
+        $this->guardCsrf('/admin/turmas');
+        $this->subjects->archive((int) $subject['id']);
+        $this->logs->record((int) current_user()['id'], 'subject.archived', ['subject_id' => (int) $subject['id']], 'warning');
+
+        flash('success', 'Disciplina arquivada.');
         $this->redirect('/admin/turmas');
     }
 
@@ -168,6 +244,18 @@ class AdminClassController extends Controller
         }
 
         return $class;
+    }
+
+    private function findSubject(int $id): array
+    {
+        $subject = $this->subjects->find($id);
+
+        if (! $subject) {
+            flash('error', 'Disciplina nao encontrada.');
+            $this->redirect('/admin/turmas');
+        }
+
+        return $subject;
     }
 
     private function guardCsrf(string $fallback): void
