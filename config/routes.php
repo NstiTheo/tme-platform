@@ -82,6 +82,7 @@ return [
     ['GET', '/admin/eventos/novo', [EventController::class, 'create'], ['auth', 'role:administrador,supervisor']],
     ['POST', '/admin/eventos', [EventController::class, 'store'], ['auth', 'role:administrador,supervisor']],
     ['GET', '/admin/eventos/{id}', [EventController::class, 'adminShow'], ['auth', 'role:administrador,supervisor']],
+    ['POST', '/admin/eventos/{id}/status', [EventController::class, 'updateStatus'], ['auth', 'role:administrador,supervisor']],
     ['POST', '/admin/eventos/inscricoes/{registrationId}/presenca', [EventController::class, 'confirmPresence'], ['auth', 'role:administrador,supervisor']],
     ['POST', '/admin/eventos/inscricoes/{registrationId}/certificado', [EventController::class, 'issueCertificate'], ['auth', 'role:administrador,supervisor']],
     ['GET', '/admin/turmas', [AdminClassController::class, 'index'], ['auth', 'role:administrador,supervisor']],

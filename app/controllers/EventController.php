@@ -124,6 +124,30 @@ class EventController extends Controller
         ]);
     }
 
+    public function updateStatus(string $id): void
+    {
+        $this->guardCsrf('/admin/eventos/' . $id);
+        $event = $this->events->find((int) $id);
+
+        if (! $event) {
+            flash('error', 'Evento nao encontrado.');
+            $this->redirect('/admin/eventos');
+        }
+
+        $status = trim($_POST['status'] ?? '');
+
+        if (! in_array($status, ['rascunho', 'publicado', 'encerrado'], true)) {
+            flash('error', 'Status invalido.');
+            $this->redirect('/admin/eventos/' . $id);
+        }
+
+        $this->events->setStatus((int) $event['id'], $status);
+        $this->logs->record((int) current_user()['id'], 'event.status_updated', ['event_id' => (int) $event['id'], 'status' => $status]);
+
+        flash('success', 'Status do evento atualizado.');
+        $this->redirect('/admin/eventos/' . $id);
+    }
+
     public function confirmPresence(string $registrationId): void
     {
         $this->guardCsrf('/admin/eventos');
