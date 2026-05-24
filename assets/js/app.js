@@ -109,4 +109,39 @@
             }
         });
     });
+    const examTimer = document.querySelector('[data-exam-timer]');
+    const examTimerOutput = document.querySelector('[data-exam-timer-output]');
+
+    if (examTimer && examTimerOutput) {
+        let remaining = parseInt(examTimer.dataset.examTimer || '0', 10);
+
+        const renderTimer = function () {
+            const minutes = Math.floor(Math.max(0, remaining) / 60);
+            const seconds = Math.max(0, remaining) % 60;
+            examTimerOutput.textContent = String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+            examTimer.classList.toggle('danger', remaining <= 60);
+
+            if (remaining > 0) {
+                remaining -= 1;
+            }
+        };
+
+        renderTimer();
+        window.setInterval(renderTimer, 1000);
+    }
+
+    const chatShell = document.querySelector('[data-chat-refresh]');
+
+    if (chatShell) {
+        const interval = parseInt(chatShell.dataset.chatRefresh || '45000', 10);
+
+        window.setInterval(function () {
+            const active = document.activeElement;
+            const isTyping = active && ['TEXTAREA', 'INPUT', 'SELECT'].includes(active.tagName);
+
+            if (!isTyping) {
+                window.location.reload();
+            }
+        }, Math.max(interval, 15000));
+    }
 })();

@@ -1737,6 +1737,11 @@ td span {
     font-size: 1.6rem;
 }
 
+.exam-timer.danger {
+    border-color: color-mix(in srgb, var(--danger) 48%, var(--border));
+    background: color-mix(in srgb, var(--danger) 10%, var(--surface));
+}
+
 .submission-content {
     padding: 14px;
     border: 1px solid var(--border);
