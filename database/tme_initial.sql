@@ -226,6 +226,8 @@ CREATE TABLE IF NOT EXISTS classes (
     name VARCHAR(140) NOT NULL,
     code VARCHAR(60) NULL UNIQUE,
     description TEXT NULL,
+    period VARCHAR(80) NULL,
+    status ENUM('ativa', 'inativa', 'arquivada') NOT NULL DEFAULT 'ativa',
     academic_year SMALLINT UNSIGNED NULL,
     starts_at DATE NULL,
     ends_at DATE NULL,
@@ -240,11 +242,55 @@ CREATE TABLE IF NOT EXISTS subjects (
     teacher_id BIGINT UNSIGNED NULL,
     name VARCHAR(140) NOT NULL,
     description TEXT NULL,
+    area VARCHAR(120) NULL,
     workload_hours SMALLINT UNSIGNED NULL,
+    status ENUM('ativa', 'inativa', 'arquivada') NOT NULL DEFAULT 'ativa',
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_subjects_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE SET NULL,
     CONSTRAINT fk_subjects_teacher FOREIGN KEY (teacher_id) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS class_students (
+    class_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    status ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo',
+    linked_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (class_id, user_id),
+    CONSTRAINT fk_class_students_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE,
+    CONSTRAINT fk_class_students_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS class_teachers (
+    class_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    status ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo',
+    linked_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (class_id, user_id),
+    CONSTRAINT fk_class_teachers_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE,
+    CONSTRAINT fk_class_teachers_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS class_subjects (
+    class_id BIGINT UNSIGNED NOT NULL,
+    subject_id BIGINT UNSIGNED NOT NULL,
+    teacher_id BIGINT UNSIGNED NULL,
+    status ENUM('ativa', 'inativa') NOT NULL DEFAULT 'ativa',
+    linked_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (class_id, subject_id),
+    CONSTRAINT fk_class_subjects_class FOREIGN KEY (class_id) REFERENCES classes(id) ON DELETE CASCADE,
+    CONSTRAINT fk_class_subjects_subject FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE,
+    CONSTRAINT fk_class_subjects_teacher FOREIGN KEY (teacher_id) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS subject_teachers (
+    subject_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    status ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo',
+    linked_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (subject_id, user_id),
+    CONSTRAINT fk_subject_teachers_subject FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE,
+    CONSTRAINT fk_subject_teachers_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS enrollments (
@@ -407,13 +453,23 @@ CREATE TABLE IF NOT EXISTS exam_attempts (
 CREATE TABLE IF NOT EXISTS posts (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user_id BIGINT UNSIGNED NOT NULL,
+    post_type ENUM('duvida', 'artigo', 'projeto', 'material', 'conquista', 'aviso') NOT NULL DEFAULT 'duvida',
     title VARCHAR(180) NOT NULL,
     content TEXT NOT NULL,
     visibility ENUM('publico', 'privado', 'turma') NOT NULL DEFAULT 'publico',
-    status ENUM('pendente', 'aprovado', 'recusado') NOT NULL DEFAULT 'pendente',
+    status ENUM('pendente', 'aprovado', 'recusado', 'arquivado') NOT NULL DEFAULT 'pendente',
+    is_featured TINYINT(1) NOT NULL DEFAULT 0,
+    moderation_reason VARCHAR(255) NULL,
+    moderated_by BIGINT UNSIGNED NULL,
+    moderated_at TIMESTAMP NULL,
+    archived_at TIMESTAMP NULL,
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    CONSTRAINT fk_posts_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    KEY posts_status_index (status),
+    KEY posts_featured_index (is_featured),
+    KEY posts_type_index (post_type),
+    CONSTRAINT fk_posts_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    CONSTRAINT fk_posts_moderated_by FOREIGN KEY (moderated_by) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS comments (
@@ -422,12 +478,30 @@ CREATE TABLE IF NOT EXISTS comments (
     user_id BIGINT UNSIGNED NOT NULL,
     parent_id BIGINT UNSIGNED NULL,
     content TEXT NOT NULL,
-    status ENUM('pendente', 'aprovado', 'recusado') NOT NULL DEFAULT 'pendente',
+    status ENUM('pendente', 'aprovado', 'recusado', 'arquivado') NOT NULL DEFAULT 'aprovado',
     created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_comments_post FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
     CONSTRAINT fk_comments_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     CONSTRAINT fk_comments_parent FOREIGN KEY (parent_id) REFERENCES comments(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS post_likes (
+    post_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (post_id, user_id),
+    CONSTRAINT fk_post_likes_post FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+    CONSTRAINT fk_post_likes_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS post_saves (
+    post_id BIGINT UNSIGNED NOT NULL,
+    user_id BIGINT UNSIGNED NOT NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (post_id, user_id),
+    CONSTRAINT fk_post_saves_post FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE,
+    CONSTRAINT fk_post_saves_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS content_moderation (
