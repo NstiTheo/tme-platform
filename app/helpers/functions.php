@@ -204,6 +204,63 @@ function role_label(string $slug): string
     ][$slug] ?? ucfirst($slug);
 }
 
+function human_label(?string $value): string
+{
+    $value = trim((string) $value);
+
+    if ($value === '') {
+        return '-';
+    }
+
+    $labels = [
+        'ao_vivo' => 'Ao vivo',
+        'apresentacao' => 'Apresentação',
+        'aprovado' => 'Aprovado',
+        'arquivo' => 'Arquivo',
+        'arquivado' => 'Arquivado',
+        'arquivada' => 'Arquivada',
+        'ativa' => 'Ativa',
+        'ativo' => 'Ativo',
+        'atrasada' => 'Atrasada',
+        'cancelada' => 'Cancelada',
+        'cancelado' => 'Cancelado',
+        'cartao' => 'Cartão',
+        'comissao' => 'Comissão',
+        'concluida' => 'Concluída',
+        'concluido' => 'Concluído',
+        'discursiva' => 'Discursiva',
+        'encerrado' => 'Encerrado',
+        'encerrada' => 'Encerrada',
+        'estornado' => 'Estornado',
+        'facil' => 'Fácil',
+        'imagem' => 'Imagem',
+        'institucional' => 'Institucional',
+        'logados' => 'Somente logados',
+        'media' => 'Média',
+        'mensalidade' => 'Mensalidade',
+        'objetiva' => 'Objetiva',
+        'pendente' => 'Pendente',
+        'pendente atrasada' => 'Pendente atrasada',
+        'pendente_correcao' => 'Pendente de correção',
+        'privada_admin' => 'Privada/admin',
+        'privado' => 'Privado',
+        'processando' => 'Processando',
+        'publica' => 'Pública',
+        'publicada' => 'Publicada',
+        'publicado' => 'Publicado',
+        'publico' => 'Público',
+        'rascunho' => 'Rascunho',
+        'recusado' => 'Recusado',
+        'recusada' => 'Recusada',
+        'revogado' => 'Revogado',
+        'unico' => 'Único',
+        'valido' => 'Válido',
+        'video' => 'Vídeo',
+    ];
+
+    return $labels[$value] ?? ucwords(str_replace('_', ' ', $value));
+}
+
 function slugify(string $value): string
 {
     $value = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $value) ?: $value;

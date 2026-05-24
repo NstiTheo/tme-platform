@@ -25,7 +25,7 @@
                         <div class="course-card-placeholder">TME</div>
                     <?php endif; ?>
                     <div>
-                        <span class="status-badge <?= e($enrollment['status']) ?>"><?= e($enrollment['status']) ?></span>
+                        <span class="status-badge <?= e($enrollment['status']) ?>"><?= e(human_label($enrollment['status'])) ?></span>
                         <h2><?= e($enrollment['title']) ?></h2>
                         <p><?= e($enrollment['description'] ?: 'Curso matriculado na TME.') ?></p>
                         <div class="progress-track">

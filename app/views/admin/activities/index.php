@@ -34,7 +34,7 @@
             <select name="type">
                 <option value="">Todos</option>
                 <?php foreach (['texto', 'arquivo', 'quiz', 'tarefa_pratica', 'projeto'] as $type): ?>
-                    <option value="<?= e($type) ?>" <?= ($filters['type'] ?? '') === $type ? 'selected' : '' ?>><?= e($type) ?></option>
+                    <option value="<?= e($type) ?>" <?= ($filters['type'] ?? '') === $type ? 'selected' : '' ?>><?= e(human_label($type)) ?></option>
                 <?php endforeach; ?>
             </select>
         </label>
@@ -73,7 +73,7 @@
                             </td>
                             <td><?= e($activity['due_at'] ? date('d/m/Y H:i', strtotime($activity['due_at'])) : 'Sem prazo') ?></td>
                             <td><?= e((int) $activity['submissions_count']) ?></td>
-                            <td><span class="status-badge <?= e($activity['status']) ?>"><?= e($activity['status']) ?></span></td>
+                            <td><span class="status-badge <?= e($activity['status']) ?>"><?= e(human_label($activity['status'])) ?></span></td>
                             <td class="actions-cell">
                                 <a class="button small" href="<?= e(url('/admin/atividades/' . $activity['id'])) ?>">Ver</a>
                                 <a class="button ghost small" href="<?= e(url('/admin/atividades/' . $activity['id'] . '/editar')) ?>">Editar</a>

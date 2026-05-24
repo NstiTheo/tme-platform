@@ -31,7 +31,7 @@
             <?php foreach ($availableExams as $exam): ?>
                 <article class="course-card">
                     <div>
-                        <span class="status-badge <?= e($exam['status']) ?>"><?= e($exam['status']) ?></span>
+                        <span class="status-badge <?= e($exam['status']) ?>"><?= e(human_label($exam['status'])) ?></span>
                         <h2><?= e($exam['title']) ?></h2>
                         <p><?= e($exam['description'] ?: 'Prova vinculada a sua jornada acadêmica.') ?></p>
                         <div class="course-meta">
@@ -61,7 +61,7 @@
                             <?php foreach ($attempts as $attempt): ?>
                                 <tr>
                                     <td><strong><?= e($attempt['title']) ?></strong><span><?= e($attempt['subject_name'] ?: 'Geral') ?></span></td>
-                                    <td><span class="status-badge <?= e($attempt['status']) ?>"><?= e($attempt['status']) ?></span></td>
+                                    <td><span class="status-badge <?= e($attempt['status']) ?>"><?= e(human_label($attempt['status'])) ?></span></td>
                                     <td><?= e(number_format((float) $attempt['total_score'], 2, ',', '.')) ?></td>
                                     <td><a href="<?= e(url('/provas/tentativas/' . $attempt['id'] . '/resultado')) ?>">Resultado</a></td>
                                 </tr>

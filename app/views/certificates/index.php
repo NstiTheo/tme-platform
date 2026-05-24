@@ -22,7 +22,7 @@
         <div class="certificate-grid">
             <?php foreach ($certificates as $certificate): ?>
                 <article class="certificate-card">
-                    <span class="status-badge <?= e($certificate['validation_status']) ?>"><?= e($certificate['validation_status']) ?></span>
+                    <span class="status-badge <?= e($certificate['validation_status']) ?>"><?= e(human_label($certificate['validation_status'])) ?></span>
                     <h2><?= e($certificate['course_title'] ?: $certificate['title']) ?></h2>
                     <p><?= e($certificate['title']) ?></p>
                     <div class="course-meta">

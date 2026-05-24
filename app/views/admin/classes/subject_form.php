@@ -16,7 +16,7 @@
             <input type="text" name="area" value="<?= e(old('area', $subject['area'] ?? '')) ?>">
         </label>
         <label>
-            Carga horaria
+            Carga horária
             <input type="number" name="workload_hours" min="0" value="<?= e(old('workload_hours', $subject['workload_hours'] ?? 0)) ?>">
         </label>
         <label>

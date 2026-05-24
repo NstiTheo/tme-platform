@@ -69,9 +69,9 @@ $decodeAlternatives = static function (?string $json): array {
                     <label>
                         Dificuldade
                         <select name="difficulty">
-                            <option value="facil">Facil</option>
-                            <option value="media" selected>Media</option>
-                            <option value="dificil">Dificil</option>
+                            <option value="facil">Fácil</option>
+                            <option value="media" selected>Média</option>
+                            <option value="dificil">Difícil</option>
                         </select>
                     </label>
                 </div>
@@ -92,7 +92,7 @@ $decodeAlternatives = static function (?string $json): array {
                 <div class="exam-question-list">
                     <?php foreach ($questions as $question): ?>
                         <article class="exam-question-card">
-                            <span class="status-badge"><?= e($question['question_type']) ?></span>
+                            <span class="status-badge"><?= e(human_label($question['question_type'])) ?></span>
                             <h3><?= e($question['position']) ?>. <?= e($question['statement_text']) ?></h3>
                             <p><?= e(number_format((float) $question['exam_score'], 2, ',', '.')) ?> ponto(s) | <?= e($question['difficulty']) ?></p>
                             <?php $alternatives = $decodeAlternatives($question['alternatives'] ?? null); ?>
@@ -128,7 +128,7 @@ $decodeAlternatives = static function (?string $json): array {
                         <?php foreach ($attempts as $attempt): ?>
                             <tr>
                                 <td><strong><?= e($attempt['student_name']) ?></strong><span><?= e($attempt['student_email']) ?></span></td>
-                                <td><span class="status-badge <?= e($attempt['status']) ?>"><?= e($attempt['status']) ?></span></td>
+                                <td><span class="status-badge <?= e($attempt['status']) ?>"><?= e(human_label($attempt['status'])) ?></span></td>
                                 <td><?= e(number_format((float) $attempt['objective_score'], 2, ',', '.')) ?></td>
                                 <td><?= e(number_format((float) $attempt['total_score'], 2, ',', '.')) ?></td>
                                 <td><?= e($attempt['submitted_at'] ? date('d/m/Y H:i', strtotime($attempt['submitted_at'])) : '-') ?></td>

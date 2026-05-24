@@ -31,7 +31,7 @@ $decodeAlternatives = static function (?string $json): array {
     <div class="exam-question-list">
         <?php foreach ($answers as $answer): ?>
             <article class="exam-question-card">
-                <span class="status-badge <?= e($answer['status']) ?>"><?= e($answer['question_type']) ?></span>
+                <span class="status-badge <?= e($answer['status']) ?>"><?= e(human_label($answer['question_type'])) ?></span>
                 <h2><?= e($answer['statement_text']) ?></h2>
 
                 <?php if ($answer['question_type'] === 'objetiva'): ?>

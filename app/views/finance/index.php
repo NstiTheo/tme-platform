@@ -73,7 +73,7 @@
                         <td><?= e($transaction['plan_name'] ?? 'Avulso') ?></td>
                         <td>R$ <?= e(number_format((float) $transaction['amount'], 2, ',', '.')) ?></td>
                         <td><?= e($transaction['payment_method'] ?? 'interno') ?></td>
-                        <td><span class="status-badge <?= e($transaction['status']) ?>"><?= e($transaction['status']) ?></span></td>
+                        <td><span class="status-badge <?= e($transaction['status']) ?>"><?= e(human_label($transaction['status'])) ?></span></td>
                         <td><?= e(date('d/m/Y H:i', strtotime($transaction['created_at']))) ?></td>
                     </tr>
                 <?php endforeach; ?>

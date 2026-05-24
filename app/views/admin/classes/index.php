@@ -21,7 +21,7 @@
                     <tr>
                         <td><strong><?= e($class['name']) ?></strong><span><?= e($class['period'] ?: 'período a definir') ?></span></td>
                         <td><span><?= e($class['institution_name'] ?: 'sem instituição') ?></span></td>
-                        <td><span class="status-badge <?= e($class['status']) ?>"><?= e($class['status']) ?></span></td>
+                        <td><span class="status-badge <?= e($class['status']) ?>"><?= e(human_label($class['status'])) ?></span></td>
                         <td><span><?= e((int) $class['students_count']) ?> alunos</span><span><?= e((int) $class['subjects_count']) ?> disciplinas</span></td>
                         <td class="actions-cell">
                             <a class="button small" href="<?= e(url('/admin/turmas/' . $class['id'])) ?>">Gerenciar</a>
@@ -44,7 +44,7 @@
     <div class="module-grid">
         <?php foreach ($subjects as $subject): ?>
             <article class="module-card">
-                <span class="status-badge <?= e($subject['status'] ?? 'ativa') ?>"><?= e($subject['status'] ?? 'ativa') ?></span>
+                <span class="status-badge <?= e($subject['status'] ?? 'ativa') ?>"><?= e(human_label($subject['status'] ?? 'ativa')) ?></span>
                 <h2><?= e($subject['name']) ?></h2>
                 <p><?= e($subject['area'] ?: 'Área não informada') ?> | <?= e((int) $subject['workload_hours']) ?>h</p>
                 <div class="inline-actions">

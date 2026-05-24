@@ -21,7 +21,7 @@
             <?php foreach ($questions as $question): ?>
                 <?php $alternatives = $examModel->decodeAlternatives($question['alternatives'] ?? null); ?>
                 <article class="exam-question-card">
-                    <span class="status-badge"><?= e($question['question_type']) ?></span>
+                    <span class="status-badge"><?= e(human_label($question['question_type'])) ?></span>
                     <h2><?= e($question['position']) ?>. <?= e($question['statement_text']) ?></h2>
                     <p><?= e(number_format((float) $question['exam_score'], 2, ',', '.')) ?> ponto(s)</p>
 

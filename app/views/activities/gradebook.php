@@ -20,7 +20,7 @@
                         <th>Curso</th>
                         <th>Atividades</th>
                         <th>Corrigidas</th>
-                        <th>Media</th>
+                        <th>Média</th>
                         <th>Total</th>
                     </tr>
                 </thead>

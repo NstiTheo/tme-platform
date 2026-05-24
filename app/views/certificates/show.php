@@ -41,7 +41,7 @@ $completedAt = $certificate['enrollment_completed_at'] ? date('d/m/Y', strtotime
                 <h1><?= e($certificate['student_name']) ?></h1>
                 <p>concluiu com aproveitamento o curso</p>
                 <h3><?= e($certificate['course_title'] ?: $certificate['title']) ?></h3>
-                <p>com carga horaria de <strong><?= e((int) $certificate['workload_hours']) ?> horas</strong>, finalizado em <?= e($completedAt) ?>.</p>
+                <p>com carga horária de <strong><?= e((int) $certificate['workload_hours']) ?> horas</strong>, finalizado em <?= e($completedAt) ?>.</p>
             </div>
 
             <footer>

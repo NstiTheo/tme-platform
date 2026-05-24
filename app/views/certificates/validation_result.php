@@ -13,7 +13,7 @@ $isValid = $certificate && $certificate['validation_status'] === 'valido';
             <p class="muted">Nenhum certificado foi encontrado para o código <?= e($code) ?>.</p>
         <?php else: ?>
             <div class="validation-result <?= $isValid ? 'valid' : 'invalid' ?>">
-                <span class="status-badge <?= e($certificate['validation_status']) ?>"><?= e($certificate['validation_status']) ?></span>
+                <span class="status-badge <?= e($certificate['validation_status']) ?>"><?= e(human_label($certificate['validation_status'])) ?></span>
                 <h2><?= e($certificate['student_name']) ?></h2>
                 <p><?= e($certificate['course_title'] ?: $certificate['title']) ?></p>
                 <div class="course-meta">

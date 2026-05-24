@@ -33,7 +33,7 @@ A vitrine pública e a área logada agora são experiências separadas:
 - Visitantes continuam vendo Home, Sobre, Cursos, Eventos, Biblioteca, Comunidade, Login e Cadastro.
 - Usuários autenticados são redirecionados para `/portal` depois do login aprovado.
 - O seletor rapido de tema/cor saiu da navbar; tema, cor principal e preview ficam em `/perfil`.
-- O Portal mostra XP, nivel, moedas, streak e badges recentes.
+- O Portal mostra XP, nível, moedas, streak e badges recentes.
 - A rota `/inicio` também abre o Portal TME.
 - A Home pública (`/`) redireciona usuários logados para o portal interno.
 - O menu de usuários logados oculta Login/Cadastro e prioriza Início, Dashboard, Cursos, Meus cursos, Biblioteca, Eventos, Comunidade, Configurações/Tema e Sair.
@@ -59,7 +59,7 @@ Recursos disponíveis:
 - Logs em `logs` para criação, edição, remoção e arquivamento.
 - CSRF, sessão, middleware de autenticação e proteção por role `administrador/supervisor`.
 
-Alunos e professores aprovados acessam `Meus cursos` para ver cursos públicados, detalhes do curso, módulos, aulas e materiais ativos.
+Alunos e professores aprovados acessam `Meus cursos` para ver cursos publicados, detalhes do curso, módulos, aulas e materiais ativos.
 
 Para bancos existentes, aplique a migration:
 
@@ -69,16 +69,16 @@ mysql -u root -p < database/migrations/2026_05_23_admin_courses_module.sql
 
 ## Matrículas e progresso do aluno
 
-Alunos e professores aprovados podem se matrícular em cursos públicados pelo catálogo em `Catálogo`.
+Alunos e professores aprovados podem se matricular em cursos publicados pelo catálogo em `Catálogo`.
 
 Recursos disponíveis:
 
-- Botão `Matricular-se` no detalhe do curso públicado.
+- Botão `Matricular-se` no detalhe do curso publicado.
 - Bloqueio de matrícula duplicada por aluno e curso.
-- Página `Meus cursos` com cursos matrículados.
+- Página `Meus cursos` com cursos matriculados.
 - Status de matrícula: `ativa`, `concluída` e `cancelada`.
 - Registro de data de início, última atividade e conclusão.
-- Progresso percentual calculado automaticamente pelas aulas públicadas concluídas.
+- Progresso percentual calculado automaticamente pelas aulas publicadas concluídas.
 - Marcação de aula como concluída com CSRF e validação de vínculo da matrícula.
 - Mudança automática da matrícula para `concluída` ao atingir 100%.
 - Visualização de materiais ativos disponíveis em cada aula.
@@ -94,14 +94,14 @@ mysql -u root -p < database/migrations/2026_05_23_enrollments_progress_module.sq
 ## Atividades, entregas e notas
 
 Professores, administradores e supervisores gerenciam atividades em `/admin/atividades`.
-Alunos e professores matrículados acompanham tarefas em `/atividades` e notas em `/boletim`.
+Alunos e professores matriculados acompanham tarefas em `/atividades` e notas em `/boletim`.
 
 Recursos disponiveis:
 
 - CRUD de atividades vinculadas a curso, módulo e aula, com base futura para turma/disciplina.
 - Campos: título, descrição, tipo, pontuação máxima, prazo, status, instruções e anexo opcional.
 - Tipos: `texto`, `arquivo`, `quiz`, `tarefa_pratica` e `projeto`.
-- Entrega textual e/ou arquivo pelo aluno matrículado.
+- Entrega textual e/ou arquivo pelo aluno matriculado.
 - Bloqueio de envio após prazo quando a atividade não permite atraso.
 - Entregas atrasadas marcadas automaticamente quando permitido.
 - Status de entrega: `pendente`, `enviada`, `atrasada`, `corrigida` e `devolvida`.
@@ -141,9 +141,9 @@ Alunos e professores acessam `/certificados` para consultar certificados emitido
 
 Recursos disponiveis:
 
-- Emissão automatica quando uma matrícula chega a 100% de progresso.
+- Emissão automática quando uma matrícula chega a 100% de progresso.
 - Código único no formato `TME-CUR-ANO-CODIGO`.
-- Visualização HTML do certificado em `/certificados/ver/{código}`.
+- Visualização HTML do certificado em `/certificados/ver/{codigo}`.
 - Botao `Imprimir/Salvar PDF` usando o print do navegador.
 - Validação pública por código, marcando certificados revogados como inválidos.
 - Área administrativa em `/admin/certificados` para listar, filtrar e revogar certificados com motivo.
@@ -161,7 +161,7 @@ Recursos disponiveis:
 - XP por login inicial, matrícula, aula concluída, curso concluído, atividade enviada, boa nota, favorito de biblioteca e certificado emitido.
 - Badges iniciais: Primeiro Login, Primeiro Curso, Primeira Aula Concluída, Curso Finalizado, Explorador da Biblioteca e Aluno Dedicado.
 - Ranking global e ranking filtrado por curso em `/ranking`.
-- Portal e Perfil exibem XP, nivel, moedas, streak e conquistas recentes.
+- Portal e Perfil exibem XP, nível, moedas, streak e conquistas recentes.
 - Eventos de XP evitam duplicidade por ação/referência e registram logs.
 
 ## Perfil e configurações
@@ -173,7 +173,7 @@ Recursos disponiveis:
 - Informações do usuário, instituição, área de interesse e biografia curta.
 - Placeholder para foto de perfil futura.
 - Tema claro/escuro e cor principal com preview antes de salvar.
-- Estatísticas: XP, nivel, cursos matrículados, cursos concluídos, atividades entregues, certificados e badges recentes.
+- Estatísticas: XP, nível, cursos matriculados, cursos concluídos, atividades entregues, certificados e badges recentes.
 - Alteração de senha com senha atual, confirmação e `password_hash`.
 - Logout e área reservada para sessões futuras.
 
@@ -199,11 +199,11 @@ Recursos disponiveis:
 
 ## Eventos
 
-Eventos públicados aparecem em `/eventos`; a administração fica em `/admin/eventos`.
+Eventos publicados aparecem em `/eventos`; a administração fica em `/admin/eventos`.
 
 Recursos disponiveis:
 
-- Cadastro administrativo de eventos com título, descrição, tipo, data/hora, local/link, vagas, carga horaria, status e imagem opcional.
+- Cadastro administrativo de eventos com título, descrição, tipo, data/hora, local/link, vagas, carga horária, status e imagem opcional.
 - Tipos: palestra, workshop, aula ao vivo, simulado, olimpíada e hackathon.
 - Usuário logado pode se inscrever, com bloqueio de inscrição duplicada.
 - Admin visualiza inscritos, confirma presença e altera status do evento.
@@ -218,7 +218,7 @@ A gestão fica em `/admin/turmas` e a visualização do aluno/professor fica em 
 Recursos disponiveis:
 
 - CRUD inicial de turmas com nome, descrição, instituição, período e status.
-- Cadastro de disciplinas com nome, descrição, área, carga horaria e status.
+- Cadastro de disciplinas com nome, descrição, área, carga horária e status.
 - Vínculo de alunos a turmas.
 - Vínculo de professores a turmas e disciplinas.
 - Detalhe da turma com disciplinas, alunos, professores e área preparada para materiais futuros.
@@ -256,7 +256,7 @@ Recursos disponiveis:
 - Alternativas, resposta correta e pontuação por questão.
 - Tentativas com controle simples de tempo no navegador e validação no envio.
 - Respostas salvas por tentativa.
-- Correção automatica de objetivas.
+- Correção automática de objetivas.
 - Discursivas ficam como `pendente_correção` até correção manual.
 - Resultado individual, desempenho por disciplina e ranking por prova quando habilitado.
 - Logs de criação, tentativa, envio e correção.
@@ -295,7 +295,7 @@ Recursos disponiveis:
 - Cursos podem ser marcados como `gratuito` ou `premium`; curso premium exige assinatura ativa.
 - Histórico financeiro do usuário e carteira creator preparada para monetização 80/20.
 - Moedas internas seguem integradas ao perfil de gamificação.
-- Logs financeiros para criação/edicao de planos e pedidos de assinatura.
+- Logs financeiros para criação/edição de planos e pedidos de assinatura.
 
 ## Notificações
 

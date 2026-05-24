@@ -9,7 +9,7 @@
         <?php endif; ?>
 
         <div class="dashboard-heading">
-            <span class="eyebrow"><?= e($event['event_type']) ?></span>
+            <span class="eyebrow"><?= e(human_label($event['event_type'])) ?></span>
             <h1><?= e($event['title']) ?></h1>
             <p><?= e($event['description'] ?: 'Evento acadêmico TME.') ?></p>
             <div class="course-meta spacious">

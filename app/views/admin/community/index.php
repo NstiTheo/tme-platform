@@ -17,7 +17,7 @@ $typeLabels = ['duvida' => 'Duvida', 'artigo' => 'Artigo', 'projeto' => 'Projeto
             <select name="status">
                 <option value="">Todos</option>
                 <?php foreach (['pendente', 'aprovado', 'recusado', 'arquivado'] as $status): ?>
-                    <option value="<?= e($status) ?>" <?= ($filters['status'] ?? '') === $status ? 'selected' : '' ?>><?= e($status) ?></option>
+                    <option value="<?= e($status) ?>" <?= ($filters['status'] ?? '') === $status ? 'selected' : '' ?>><?= e(human_label($status)) ?></option>
                 <?php endforeach; ?>
             </select>
         </label>
@@ -57,7 +57,7 @@ $typeLabels = ['duvida' => 'Duvida', 'artigo' => 'Artigo', 'projeto' => 'Projeto
                             <span><?= e(role_label($post['author_role'])) ?></span>
                         </td>
                         <td>
-                            <span class="status-badge <?= e($post['status']) ?>"><?= e($post['status']) ?></span>
+                            <span class="status-badge <?= e($post['status']) ?>"><?= e(human_label($post['status'])) ?></span>
                             <?php if ($post['is_featured']): ?><span>Destaque</span><?php endif; ?>
                         </td>
                         <td>

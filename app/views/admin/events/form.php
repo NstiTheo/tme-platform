@@ -17,12 +17,12 @@
             Tipo
             <select name="event_type">
                 <?php foreach (['palestra', 'workshop', 'aula_ao_vivo', 'simulado', 'olimpiada', 'hackathon'] as $type): ?>
-                    <option value="<?= e($type) ?>"><?= e($type) ?></option>
+                    <option value="<?= e($type) ?>"><?= e(human_label($type)) ?></option>
                 <?php endforeach; ?>
             </select>
         </label>
         <label>
-            Data/hora inicio
+            Data/hora início
             <input type="datetime-local" name="starts_at" required>
         </label>
         <label>
@@ -42,14 +42,14 @@
             <input type="number" name="capacity" min="0" value="<?= e(old('capacity', 0)) ?>">
         </label>
         <label>
-            Carga horaria
+            Carga horária
             <input type="number" name="workload_hours" min="0" value="<?= e(old('workload_hours', 0)) ?>">
         </label>
         <label>
             Status
             <select name="status">
                 <?php foreach (['rascunho', 'publicado', 'encerrado'] as $status): ?>
-                    <option value="<?= e($status) ?>"><?= e($status) ?></option>
+                    <option value="<?= e($status) ?>"><?= e(human_label($status)) ?></option>
                 <?php endforeach; ?>
             </select>
         </label>

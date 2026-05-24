@@ -97,7 +97,7 @@ class CommunityController extends Controller
             $this->notifications->commentCreated((int) $post['user_id'], (int) $post['id'], (string) $post['title']);
         }
 
-        flash('success', 'Comentario publicado.');
+        flash('success', 'Comentário publicado.');
         $this->redirect('/comunidade/' . $id);
     }
 

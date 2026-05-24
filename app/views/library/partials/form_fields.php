@@ -22,7 +22,7 @@
         Tipo
         <select name="item_type">
             <?php foreach (['pdf', 'livro', 'apostila', 'artigo', 'video', 'link', 'apresentacao', 'imagem', 'arquivo'] as $type): ?>
-                <option value="<?= e($type) ?>" <?= $value('item_type', 'arquivo') === $type ? 'selected' : '' ?>><?= e($type) ?></option>
+                <option value="<?= e($type) ?>" <?= $value('item_type', 'arquivo') === $type ? 'selected' : '' ?>><?= e(human_label($type)) ?></option>
             <?php endforeach; ?>
         </select>
     </label>

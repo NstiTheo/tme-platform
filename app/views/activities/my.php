@@ -18,7 +18,7 @@
     <?php if (empty($activities)): ?>
         <div class="empty-state">
             <h2>Nenhuma atividade disponível</h2>
-            <p>As atividades aparecerao aqui quando seus cursos publicarem tarefas.</p>
+            <p>As atividades aparecerão aqui quando seus cursos publicarem tarefas.</p>
         </div>
     <?php else: ?>
         <div class="course-card-grid">
@@ -29,7 +29,7 @@
                 ?>
                 <article class="course-card">
                     <div>
-                        <span class="status-badge <?= e($status) ?>"><?= e($late ? 'pendente atrasada' : $status) ?></span>
+                        <span class="status-badge <?= e($status) ?>"><?= e(human_label($late ? 'pendente atrasada' : $status)) ?></span>
                         <h2><?= e($activity['title']) ?></h2>
                         <p><?= e($activity['description'] ?: 'Atividade vinculada ao curso.') ?></p>
                         <div class="course-meta">

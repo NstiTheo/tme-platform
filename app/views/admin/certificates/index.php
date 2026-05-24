@@ -75,7 +75,7 @@
                                 <span><?= e($certificate['certificate_type']) ?></span>
                             </td>
                             <td>
-                                <span class="status-badge <?= e($certificate['validation_status']) ?>"><?= e($certificate['validation_status']) ?></span>
+                                <span class="status-badge <?= e($certificate['validation_status']) ?>"><?= e(human_label($certificate['validation_status'])) ?></span>
                                 <?php if ($certificate['validation_status'] === 'revogado'): ?>
                                     <span><?= e($certificate['revocation_reason'] ?: 'sem motivo') ?></span>
                                 <?php endif; ?>

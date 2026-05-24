@@ -32,7 +32,7 @@
                         <td>R$ <?= e(number_format((float) $plan['price'], 2, ',', '.')) ?></td>
                         <td><?= e((int) $plan['duration_days']) ?> dias</td>
                         <td><?= (int) $plan['is_premium'] === 1 ? 'Premium' : 'Gratuito' ?></td>
-                        <td><span class="status-badge <?= e($plan['status']) ?>"><?= e($plan['status']) ?></span></td>
+                        <td><span class="status-badge <?= e($plan['status']) ?>"><?= e(human_label($plan['status'])) ?></span></td>
                         <td class="actions-cell">
                             <a class="button small ghost" href="<?= e(url('/admin/planos/' . $plan['id'] . '/editar')) ?>">Editar</a>
                             <form action="<?= e(url('/admin/planos/' . $plan['id'] . '/desativar')) ?>" method="post" data-confirm="Desativar este plano?">

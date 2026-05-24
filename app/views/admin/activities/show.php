@@ -35,7 +35,7 @@
     <?php if (empty($submissions)): ?>
         <div class="empty-state">
             <h2>Nenhuma entrega recebida</h2>
-            <p>As entregas dos alunos aparecerao aqui.</p>
+            <p>As entregas dos alunos aparecerão aqui.</p>
         </div>
     <?php else: ?>
         <div class="table-wrap">
@@ -56,7 +56,7 @@
                                 <span><?= e($submission['student_email']) ?></span>
                             </td>
                             <td>
-                                <span class="status-badge <?= e($submission['status']) ?>"><?= e($submission['status']) ?></span>
+                                <span class="status-badge <?= e($submission['status']) ?>"><?= e(human_label($submission['status'])) ?></span>
                                 <span><?= e(date('d/m/Y H:i', strtotime($submission['submitted_at']))) ?></span>
                                 <?php if (! empty($submission['file_path'])): ?>
                                     <a href="<?= e(url('/' . $submission['file_path'])) ?>" target="_blank" rel="noopener">Arquivo enviado</a>

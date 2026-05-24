@@ -23,7 +23,7 @@
             Status do evento
             <select name="status">
                 <?php foreach (['rascunho', 'publicado', 'encerrado'] as $status): ?>
-                    <option value="<?= e($status) ?>" <?= $event['status'] === $status ? 'selected' : '' ?>><?= e($status) ?></option>
+                    <option value="<?= e($status) ?>" <?= $event['status'] === $status ? 'selected' : '' ?>><?= e(human_label($status)) ?></option>
                 <?php endforeach; ?>
             </select>
         </label>
@@ -41,7 +41,7 @@
                 <?php foreach ($registrations as $registration): ?>
                     <tr>
                         <td><strong><?= e($registration['full_name']) ?></strong><span><?= e($registration['email']) ?></span></td>
-                        <td><span class="status-badge <?= e($registration['status']) ?>"><?= e($registration['status']) ?></span></td>
+                        <td><span class="status-badge <?= e($registration['status']) ?>"><?= e(human_label($registration['status'])) ?></span></td>
                         <td><span><?= e($registration['certificate_code'] ?: 'não emitido') ?></span></td>
                         <td class="actions-cell">
                             <form action="<?= e(url('/admin/eventos/inscricoes/' . $registration['id'] . '/presenca')) ?>" method="post">

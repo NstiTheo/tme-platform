@@ -55,6 +55,6 @@ $adminPopularChart = [
         <article class="module-card"><h2>Certificados</h2><p>Liste certificados emitidos e revogue registros invalidos.</p><a href="<?= e(url('/admin/certificados')) ?>">Gerenciar certificados</a></article>
         <article class="module-card"><h2>Planos</h2><p>Gerencie planos gratuitos, premium e benefícios.</p><a href="<?= e(url('/admin/planos')) ?>">Gerenciar planos</a></article>
         <article class="module-card"><h2>Analytics</h2><p>Explore indicadores avançados por período.</p><a href="<?= e(url('/analytics')) ?>">Abrir analytics</a></article>
-        <article class="module-card"><h2>Ranking</h2><p>Veja XP, niveis, moedas e badges da comunidade.</p><a href="<?= e(url('/ranking')) ?>">Abrir ranking</a></article>
+        <article class="module-card"><h2>Ranking</h2><p>Veja XP, níveis, moedas e badges da comunidade.</p><a href="<?= e(url('/ranking')) ?>">Abrir ranking</a></article>
     </div>
 </section>

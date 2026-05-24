@@ -30,7 +30,7 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
                         <span class="eyebrow">Informações</span>
                         <h2>Dados do usuário</h2>
                     </div>
-                    <span class="status-badge <?= e($user['status']) ?>"><?= e($user['status']) ?></span>
+                    <span class="status-badge <?= e($user['status']) ?>"><?= e(human_label($user['status'])) ?></span>
                 </div>
 
                 <div class="profile-info-grid">
@@ -82,12 +82,12 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
                 </div>
                 <div class="profile-post-list">
                     <?php if (empty($posts)): ?>
-                        <p class="muted">Seus posts academicos aparecerao aqui.</p>
+                        <p class="muted">Seus posts acadêmicos aparecerão aqui.</p>
                     <?php else: ?>
                         <?php foreach ($posts as $post): ?>
                             <article>
                                 <strong><?= e($post['title']) ?></strong>
-                                <span class="status-badge <?= e($post['status']) ?>"><?= e($post['status']) ?></span>
+                                <span class="status-badge <?= e($post['status']) ?>"><?= e(human_label($post['status'])) ?></span>
                             </article>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -146,7 +146,7 @@ $initials = strtoupper(substr($user['full_name'], 0, 1));
 
                 <div class="badge-strip">
                     <?php if (empty($badges)): ?>
-                        <span class="muted">Suas conquistas recentes aparecerao aqui.</span>
+                        <span class="muted">Suas conquistas recentes aparecerão aqui.</span>
                     <?php else: ?>
                         <?php foreach ($badges as $badge): ?>
                             <span class="badge-pill"><?= e($badge['name']) ?></span>

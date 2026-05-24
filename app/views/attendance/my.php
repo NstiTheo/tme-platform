@@ -86,7 +86,7 @@ $frequencyPercent = $totals['total'] > 0
                             <td><?= e(date('d/m/Y', strtotime($record['attendance_date']))) ?></td>
                             <td><?= e($record['class_name']) ?></td>
                             <td><?= e($record['subject_name']) ?></td>
-                            <td><span class="status-badge <?= e($record['status']) ?>"><?= e($record['status']) ?></span></td>
+                            <td><span class="status-badge <?= e($record['status']) ?>"><?= e(human_label($record['status'])) ?></span></td>
                             <td><?= e($record['note'] ?: '-') ?></td>
                         </tr>
                     <?php endforeach; ?>

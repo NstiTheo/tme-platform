@@ -37,7 +37,7 @@ $xpChart = [
         <article class="metric"><span>Progresso geral</span><strong><?= e(number_format((float) ($dashboardAnalytics['metrics']['average_progress'] ?? 0), 0)) ?>%</strong></article>
         <article class="metric"><span>Frequência</span><strong><?= e(number_format((float) ($dashboardAnalytics['metrics']['attendance_percent'] ?? 0), 0)) ?>%</strong></article>
         <article class="metric"><span>XP semanal</span><strong><?= e((int) ($dashboardAnalytics['metrics']['weekly_xp'] ?? 0)) ?></strong></article>
-        <article class="metric"><span>Media provas</span><strong><?= e(number_format((float) ($dashboardAnalytics['metrics']['exam_average'] ?? 0), 1)) ?></strong></article>
+        <article class="metric"><span>Média provas</span><strong><?= e(number_format((float) ($dashboardAnalytics['metrics']['exam_average'] ?? 0), 1)) ?></strong></article>
     </div>
 
     <div class="chart-grid compact-chart-grid">
@@ -58,8 +58,8 @@ $xpChart = [
         <article class="module-card"><h2>Catálogo</h2><p>Encontre cursos publicados e faça matrícula com um clique.</p><a href="<?= e(url('/aluno/cursos')) ?>">Ver catálogo</a></article>
         <article class="module-card"><h2>Atividades</h2><p>Veja tarefas abertas, envie respostas e acompanhe correcoes.</p><a href="<?= e(url('/atividades')) ?>">Minhas atividades</a></article>
         <article class="module-card"><h2>Boletim</h2><p>Resumo simples das notas por curso.</p><a href="<?= e(url('/boletim')) ?>">Ver boletim</a></article>
-        <article class="module-card"><h2>Certificados</h2><p>Consulte certificados emitidos e valide codigos publicos.</p><a href="<?= e(url('/certificados')) ?>">Abrir certificados</a></article>
-        <article class="module-card"><h2>Ranking</h2><p>Acompanhe XP, nivel e badges na comunidade TME.</p><a href="<?= e(url('/ranking')) ?>">Ver ranking</a></article>
+        <article class="module-card"><h2>Certificados</h2><p>Consulte certificados emitidos e valide códigos públicos.</p><a href="<?= e(url('/certificados')) ?>">Abrir certificados</a></article>
+        <article class="module-card"><h2>Ranking</h2><p>Acompanhe XP, nível e badges na comunidade TME.</p><a href="<?= e(url('/ranking')) ?>">Ver ranking</a></article>
         <article class="module-card"><h2>Biblioteca</h2><p>Materiais publicados, favoritos e histórico de acesso.</p><a href="<?= e(url('/biblioteca')) ?>">Abrir biblioteca</a></article>
         <article class="module-card"><h2>Comunidade</h2><p>Projetos, publicações e comentários com moderação acadêmica.</p><a href="<?= e(url('/comunidade')) ?>">Entrar</a></article>
         <article class="module-card"><h2>Planos</h2><p>Acompanhe acesso gratuito ou premium.</p><a href="<?= e(url('/planos')) ?>">Ver planos</a></article>

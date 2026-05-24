@@ -4,7 +4,7 @@
     <div class="dashboard-heading">
         <span class="eyebrow">Eventos</span>
         <h1>Agenda TME</h1>
-        <p>Palestras, workshops, aulas ao vivo, simulados, olimpiadas e hackathons publicados pela equipe.</p>
+        <p>Palestras, workshops, aulas ao vivo, simulados, olimpíadas e hackathons publicados pela equipe.</p>
     </div>
 
     <?php if (empty($events)): ?>
@@ -19,7 +19,7 @@
                         <div class="course-card-placeholder">TME</div>
                     <?php endif; ?>
                     <div>
-                        <span class="status-badge"><?= e($event['event_type']) ?></span>
+                        <span class="status-badge"><?= e(human_label($event['event_type'])) ?></span>
                         <h2><?= e($event['title']) ?></h2>
                         <p><?= e($event['description'] ?: 'Evento acadêmico TME.') ?></p>
                         <div class="course-meta">

@@ -84,7 +84,7 @@
                             </td>
                             <td><?= e((int) $exam['questions_count']) ?></td>
                             <td><?= e((int) $exam['attempts_count']) ?></td>
-                            <td><span class="status-badge <?= e($exam['status']) ?>"><?= e($exam['status']) ?></span></td>
+                            <td><span class="status-badge <?= e($exam['status']) ?>"><?= e(human_label($exam['status'])) ?></span></td>
                             <td class="actions-cell">
                                 <a class="button small" href="<?= e(url('/admin/provas/' . $exam['id'])) ?>">Gerenciar</a>
                             </td>
