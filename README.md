@@ -183,6 +183,54 @@ Para bancos existentes, aplique tambem:
 mysql -u root -p < database/migrations/2026_05_23_certificates_gamification_profile.sql
 ```
 
+## Comunidade academica
+
+A comunidade fica em `/comunidade` para usuarios logados e a moderacao fica em `/admin/comunidade`.
+
+Recursos disponiveis:
+
+- Feed academico com posts aprovados e posts destacados.
+- Criacao de posts dos tipos: duvida, artigo, projeto, material, conquista e aviso.
+- Posts de alunos/professores entram como `pendente`; admin/supervisor pode aprovar, recusar, arquivar e destacar.
+- Comentarios em posts aprovados.
+- Curtir e salvar posts por usuario.
+- Perfil do usuario exibe posts recentes e status de moderacao.
+- Logs para criacao, aprovacao, recusa, comentario e curtida/salvo.
+
+## Eventos
+
+Eventos publicados aparecem em `/eventos`; a administracao fica em `/admin/eventos`.
+
+Recursos disponiveis:
+
+- Cadastro administrativo de eventos com titulo, descricao, tipo, data/hora, local/link, vagas, carga horaria, status e imagem opcional.
+- Tipos: palestra, workshop, aula ao vivo, simulado, olimpiada e hackathon.
+- Usuario logado pode se inscrever, com bloqueio de inscricao duplicada.
+- Admin visualiza inscritos, confirma presenca e altera status do evento.
+- Evento `encerrado`, com presenca confirmada e certificado habilitado, pode gerar certificado de participacao.
+- Portal mostra eventos inscritos do usuario.
+- Logs para criacao, inscricao, presenca e certificado.
+
+## Turmas e disciplinas
+
+A gestao fica em `/admin/turmas` e a visualizacao do aluno/professor fica em `/turmas`.
+
+Recursos disponiveis:
+
+- CRUD inicial de turmas com nome, descricao, instituicao, periodo e status.
+- Cadastro de disciplinas com nome, descricao, area, carga horaria e status.
+- Vinculo de alunos a turmas.
+- Vinculo de professores a turmas e disciplinas.
+- Detalhe da turma com disciplinas, alunos, professores e area preparada para materiais futuros.
+- Estrutura preparada para calendario, frequencia e ranking por turma.
+- Logs de criacao e vinculos.
+
+Para bancos existentes, aplique tambem:
+
+```bash
+mysql -u root -p < database/migrations/2026_05_24_community_events_classes.sql
+```
+
 ## Estrutura
 
 ```text
